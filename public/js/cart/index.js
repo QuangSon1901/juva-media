@@ -1,3 +1,5 @@
+let tabCart = 0;
+
 async function increaseQuantityCart(r) {
     let inputEle = r.parents(".quantity-action").find("input");
     inputEle.val(Number(inputEle.val()) + 1);
@@ -87,4 +89,41 @@ async function removeProductCart(r) {
         };
 
     await axiosTemplate(method, url, params, data);
+}
+
+
+async function orderFunction() {
+    if (tabCart == 0) {
+        $('.cart-list').addClass('hidden')
+        $('.form-order').removeClass('hidden')
+        $('.cart-back').removeClass('hidden')
+        tabCart = 1;
+        return;
+    }
+
+    let method = "post",
+    url = "/order",
+    params = null,
+    data = {
+        name: $('#form-order-name').val().trim(),
+        phone: $('#form-order-phone').val().trim(),
+        email: $('#form-order-email').val().trim(),
+        address: $('#form-order-address').val().trim(),
+    };
+
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            $('.cart').addClass('hidden')
+            $('.order-success').removeClass('hidden')
+            $('#cart-quantity-header').text(0)
+            break;
+    }
+}
+
+function backOrderFunction() {
+    $('.cart-list').removeClass('hidden')
+    $('.form-order').addClass('hidden')
+    $('.cart-back').addClass('hidden')
+    tabCart = 0;
 }

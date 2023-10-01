@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Home\IndexController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 
     // Product
     Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
+    Route::get('/search', [ProductController::class, 'search']);
 
     // Cart
     Route::resource('/gio-hang', CartController::class);
@@ -47,6 +49,10 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 
     // Service
     Route::get('/dich-vu/{slug}', [ServiceController::class, 'index']);
+    Route::get('/filter/{slug}', [ServiceController::class, 'filter']);
     Route::get('/get-services', [ServiceController::class, 'getServices']);
     Route::get('/get-categories-of-service', [ServiceController::class, 'getCategoriesOfService']);
+
+    // Order
+    Route::post('/order', [OrderController::class, 'order']);
 });

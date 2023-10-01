@@ -56,5 +56,30 @@ class ProductController extends Controller
         return view('product.index', compact('product', 'photography', 'breadcrumbs', 'cart_quantity'));
     }
 
-    
+    public function search(Request $request) {
+        $searchTerm = $request->input('search');
+
+        $products = Product::where('name', 'LIKE', '%' . $searchTerm . '%')
+            ->get();
+
+        $groupedData = [];
+
+        foreach ($products as $item) {
+            $serviceCategoryId = $item['service_categories']['id'];
+        
+            if (!isset($groupedData[$serviceCategoryId])) {
+                $groupedData[$serviceCategoryId] = [
+                    'service_categories' => $item['service_categories'],
+                    'items' => [],
+                ];
+            }
+        
+            $groupedData[$serviceCategoryId]['items'][] = $item;
+        }
+
+        return [
+            "status" => 200,
+            "data" => collect($groupedData)->values()
+        ];
+    }
 }
