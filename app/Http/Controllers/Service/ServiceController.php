@@ -101,9 +101,16 @@ class ServiceController extends Controller
 
     public function getCategoriesOfService(Request $request)
     {
+        $serviceId = $request->get('service_id');
+        if ($serviceId == -1) return [
+            "status" => 200,
+            "data" => ServiceCategory::with('services')->get()
+        ];
+
+
         return [
             "status" => 200,
-            "data" => ServiceCategory::where('service_id', $request->get('service_id'))->get()
+            "data" => ServiceCategory::where('service_id', $serviceId)->get()
         ];
     }
 }

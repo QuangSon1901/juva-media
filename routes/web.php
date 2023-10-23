@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Category\CategoryController;
@@ -55,4 +57,20 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 
     // Order
     Route::post('/order', [OrderController::class, 'order']);
+});
+
+/**
+ * Trans: Admin
+ */
+Route::group(['as' => 'admin.', 'middleware' => []], function () {
+    // Admin
+    Route::resource('/admin', AdminController::class);
+    Route::post('/category-big.create', [AdminController::class, 'create']);
+    Route::post('/category-big.delete', [AdminController::class, 'delete']);
+
+    // Product
+    Route::resource('/product', AdminProductController::class);
+    Route::get('/product.data', [AdminProductController::class, 'data']);
+    Route::post('/product.create', [AdminProductController::class, 'create']);
+    Route::post('/product.delete', [AdminProductController::class, 'delete']);
 });

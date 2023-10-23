@@ -55,3 +55,11 @@ html ::-webkit-scrollbar-track {
 .filter-active {
     font-weight: 600;
 }
+
+.slice-text {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
