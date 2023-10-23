@@ -19,7 +19,7 @@ async function getProductAdmin(id) {
                     <tr>
                         <td class="p-2 whitespace-nowrap">
                             <div class="flex items-center">
-                                <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full w-full h-full" src="${product.image}" width="40" height="40" alt="Alex Shatov"></div>
+                                <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full w-full h-full" src="${product.image.split(" ")[0]}" width="40" height="40" alt="Alex Shatov"></div>
                                 <div class="font-medium text-gray-800 slice-text">${product.name}</div>
                             </div>
                         </td>

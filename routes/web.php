@@ -71,6 +71,15 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     // Product
     Route::resource('/product', AdminProductController::class);
     Route::get('/product.data', [AdminProductController::class, 'data']);
+    Route::get('/product.data-create', [AdminProductController::class, 'dataCreate']);
+    Route::post('/product.add-type-create', [AdminProductController::class, 'addTypeCreate']);
+    Route::post('/product.add-graphy-create', [AdminProductController::class, 'addGraphyCreate']);
     Route::post('/product.create', [AdminProductController::class, 'create']);
     Route::post('/product.delete', [AdminProductController::class, 'delete']);
 });
+
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');

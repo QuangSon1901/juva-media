@@ -37,6 +37,25 @@ function openModalCreateCategoryBigAdmin() {
 function closeModalCreateCategoryBigAdmin() {
     $("#modal-create-category-big-admin").addClass("hidden");
     $("#modal-create-category-big-admin").removeClass("flex");
+    resetModalCreateCategoryBigAdmin()
+}
+
+function resetModalCreateCategoryBigAdmin() {
+    $("#modal-create-category-big-admin input#name").val("")
+    $("#modal-create-category-big-admin #dropdown-menu div.selected").removeClass('selected')
+    $("#modal-create-category-big-admin #dropdown-menu").parents('.select-group').find('span').text('Loại danh mục')
+    $("#modal-create-category-big-admin input#description").val("")
+
+    let gallery = document.getElementById("gallery"),
+    empty = document.getElementById("empty");
+    while (gallery.children.length > 0) {
+        gallery.lastChild.remove();
+    }
+
+    FILES = {};
+    empty.classList.remove("hidden");
+    gallery.append(empty);
+    $("#hidden-input").replaceWith($("#hidden-input").val('').clone(true));
 }
 
 async function saveModalCreateCategoryBigAdmin() {
@@ -51,7 +70,9 @@ async function saveModalCreateCategoryBigAdmin() {
         params = null;
 
     checkCreateCategoryBig = 1;
+    $('#modal-create-category-big-admin-loading').removeClass('hidden')
     let res = await axiosTemplate(method, url, params, data);
+    $('#modal-create-category-big-admin-loading').addClass('hidden')
     checkCreateCategoryBig = 0;
     switch (res.data.status) {
         case 200:

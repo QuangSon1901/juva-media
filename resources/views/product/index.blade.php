@@ -5,13 +5,13 @@
         <div class="grid grid-cols-2 gap-4">
             <div class="grid grid-cols-1 gap-4">
                 @foreach ($product['image'] as $image) 
-                    <img class="w-100 h-auto" src="{{$image}}" alt="">
+                    <img class="w-full h-auto" src="{{$image}}" alt="">
                 @endforeach
             </div>
             <div>
                 <h2 class="font-bold text-3xl leading-10">{{$product['name']}}</h2>
                 <hr class="my-4" />
-                <p>{{$product['description']}}</p>
+                <p>{!! $product['description'] !!}</p>
                 <hr class="my-4" />
                 <div>
                     <div class="font-semibold text-lg">Chọn số lượng</div>

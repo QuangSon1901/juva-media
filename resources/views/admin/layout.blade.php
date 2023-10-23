@@ -15,7 +15,7 @@
             <h2 class="text-center bg-white py-4 rounded-md border-b-2 font-semibold text-gray-800">
                 Danh mục</h2>
             <div class="bg-white rounded-md list-none text-sm ">
-                <li class="py-3 border-b-2"><a href="/admin" class="list-none hover:text-indigo-600">Danh mục lớn</a>
+                <li class="py-3 border-b-2"><a href="/admin" class="list-none hover:text-indigo-600">Danh mục</a>
                 </li>
                 <li class="py-3 border-b-2"><a href="/product" class="list-none hover:text-indigo-600">Sản phẩm</a>
                 </li>
