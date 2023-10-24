@@ -143,10 +143,7 @@ class AuthController extends Controller
     public function logout() {
         Session::flush();
         Auth::logout();
-  
-        return [
-            "status" => 200,
-            "message" => "Đăng xuất thành công"
-        ];;
+        $cart_quantity = 0;
+        return redirect('/');
     }
 }

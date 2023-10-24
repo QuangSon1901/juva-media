@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::post('/post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/test', [OrderController::class, 'testMail'])->name('testMail');
 
 
 /**

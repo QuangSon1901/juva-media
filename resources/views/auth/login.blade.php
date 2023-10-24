@@ -1,7 +1,7 @@
 <div id="loginModal" style="display: none; background-color: rgba(0, 0, 0, .5);" class="fixed inset-0 items-center justify-center">
-    <div class="relative w-full max-w-2xl max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full ">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow">
+        <div class="relative bg-white rounded-lg shadow ">
             <!-- Modal header -->
             <div class="flex items-start justify-between p-4">
                 <div>

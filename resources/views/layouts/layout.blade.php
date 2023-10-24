@@ -12,7 +12,7 @@
 <body>
     <div>
         @include('layouts.header')
-        @if (Request::path() !== '/')
+        @if (Request::path() !== '/' && Request::path() == '/logout')
             @include('layouts.breadcrumb')
         @endif
         @yield('content')

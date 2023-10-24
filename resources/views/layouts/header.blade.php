@@ -36,7 +36,9 @@
             @auth
             <div class="flex gap-1 items-center cursor-pointer">
                 <box-icon name='user' class="w-5 h-5"></box-icon>
-                <span class="text-sm">Quang Sơn</span>
+                <span class="text-sm">{{auth()->user()->name}}</span>
+                <span class="px-3">/</span>
+                <a href="/logout" class="text-sm hover:border-b-2 border-[#555]">Đăng Xuất</a>
             </div>
             @else
             <div class="flex gap-1 items-center cursor-pointer">
