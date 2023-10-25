@@ -175,3 +175,5 @@ function removeformatNumber(num) {
     num = String(num);
     return Number(num.replace(/[^0-9.-]+/g, ""));
 }
+
+

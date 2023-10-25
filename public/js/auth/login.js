@@ -23,6 +23,7 @@ function closeModalLogin() {
 }
 
 async function loginSubmit() {
+    if(!checkValidateSave($('#login-form-modal'))) return false
     let method = "post",
         url = "/post-login",
         params = null,
@@ -33,8 +34,14 @@ async function loginSubmit() {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            closeModalLogin();
-            console.log(res.data);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            }).then(closeModalLogin());
             $("#header-action-user div:first-child").remove();
             $("#header-action-user").prepend(`
                 <div class="flex gap-1 items-center cursor-pointer">
@@ -44,6 +51,16 @@ async function loginSubmit() {
                 <a href="/logout" class="text-sm hover:border-b-2 border-[#555]">Đăng Xuất</a>
             </div>
                 `);
+            break;
+        case 403:
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            });
             break;
     }
 }
