@@ -55,7 +55,15 @@ function totalPhotoSelected() {
 
 async function addToCart(r) {
     if (dataPhotoSelected.length <= 0) {
-        return;
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Xin chọn sản phẩm",
+            showConfirmButton: true,
+            timer: 1500,
+            confirmButtonText: "OK",
+        });
+        return false
     }
 
     let method = "post",

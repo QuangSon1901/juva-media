@@ -9,6 +9,7 @@ use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Service\ServiceController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::post('/post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/test', [OrderController::class, 'testMail'])->name('testMail');
 
 
 /**
@@ -58,6 +58,14 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 
     // Order
     Route::post('/order', [OrderController::class, 'order']);
+
+    // Profile
+    Route::group(['prefix' => 'tai-khoan','as' => 'account.', 'middleware' => []], function () {
+        Route::get('/thong-tin-ca-nhan', [UserController::class, 'getInfoUser']);
+        Route::get('/don-hang', [UserController::class, 'getInfoPurchase']);
+    });
+    Route::post('/update-info-user', [UserController::class, 'addToCart']);
+
 });
 
 /**

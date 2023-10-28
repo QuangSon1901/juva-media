@@ -12,11 +12,17 @@ $(function () {
 
 function openModalLogin() {
     $("#loginModal").css("display", "flex");
+    setTimeout(()=>{
+        $("#model").removeClass('-translate-y-full')
+    },100)
     $("body").css("overflow", "hidden");
 }
 
 function closeModalLogin() {
-    $("#loginModal").css("display", "none");
+    $("#model").addClass('-translate-y-full')
+    setTimeout(()=>{
+        $("#loginModal").css("display", "none");
+    },200)
     $("body").css("overflow", "auto");
     $("#register-form-modal").removeClass("active");
     $("#login-form-modal").addClass("active");
@@ -47,8 +53,6 @@ async function loginSubmit() {
                 <div class="flex gap-1 items-center cursor-pointer">
                 <box-icon name='user' class="w-5 h-5"></box-icon>
                 <span class="text-sm">${res.data.data.name}</span>
-                <span class="px-3">/</span>
-                <a href="/logout" class="text-sm hover:border-b-2 border-[#555]">Đăng Xuất</a>
             </div>
                 `);
             break;
@@ -66,6 +70,7 @@ async function loginSubmit() {
 }
 
 async function registerSubmit() {
+    if(!checkValidateSave($('#register-form-modal'))) return false
     let method = "post",
         url = "/post-registration",
         params = null,
@@ -79,7 +84,14 @@ async function registerSubmit() {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            closeModalLogin();
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            }).then(closeModalLogin());
             $("#header-action-user div:first-child").remove();
             $("#header-action-user").prepend(`
                     <div class="flex gap-1 items-center cursor-pointer">
@@ -87,6 +99,16 @@ async function registerSubmit() {
                         <span class="text-sm">${res.data.data.name}</span>
                     </div>
                 `);
+            break;
+        case 401:
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            });
             break;
     }
 }

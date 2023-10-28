@@ -827,6 +827,7 @@ function addErrorInput(el, text) {
     el.parent().removeClass('validate-error');
     el.parent().removeClass('focus-validate');
     el.parent().addClass('validate-error');
+    el.addClass('border-red-500')
     el.parent().append('<div class="error mt-1">' +
         '<span class=" text-red-500 text-xs font-light text-danger">' + text + '</span>' +
         '</div>');
@@ -872,6 +873,7 @@ function removeErrorInput(el) {
     el.parent().removeClass('focus-validate');
     el.parents('.validate-error').removeClass('validate-error');
     el.parents('.warning-error').removeClass('warning-error');
+    el.removeClass('border-red-500')
     el.parent().find('.error').remove();
 }
 
@@ -982,6 +984,7 @@ function checkValidateSave(el) {
                             flag = false
                         } else {
                             text = 'Số tối thiểu ' + min_value;
+                            console.log($(this).val());
                             addErrorInput($(this), text);
                         }
                         flag = false;

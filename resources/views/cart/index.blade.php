@@ -72,29 +72,29 @@
             <div class="form-order hidden">
                 <h2 class="font-bold text-xl">Nhập thông tin gửi trả hàng</h2>
                 <hr class="my-4" />
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-4" id="delivery-information-form">
                     <label for="" class="flex flex-col gap-2">
                         <p>Họ tên đầy đủ</p>
                         <div>
-                            <input type="text" id="form-order-name" class="w-full h-9 p-2 rounded-md border outline-none">
+                            <input type="text" id="form-order-name" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1">
                         </div>
                     </label>
                     <label for="" class="flex flex-col gap-2">
                         <p>Số điện thoại</p>
                         <div>
-                            <input type="phone" id="form-order-phone" class="w-full h-9 p-2 rounded-md border outline-none">
+                            <input type="phone" id="form-order-phone" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-phone="1">
                         </div>
                     </label>
                     <label for="" class="flex flex-col gap-2">
                         <p>Email</p>
                         <div>
-                            <input type="email" id="form-order-email" class="w-full h-9 p-2 rounded-md border outline-none">
+                            <input type="email" id="form-order-email" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-email="1">
                         </div>
                     </label>
                     <label for="" class="flex flex-col gap-2">
                         <p>Địa chỉ cụ thể</p>
                         <div>
-                            <input type="text" id="form-order-address" class="w-full h-9 p-2 rounded-md border outline-none">
+                            <input type="text" id="form-order-address" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1">
                         </div>
                     </label>
                 </div>

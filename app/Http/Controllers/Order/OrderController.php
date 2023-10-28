@@ -54,8 +54,4 @@ class OrderController extends Controller
             'status' => 200
         ];
     }
-
-    public function testMail(){
-        return view('mail.orderMail');
-    }
 }

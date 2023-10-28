@@ -100,6 +100,7 @@ async function orderFunction() {
         tabCart = 1;
         return;
     }
+    if(!checkValidateSave($('#delivery-information-form'))) return false
 
     let method = "post",
     url = "/order",
