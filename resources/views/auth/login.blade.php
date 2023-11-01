@@ -48,7 +48,7 @@
                         </label>
                         <label for="" class="flex flex-col">
                             <span class="font-semibold mb-1 text-base after:content-['*'] after:ml-0.5 after:text-red-500">Họ tên</span>
-                            <input type="text" id="name-field-register" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-max="50">
+                            <input type="text" id="name-field-register" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-max-length="50">
                         </label>
                         <label for="" class="flex flex-col">
                             <span class="font-semibold mb-1 text-base after:content-['*'] after:ml-0.5 after:text-red-500">Mật khẩu</span>

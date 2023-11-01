@@ -1,12 +1,10 @@
-<div style="display:flex; width:100%; padding:10px">
-    <img src="{{asset('images/logo/juva-rectangle.png')}}" alt="" class="h-full w-full">
-    <div style="display:flex; align-items: center; justify-content: center;">
-        <span>0703555544 - 0397838804</span>
-    </div>
-</div>
 <div style="padding: 10px; margin-bottom: 5px">
     <div>ĐẶT HÀNG THÀNH CÔNG</div>
     <div>CẢM ƠN QUÝ QUÝ KHÁCH ĐÃ CHỌN DỊCH VỤ CỦA JUVA-MEDIA</div>
+    <div style="display:flex; align-items: center; justify-content: center;">
+        <p class="font-bold">Hotline hỗ trợ:</p>
+        <p>0703555544 - 0397838804</p>
+    </div>
 </div>
 <div style="padding: 10px; margin-bottom: 5px">
     <h3>Thông tin khách hàng</h3>
