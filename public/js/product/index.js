@@ -1,3 +1,5 @@
+// const { result } = require("lodash");
+
 let dataPhotoSelected = [];
 function increaseQuantity(r) {
     let inputEle = r.parents(".quantity-action").find("input");
@@ -65,7 +67,6 @@ async function addToCart(r) {
         });
         return false
     }
-
     let method = "post",
         url = "/add-to-cart",
         params = null,
@@ -94,6 +95,10 @@ async function addToCart(r) {
                 showConfirmButton: true,
                 timer: 1500,
                 confirmButtonText: "OK",
+            }).then((result) => {
+                if(result.isConfirmed){
+                    openModalLogin();
+                }
             });
             break;
     }
