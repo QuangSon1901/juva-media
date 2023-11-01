@@ -61,36 +61,43 @@ class CartController extends Controller
     public function addToCart(Request $request) {
         $product_id = $request->get('product_id');
         $data_photo_selected = $request->get('data_photo_selected');
-        
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
-        $check_cart_product = CartProduct::where('cart_id', $cart->id)->where('product_id', $product_id)->first();
-        if (!$check_cart_product) {
-            $check_cart_product = CartProduct::create([
-                'cart_id' => $cart->id,
-                'product_id' => $product_id
-            ]);
-        }
-
-        foreach ($data_photo_selected as $photo) {
-            $check_photo = CartProductPhotography::where('cart_product_id', $check_cart_product->id)->where('product_photography_id', $photo['id'])->first();
-            if ($check_photo) {
-                $check_photo->update([
-                    'quantity' => $check_photo->quantity + $photo['quantity']
-                ]);
-            } else {
-                CartProductPhotography::create([
-                    'cart_product_id' => $check_cart_product->id,
-                    'product_photography_id' => $photo['id'],
-                    'quantity' => $photo['quantity']
+        if(Auth::check()){
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+            $check_cart_product = CartProduct::where('cart_id', $cart->id)->where('product_id', $product_id)->first();
+            if (!$check_cart_product) {
+                $check_cart_product = CartProduct::create([
+                    'cart_id' => $cart->id,
+                    'product_id' => $product_id
                 ]);
             }
+    
+            foreach ($data_photo_selected as $photo) {
+                $check_photo = CartProductPhotography::where('cart_product_id', $check_cart_product->id)->where('product_photography_id', $photo['id'])->first();
+                if ($check_photo) {
+                    $check_photo->update([
+                        'quantity' => $check_photo->quantity + $photo['quantity']
+                    ]);
+                } else {
+                    CartProductPhotography::create([
+                        'cart_product_id' => $check_cart_product->id,
+                        'product_photography_id' => $photo['id'],
+                        'quantity' => $photo['quantity']
+                    ]);
+                }
+            }
+    
+            return [
+                "status" => 200,
+                "message" => "Thêm vào giỏ hàng thành công!",
+                "quantity_cart" => CartProduct::count()
+            ];
+            
+        }else{
+            return [
+                "status" => 403,
+                "message" => "Đăng nhập để thêm giỏ hàng",
+            ];
         }
-
-        return [
-            "status" => 200,
-            "message" => "Thêm vào giỏ hàng thành công!",
-            "quantity_cart" => CartProduct::count()
-        ];
     }
 
     public function removeProduct(Request $request) {

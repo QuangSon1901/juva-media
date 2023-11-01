@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\CartProduct;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +47,13 @@ class AuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+            $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
             return [
                 "status" => 200,
                 "message" => "Đăng nhập thành công!",
-                "data" => Auth::user()
+                "data" => Auth::user(),
+                "cart_quantity" => $cart_quantity
             ];
         }
   
@@ -143,10 +147,7 @@ class AuthController extends Controller
     public function logout() {
         Session::flush();
         Auth::logout();
-  
-        return [
-            "status" => 200,
-            "message" => "Đăng xuất thành công"
-        ];;
+        $cart_quantity = 0;
+        return redirect('/');
     }
 }

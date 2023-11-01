@@ -1,5 +1,6 @@
-let dataPhotoSelected = [];
+// const { result } = require("lodash");
 
+let dataPhotoSelected = [];
 function increaseQuantity(r) {
     let inputEle = r.parents(".quantity-action").find("input");
     inputEle.val(Number(inputEle.val()) + 1);
@@ -21,6 +22,7 @@ function increaseQuantity(r) {
         }
     }
     totalPhotoSelected();
+    console.log(dataPhotoSelected);
 }
 
 function decreaseQuantity(r) {
@@ -55,9 +57,16 @@ function totalPhotoSelected() {
 
 async function addToCart(r) {
     if (dataPhotoSelected.length <= 0) {
-        return;
+        Swal.fire({
+            position: "center",
+            icon: "warning",
+            title: "Xin chọn sản phẩm",
+            showConfirmButton: true,
+            timer: 1500,
+            confirmButtonText: "OK",
+        });
+        return false
     }
-
     let method = "post",
         url = "/add-to-cart",
         params = null,
@@ -68,7 +77,29 @@ async function addToCart(r) {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            $('#cart-quantity-header').text(res.data.quantity_cart)
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            });
+            $("#cart-quantity-header").text(res.data.quantity_cart);
+            break;
+        case 403:
+            Swal.fire({
+                position: "center",
+                icon: "warning",
+                title: res.data.message,
+                showConfirmButton: true,
+                timer: 1500,
+                confirmButtonText: "OK",
+            }).then((result) => {
+                if(result.isConfirmed){
+                    openModalLogin();
+                }
+            });
             break;
     }
 }

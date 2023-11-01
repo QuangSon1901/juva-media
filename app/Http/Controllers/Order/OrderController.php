@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewOrder;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\CartProductPhotography;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderProductPhotography;
+use App\Models\Product;
 use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
 
 class OrderController extends Controller
 {
@@ -42,7 +46,8 @@ class OrderController extends Controller
                 ]);
             }
         }
-
+        // $product = Product::Where('id', $orderProduct->product_id)
+        Mail::to($request->get('email'))->send(new NewOrder($order, $orderProduct));
         CartProduct::where('cart_id', $cart->id)->delete();
 
         return [

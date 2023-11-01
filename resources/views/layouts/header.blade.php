@@ -34,20 +34,33 @@
         </div>
         <div class="flex gap-6 items-center" id="header-action-user">
             @auth
-            <div class="flex gap-1 items-center cursor-pointer">
-                <box-icon name='user' class="w-5 h-5"></box-icon>
-                <span class="text-sm">Quang Sơn</span>
+            <div class="group">
+                <div class="flex gap-1 items-center cursor-pointer relative">
+                    <box-icon name='user' class="w-5 h-5"></box-icon>
+                    <span class="text-sm">{{auth()->user()->name}}</span>
+                </div>
+                <div class="flex flex-col bg-juva-grey absolute border border-neutral-400 rounded-lg py-2 mt-2 top-[5.8rem] opacity-0 visible z-0 group-hover:visible group-hover:opacity-100 group-hover:mt-0 group-hover:z-20 transition-all duration-500">
+                    <div class="w-3 h-3 left-[18px] top-[-6.2px] absolute bg-juva-grey rotate-45 border-t border-l border-neutral-400"></div>
+                    <a href="/tai-khoan/thong-tin-ca-nhan" class="flex items-center px-4 py-2 hover:bg-blue-300"><box-icon name='user-circle' class="w-5 h-5 mr-1"></box-icon> Thông tin cá nhân</a>
+                    <a href="/tai-khoan/don-hang" class="flex items-center px-4 py-2 hover:bg-blue-300"><box-icon name='check-circle' class="w-5 h-5 mr-1"></box-icon>Đơn hàng</a>
+                    <a href="/logout" class="flex items-center px-4 py-2 hover:bg-blue-300"><box-icon name='log-out-circle' class="w-5 h-5 mr-1"></box-icon>Đăng xuất</a>
+                </div>
             </div>
+            <a class="cursor-pointer relative"  href="/gio-hang">
+                <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
+                <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">{{$cart_quantity}}</span>
+            </a>
             @else
             <div class="flex gap-1 items-center cursor-pointer">
                 <box-icon name='user' class="w-5 h-5"></box-icon>
                 <span class="text-sm" onclick="openModalLogin()">Đăng nhập/Đăng ký</span>
             </div>
-            @endauth
-            <a href="/gio-hang" class="cursor-pointer relative">
+            <a class="cursor-pointer relative"  onclick="openModalLogin()">
                 <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
                 <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">{{$cart_quantity}}</span>
             </a>
+            @endauth
+
         </div>
     </div>
     <div class="relative header-bottom-menu">
