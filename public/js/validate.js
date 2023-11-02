@@ -936,6 +936,7 @@ function checkValidateSave(el) {
                             $(this).parent().addClass('border-danger');
                         } else {
                             text = 'Không được để trống'
+                            
                         }
                         flag = false;
                     }

@@ -26,6 +26,7 @@ function closeModalLogin() {
     $("body").css("overflow", "auto");
     $("#register-form-modal").removeClass("active");
     $("#login-form-modal").addClass("active");
+    removeAllValidate()
 }
 
 async function loginSubmit() {

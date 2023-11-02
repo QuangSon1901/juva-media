@@ -159,6 +159,7 @@ function closeModalCreateProductAdmin() {
     $("#modal-create-product-admin").addClass("hidden");
     $("#modal-create-product-admin").removeClass("flex");
     resetModalCreateProductAdmin();
+    removeAllValidate()
 }
 
 function resetModalCreateProductAdmin() {
@@ -192,7 +193,7 @@ function resetModalCreateProductAdmin() {
 
 async function saveModalCreateProductAdmin() {
     if (checkCreateProduct === 1) return;
-
+    if(!checkValidateSave($('#modal-create-product-admin'))) return false
     let graphy = $(".graphy-list li").map((index, item) => ({
         id: $(item).data("id"),
         title: $(item).data("text"),

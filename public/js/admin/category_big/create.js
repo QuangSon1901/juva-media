@@ -38,6 +38,7 @@ function closeModalCreateCategoryBigAdmin() {
     $("#modal-create-category-big-admin").addClass("hidden");
     $("#modal-create-category-big-admin").removeClass("flex");
     resetModalCreateCategoryBigAdmin()
+    removeAllValidate()
 }
 
 function resetModalCreateCategoryBigAdmin() {
@@ -60,6 +61,7 @@ function resetModalCreateCategoryBigAdmin() {
 
 async function saveModalCreateCategoryBigAdmin() {
     if (checkCreateCategoryBig === 1) return;
+    if(!checkValidateSave($('#modal-create-category-big-admin'))) return false
     let data = new FormData();
     data.append("file", Object.values(FILES)[0]);
     data.append("name", $("input#name").val());

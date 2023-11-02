@@ -41,7 +41,7 @@
                     <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                         <div class="md:col-span-5">
                             <label for="name">Tên sản phẩm</label>
-                            <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                            <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="50"/>
                         </div>
 
                         <div class="md:col-span-2">
@@ -151,7 +151,7 @@
                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                     <span>Kéo và thả vào ảnh của bạn</span>
                                 </p>
-                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" />
+                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-empty="1"/>
                                 <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
