@@ -1401,6 +1401,31 @@ function checkValidateSave(el) {
             }
         }
     })
+    el.find('input[data-file]').each(function() {
+        if ($(this).attr('type') === 'file' && $(this).get(0).files.length > 0) {
+            let allowedExtensions = ["png", "jpg", "jpeg", "webp"];
+            let fileName = $(this).get(0).files[0].name;
+            let fileExtension = fileName.split('.').pop().toLowerCase();
+    
+            if (allowedExtensions.indexOf(fileExtension) === -1) {
+                let text = 'Vui lòng chọn một tệp ảnh có định dạng hợp lệ (PNG, JPG, JPEG, WEBP)';
+                addErrorInput($(this), text);
+                flag = false;
+            }
+        }
+    });
+    el.find('input[data-min-file]').each(function() {
+        if ($(this).attr('type') === 'file') {
+            let minFiles = parseInt($(this).attr('data-min-file'));
+            let selectedFiles = $(this).get(0).files.length;
+    
+            if (selectedFiles < minFiles) {
+                let text = `Phải chọn ít nhất ${minFiles} tệp`;
+                addErrorInput($(this), text);
+                flag = false;
+            }
+        }
+    });
     return flag;
 }
 

@@ -55,7 +55,7 @@
                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                     <span>Kéo và thả vào ảnh của bạn</span>
                                 </p>
-                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-empty="1"/>
+                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
                                 <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
