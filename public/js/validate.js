@@ -828,7 +828,7 @@ function addErrorInput(el, text) {
     el.parent().removeClass('focus-validate');
     el.parent().addClass('validate-error');
     el.addClass('border-red-500')
-    el.parent().append('<div class="error mt-1 flex w-[150px]">' +
+    el.parent().append('<div class="error mt-1">' +
         '<span class=" text-red-500 text-xs font-light text-danger">' + text + '</span>' +
         '</div>');
 }
