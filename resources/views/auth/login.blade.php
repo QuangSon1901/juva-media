@@ -17,7 +17,7 @@
                 </button>
             </div>
             <div>
-                <input type="hidden" name="text-red-500 border-red-500">
+                <input type="hidden" name="text-red-500 border-red-500 w-[150px]">
                 <div class="grid grid-cols-2 gap-5 p-4">
                     <div>
                         <img class="rounded-lg" src="https://assets.tronhouse.vn/59185068-4c44-404a-a5b6-493d1d50d13d/derived/p_l/tron-house-chuyen-nghiep.jpg" alt="">

@@ -79,7 +79,7 @@ $(function () {
             )}" data-text="${$(this).text()}" class="graphy-item flex rounded-md bg-gray-50 border border-[#d1d1d1] p-1 justify-between items-center pr-4">
                 <div class="flex gap-2">
                     <div class="w-10 h-10 object-cover rounded-md graphy-item-image-group">
-                        <input type="file" class="hidden graphy-item-file-input" accept="image/png, image/jpg, image/jpeg, image/webp">
+                        <input type="file" class="hidden graphy-item-file-input" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1">
                         <img class="w-full h-full object-cover rounded-md cursor-pointer graphy-item-image" src="/images/images/9261177.png" alt="">
                     </div>
                     <div class="flex flex-col">

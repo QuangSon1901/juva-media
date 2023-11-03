@@ -828,7 +828,7 @@ function addErrorInput(el, text) {
     el.parent().removeClass('focus-validate');
     el.parent().addClass('validate-error');
     el.addClass('border-red-500')
-    el.parent().append('<div class="error mt-1">' +
+    el.parent().append('<div class="error mt-1 flex w-[150px]">' +
         '<span class=" text-red-500 text-xs font-light text-danger">' + text + '</span>' +
         '</div>');
 }
@@ -1420,9 +1420,12 @@ function checkValidateSave(el) {
             let selectedFiles = $(this).get(0).files.length;
     
             if (selectedFiles < minFiles) {
-                let text = `Phải chọn ít nhất ${minFiles} tệp`;
+                let text = `Phải chọn ít nhất ${minFiles} ảnh`;
+                removeErrorInput($(this));
                 addErrorInput($(this), text);
                 flag = false;
+            }else{
+                removeErrorInput($(this));
             }
         }
     });
