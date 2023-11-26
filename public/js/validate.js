@@ -1372,9 +1372,9 @@ function checkValidateSave(el) {
             let element = $(this).attr('data-validate');
             if ($(this).attr('data-note')) {
                 if ($(this).val() === '' || $(this).val().length < 2) {
-                    // $(this).parent().addClass('validate-error');
+                    $(this).parent().addClass('validate-error');
                     text = 'Tối thiểu 2 đến 255 ký tự';
-                    addErrorInput($(this).parent(), text);
+                    addErrorInput($(this), text);
                     flag = false;
                 } else {
                     $(this).parent().removeClass('validate-error');

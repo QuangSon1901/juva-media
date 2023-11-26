@@ -46,21 +46,16 @@
                     <a href="/logout" class="flex items-center px-4 py-2 hover:bg-blue-300"><box-icon name='log-out-circle' class="w-5 h-5 mr-1"></box-icon>Đăng xuất</a>
                 </div>
             </div>
-            <a class="cursor-pointer relative"  href="/gio-hang">
-                <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
-                <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">{{$cart_quantity}}</span>
-            </a>
             @else
             <div class="flex gap-1 items-center cursor-pointer">
                 <box-icon name='user' class="w-5 h-5"></box-icon>
                 <span class="text-sm" onclick="openModalLogin()">Đăng nhập/Đăng ký</span>
             </div>
-            <a class="cursor-pointer relative"  onclick="openModalLogin()">
+            @endauth
+            <a class="cursor-pointer relative"  href="/gio-hang">
                 <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
                 <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">{{$cart_quantity}}</span>
             </a>
-            @endauth
-
         </div>
     </div>
     <div class="relative header-bottom-menu">

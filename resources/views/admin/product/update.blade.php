@@ -7,17 +7,17 @@
         background: rgba(5, 5, 5, 0.45);
     }
 
-    #overlay p,
+    #overlay-update p,
     i {
         opacity: 0;
     }
 
-    #overlay.draggedover {
+    #overlay-update.draggedover {
         background-color: rgba(255, 255, 255, 0.7);
     }
 
-    #overlay.draggedover p,
-    #overlay.draggedover i {
+    #overlay-update.draggedover p,
+    #overlay-update.draggedover i {
         opacity: 1;
     }
 
@@ -25,9 +25,9 @@
         color: #2b6cb0;
     }
 </style>
-<div id="modal-create-product-admin" class="fixed inset-0 hidden items-center justify-center">
+<div id="modal-update-product-admin" class="fixed inset-0 hidden items-center justify-center">
     <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div role="status" class="absolute inset-0 bg-[rgba(0,0,0,0.5)] z-20 flex items-center justify-center hidden" id="modal-create-product-admin-loading">
+    <div role="status" class="absolute inset-0 bg-[rgba(0,0,0,0.5)] z-20 flex items-center justify-center hidden" id="modal-update-product-admin-loading">
         <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
@@ -120,13 +120,13 @@
 
                         <div class="md:col-span-5">
                             <label for="description">Mô tả</label>
-                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <textarea name="description" id="description-update" cols="30" rows="10"></textarea>
                         </div>
 
                         <div class="md:col-span-5 text-right">
                             <div class="inline-flex items-end gap-2">
-                                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onclick="closeModalCreateProductAdmin()">Thoát</button>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="saveModalCreateProductAdmin()">Lưu lại</button>
+                                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onclick="closeModalUpdateProductAdmin()">Thoát</button>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="">Lưu lại</button>
                             </div>
                         </div>
 
@@ -134,9 +134,9 @@
                 </div>
 
                 <div class="text-gray-600 lg:col-span-2">
-                    <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
+                    <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler2(event);" ondragover="dragOverHandler2(event);" ondragleave="dragLeaveHandler2(event);" ondragenter="dragEnterHandler2(event);">
                         <!-- overlay -->
-                        <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                        <div id="overlay-update" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
                             <i>
                                 <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
@@ -151,14 +151,14 @@
                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                     <span>Kéo và thả vào ảnh của bạn</span>
                                 </p>
-                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
-                                <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                <input id="hidden-input-update" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
+                                <button id="button-img-update" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
                             </header>
 
-                            <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
-                                <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
+                            <ul id="gallery-update" class="flex flex-1 flex-wrap -m-1">
+                                <li id="empty-update" class="h-full w-full text-center flex flex-col items-center justify-center">
                                     <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
                                     <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
                                 </li>
@@ -170,7 +170,7 @@
         </div>
     </div>
 </div>
-<template id="image-template">
+<template id="image-template-update">
     <li class="block p-1 w-1/4 h-auto">
         <article tabindex="0" class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
             <img alt="upload preview" class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed" />
@@ -198,21 +198,21 @@
     </li>
 </template>
 <script>
-    const imageTempl = document.getElementById("image-template"),
-        empty = document.getElementById("empty");
+    const imageTemp2 = document.getElementById("image-template-update"),
+        emptyUpdate = document.getElementById("empty-update");
 
     // use to store pre selected files
-    let FILES = {};
+    let FILES2 = {};
 
     // check if file is of type image and prepend the initialied
     // template to the target element
-    function addFile(target, file) {
+    function addFile2(target, file) {
         const isImage = file.type.match("image.*"),
             objectURL = URL.createObjectURL(file);
 
         if (!isImage) return;
 
-        const clone = imageTempl.content.cloneNode(true);
+        const clone = imageTemp2.content.cloneNode(true);
 
         clone.querySelector("h1").textContent = file.name;
         clone.querySelector("li").id = objectURL;
@@ -230,22 +230,22 @@
                 alt: file.name
             });
 
-        empty.classList.add("hidden");
+        emptyUpdate.classList.add("hidden");
         target.prepend(clone);
 
-        FILES[objectURL] = file;
+        FILES2[objectURL] = file;
     }
 
-    const gallery = document.getElementById("gallery"),
-        overlay = document.getElementById("overlay");
+    const galleryUpdate = document.getElementById("gallery-update"),
+        overlayUpdate = document.getElementById("overlay-update");
 
     // click the hidden input of type file if the visible button is clicked
     // and capture the selected files
-    const hidden = document.getElementById("hidden-input");
-    document.getElementById("button").onclick = () => hidden.click();
+    const hidden = document.getElementById("hidden-input-update");
+    document.getElementById("button-img-update").onclick = () => hidden.click();
     hidden.onchange = (e) => {
         for (const file of e.target.files) {
-            addFile(gallery, file);
+            addFile2(galleryUpdate, file);
         }
     };
 
@@ -263,29 +263,29 @@
     let counter = 0;
 
     // reset counter and append file to gallery when file is dropped
-    function dropHandler(ev) {
+    function dropHandler2(ev) {
         ev.preventDefault();
         for (const file of ev.dataTransfer.files) {
-            addFile(gallery, file);
-            overlay.classList.remove("draggedover");
+            addFile2(galleryUpdate, file);
+            overlayUpdate.classList.remove("draggedover");
             counter = 0;
         }
     }
 
     // only react to actual files being dragged
-    function dragEnterHandler(e) {
+    function dragEnterHandler2(e) {
         e.preventDefault();
         if (!hasFiles(e)) {
             return;
         }
-        ++counter && overlay.classList.add("draggedover");
+        ++counter && overlayUpdate.classList.add("draggedover");
     }
 
-    function dragLeaveHandler(e) {
-        1 > --counter && overlay.classList.remove("draggedover");
+    function dragLeaveHandler2(e) {
+        1 > --counter && overlayUpdate.classList.remove("draggedover");
     }
 
-    function dragOverHandler(e) {
+    function dragOverHandler2(e) {
         if (hasFiles(e)) {
             e.preventDefault();
         }
@@ -293,19 +293,19 @@
 
     // event delegation to caputre delete events
     // fron the waste buckets in the file preview cards
-    gallery.onclick = ({
+    galleryUpdate.onclick = ({
         target
     }) => {
         if (target.classList.contains("delete")) {
             const ou = target.dataset.target;
             document.getElementById(ou).remove(ou);
-            gallery.children.length === 1 && empty.classList.remove("hidden");
-            delete FILES[ou];
+            galleryUpdate.children.length === 1 && empty.classList.remove("hidden");
+            delete FILES2[ou];
         }
     };
 </script>
 
 @include('ckfinder::setup')
 @push('scripts')
-<script type="text/javascript" src="{{ asset('js/admin/product/create.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/product/update.js')}}"></script>
 @endpush

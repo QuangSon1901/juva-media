@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrder extends Mailable
+class ContactForm extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,9 @@ class NewOrder extends Mailable
      *
      * @return void
      */
-    public function __construct($order, $product)
+    public function __construct($data)
     {
-            $this->order = $order;
-            $this->product = $product;
-
+        $this->data = $data;
     }
 
     /**
@@ -30,9 +28,6 @@ class NewOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject('Xác thực đơn hàng')->view('mail.orderMail')->with([
-            'order' => $this->order,
-            'orderProduct' => $this->product,
-        ]);
+        return $this->subject('Thông tin liên hệ hỗ trợ mới')->view('mail.contactMail')->with(['data' => $this->data]);
     }
 }

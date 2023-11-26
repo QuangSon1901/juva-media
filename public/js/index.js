@@ -1,75 +1,92 @@
 $(function () {
     $(document).on("click", (event) => {
-        if ($('.header-bottom-menu .header-service-dropdown').hasClass('block') && !$(event.target).closest(".header-bottom-menu").length) {
+        if (
+            $(".header-bottom-menu .header-service-dropdown").hasClass(
+                "block"
+            ) &&
+            !$(event.target).closest(".header-bottom-menu").length
+        ) {
             $(".header-service-dropdown").removeClass("block");
             $(".header-service-dropdown").addClass("hidden");
         }
     });
 
-    $(document).on('focus', '#search-header', function() {
-        if ($('#search-header').val().trim().length <= 0) return;
-        $('#search-popup-hint').addClass('active')
-    })
+    $(document).on("focus", "#search-header", function () {
+        if ($("#search-header").val().trim().length <= 0) return;
+        $("#search-popup-hint").addClass("active");
+    });
 
-    $(document).on('blur', '#search-header', function() {
-        $('#search-popup-hint').removeClass('active')
-    })
+    $(document).on("blur", "#search-header", function () {
+        $("#search-popup-hint").removeClass("active");
+    });
 
     loadData();
+    loadCartCount();
 });
 
 function loadData() {
     getServices();
 }
 
+function loadCartCount() {
+    const cartDataString = localStorage.getItem("cart");
+
+    const cartData = JSON.parse(cartDataString);
+    $("#cart-quantity-header").text(cartData.length);
+}
+
 async function getProductSearch() {
-    let searchText = $('#search-header').val().trim()
+    let searchText = $("#search-header").val().trim();
     if (searchText.length <= 0) return;
-    if (!$('#search-popup-hint').hasClass('active')) {
-        $('#search-popup-hint').addClass('active')
+    if (!$("#search-popup-hint").hasClass("active")) {
+        $("#search-popup-hint").addClass("active");
     }
     let method = "get",
         url = "/search",
         params = {
-            'search': searchText
+            search: searchText,
         },
         data = null;
-        let res = await axiosTemplate(method, url, params, data);
-        switch (res.data.status) {
-            case 200:
-                if (res.data.data.length > 0) {
-                    let html = '';
-                    $.each(res.data.data, function (index, item) {
-                        let product = '';
-                        $.each(item['items'], function (index2, item2) {
-                            product += `
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            if (res.data.data.length > 0) {
+                let html = "";
+                $.each(res.data.data, function (index, item) {
+                    let product = "";
+                    $.each(item["items"], function (index2, item2) {
+                        product += `
                                 <li class="w-full">
-                                    <a href="/san-pham/${item2.slug}" class="flex items-center gap-3 w-full">
-                                        <img class="w-10 h-10 rounded-full" src="${item2.image.split(' ')[0]}" alt="">
+                                    <a href="/san-pham/${
+                                        item2.slug
+                                    }" class="flex items-center gap-3 w-full">
+                                        <img class="w-10 h-10 rounded-full" src="${
+                                            item2.image.split(" ")[0]
+                                        }" alt="">
                                         <p>${item2.name}</p>
                                     </a>
                                 </li>
-                            `
-                        })
-                        html += `
+                            `;
+                    });
+                    html += `
                             <div>
                                 <p class="font-semibold py-2">${item.service_categories.name}</p>
                                 <ul class="flex flex-col gap-2 py-2 border-t">
                                     ${product}
                                 </ul>
                             </div>
-                        `
-                    })
-                    $('.search-popup-hint-body').html(html)
-                } else {
-                    $('.search-popup-hint-body').html(`
+                        `;
+                });
+                $(".search-popup-hint-body").html(html);
+            } else {
+                $(".search-popup-hint-body").html(`
                         <div class="flex items-center justify-center">
                             <img class="w-40 h-20" src="https://bizweb.dktcdn.net/100/401/953/themes/785928/assets/empty_cart.png?1614590460628" />
                         </div>
-                    `)
-                }
-                break;
-        }
+                    `);
+            }
+            break;
+    }
 }
 
 async function getServices() {
@@ -164,16 +181,14 @@ async function axiosTemplate(method, url, params, data, element) {
 }
 
 function formatNumber(num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 function formatNumberLimit(num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 function removeformatNumber(num) {
     num = String(num);
     return Number(num.replace(/[^0-9.-]+/g, ""));
 }
-
-

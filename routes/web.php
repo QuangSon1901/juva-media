@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::post('/post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/contact', [UserController::class, 'sendContact']); 
 
 
 /**
@@ -55,6 +56,8 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
     Route::get('/filter/{slug}', [ServiceController::class, 'filter']);
     Route::get('/get-services', [ServiceController::class, 'getServices']);
     Route::get('/get-categories-of-service', [ServiceController::class, 'getCategoriesOfService']);
+    Route::get('/get-detail-service-category', [ServiceController::class, 'getDetailServiceCategory']);
+
 
     // Order
     Route::post('/order', [OrderController::class, 'order']);
@@ -76,6 +79,7 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::resource('/admin', AdminController::class);
     Route::post('/category-big.create', [AdminController::class, 'create']);
     Route::post('/category-big.delete', [AdminController::class, 'delete']);
+    Route::post('/category-big.update', [AdminController::class, 'update']);
 
     // Product
     Route::resource('/product', AdminProductController::class);

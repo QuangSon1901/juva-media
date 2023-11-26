@@ -6,62 +6,115 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\CartProductPhotography;
+use App\Models\Product;
+use App\Models\ProductPhotography;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Cookie;
 class CartController extends Controller
 {
-    public function index() {
+    public function index()
+    {
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+            $get_data_cart = CartProduct::where('cart_id', $cart->id)->get();
 
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
-        $get_data_cart = CartProduct::where('cart_id', $cart->id)->get();
-
-        $data_cart = [
-            "data" => [],
-            "total" => 0
-        ];
-        foreach ($get_data_cart as $product) {
-            $total_product = 0;
-            $list = [];
-            foreach ($product->cart_product_photography as $photo) {
-                $total_product += $photo->quantity * $photo->product_photography->price;
-                $list[] = [
-                    "photography_id" => $photo->id,
-                    "photography_image" => $photo->product_photography->image,
-                    "photography_title" => $photo->product_photography->photography->title,
-                    "photography_price_unit" => $this->numberFormat($photo->product_photography->price),
-                    "photography_price_total" => $this->numberFormat($photo->product_photography->price * $photo->quantity),
-                    "price" => $photo->product_photography->price,
-                    "quantity" => $photo->quantity,
-                ];
-            }
-
-            $data_cart['data'][] = [
-                "product_id" => $product->product->id,
-                "product_name" => $product->product->name,
-                "product_image" => explode(' ', $product->product->image)[0],
-                "product_total" => $this->numberFormat($total_product),
-                "list" => $list
+            $data_cart = [
+                "data" => [],
+                "total" => 0
             ];
+            foreach ($get_data_cart as $product) {
+                $total_product = 0;
+                $list = [];
+                foreach ($product->cart_product_photography as $photo) {
+                    $total_product += $photo->quantity * $photo->product_photography->price;
+                    $list[] = [
+                        "photography_id" => $photo->id,
+                        "photography_image" => $photo->product_photography->image,
+                        "photography_title" => $photo->product_photography->photography->title,
+                        "photography_price_unit" => $this->numberFormat($photo->product_photography->price),
+                        "photography_price_total" => $this->numberFormat($photo->product_photography->price * $photo->quantity),
+                        "price" => $photo->product_photography->price,
+                        "quantity" => $photo->quantity,
+                    ];
+                }
 
-            $data_cart['total'] += $total_product;
+                $data_cart['data'][] = [
+                    "product_id" => $product->product->id,
+                    "product_name" => $product->product->name,
+                    "product_image" => explode(' ', $product->product->image)[0],
+                    "product_total" => $this->numberFormat($total_product),
+                    "list" => $list
+                ];
+
+                $data_cart['total'] += $total_product;
+            }
+            $data_cart['total'] = $this->numberFormat($data_cart['total']);
+
+            $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
+            $breadcrumbs = [
+                [
+                    'title' => 'Giỏ hàng',
+                    'url' => '/gio-hang'
+                ]
+            ];
+            return view('cart.index', compact('data_cart', 'breadcrumbs', 'cart_quantity'));
+        } else {
+            //Display cart without login
+
+            $cartDataString = Cookie::get('cart');
+            $cartData = json_decode($cartDataString, true);
+            $get_data_cart = $cartData ?? [];
+            $data_cart = [
+                "data" => [],
+                "total" => 0
+            ];
+            foreach ($get_data_cart as $product) {
+                $productDetail = Product::find($product['product_id']);
+                $total_product = 0;
+                $list = [];
+                foreach ($product['photos'] as $photo) {
+                    $photoDetails = ProductPhotography::find($photo['id']);
+                    $total_product += $photo['quantity'] * $photo['price'];
+                    $list[] = [
+                        "photography_id" => $photo['id'],
+                        "photography_image" => $photoDetails->image,
+                        "photography_title" => $photoDetails->photography->title,
+                        "photography_price_unit" => $this->numberFormat($photo['price']),
+                        "photography_price_total" => $this->numberFormat($photo['price'] * $photo['quantity']),
+                        "price" => $photo['price'],
+                        "quantity" => $photo['quantity'],
+                    ];
+                }
+
+                $data_cart['data'][] = [
+                    "product_id" => $product['product_id'],
+                    "product_name" => $productDetail->name,
+                    "product_image" => explode(' ', $productDetail->image)[0],
+                    "product_total" => $this->numberFormat($total_product),
+                    "list" => $list
+                ];
+
+                $data_cart['total'] += $total_product;
+            }
+            $data_cart['total'] = $this->numberFormat($data_cart['total']);
+
+            $cart_quantity = count($get_data_cart);
+            $breadcrumbs = [
+                [
+                    'title' => 'Giỏ hàng',
+                    'url' => '/gio-hang'
+                ]
+            ];
+            return view('cart.index', compact('data_cart', 'breadcrumbs', 'cart_quantity'));
         }
-        $data_cart['total'] = $this->numberFormat($data_cart['total']);
-
-        $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
-        $breadcrumbs = [
-            [
-                'title' => 'Giỏ hàng',
-                'url' => '/gio-hang'
-            ]
-        ];
-        return view('cart.index', compact('data_cart', 'breadcrumbs', 'cart_quantity'));
     }
 
-    public function addToCart(Request $request) {
+    public function addToCart(Request $request)
+    {
         $product_id = $request->get('product_id');
         $data_photo_selected = $request->get('data_photo_selected');
-        if(Auth::check()){
+        if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $check_cart_product = CartProduct::where('cart_id', $cart->id)->where('product_id', $product_id)->first();
             if (!$check_cart_product) {
@@ -70,7 +123,7 @@ class CartController extends Controller
                     'product_id' => $product_id
                 ]);
             }
-    
+
             foreach ($data_photo_selected as $photo) {
                 $check_photo = CartProductPhotography::where('cart_product_id', $check_cart_product->id)->where('product_photography_id', $photo['id'])->first();
                 if ($check_photo) {
@@ -85,22 +138,73 @@ class CartController extends Controller
                     ]);
                 }
             }
-    
+
             return [
                 "status" => 200,
                 "message" => "Thêm vào giỏ hàng thành công!",
                 "quantity_cart" => CartProduct::count()
             ];
-            
-        }else{
-            return [
-                "status" => 403,
-                "message" => "Đăng nhập để thêm giỏ hàng",
-            ];
+        } else {
+            // Thêm vào giỏ hàng khi chưa đăng nhập
+            $cart = json_decode($request->cookie('cart'), true) ?? [];
+
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            $found = false;
+            foreach ($cart as &$cartItem) {
+                if ($cartItem['product_id'] == $product_id) {
+                    // Sản phẩm đã có trong giỏ hàng, cập nhật số lượng
+                    $found = true;
+                    foreach ($data_photo_selected as $photo) {
+                        $photoId = $photo['id'];
+                        $quantity = $photo['quantity'];
+                        $price = $photo['price'];
+                        $foundPhoto = false;
+
+                        // Kiểm tra xem ảnh đã có trong giỏ hàng chưa
+                        foreach ($cartItem['photos'] as &$cartPhoto) {
+                            if ($cartPhoto['id'] == $photoId) {
+                                // Ảnh đã có trong giỏ hàng, cập nhật số lượng
+                                $cartPhoto['price'] = $price;
+                                $cartPhoto['quantity'] += $quantity;
+                                $foundPhoto = true;
+                                break;
+                            }
+                        }
+
+                        // Nếu ảnh chưa có trong giỏ hàng, thêm mới
+                        if (!$foundPhoto) {
+                            $cartItem['photos'][] = [
+                                'id' => $photoId,
+                                'price' => $price,
+                                'quantity' => $quantity,
+                            ];
+                        }
+                    }
+                    break;
+                }
+            }
+
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
+            if (!$found) {
+                $cart[] = [
+                    'product_id' => $product_id,
+                    'photos' => $data_photo_selected,
+                ];
+            }
+
+            // Lưu giỏ hàng vào localStorage và set cookie
+            $cookie = cookie('cart', json_encode($cart), 60 * 24 * 30);
+            return response([
+                "status" => 200,
+                "message" => "Thêm vào giỏ hàng thành công! 2",
+                'cart' => $cart,
+                "quantity_cart" => count($cart),
+            ])->withCookie($cookie);
         }
     }
 
-    public function removeProduct(Request $request) {
+    public function removeProduct(Request $request)
+    {
         $cart = Cart::where('user_id', Auth::user()->id)->first();
         $product_id = $request->get('product_id');
         $deleted = CartProduct::where('cart_id', $cart->id)->where('product_id', $product_id)->delete();
@@ -115,7 +219,8 @@ class CartController extends Controller
         ];
     }
 
-    public function updateQuantity(Request $request) {
+    public function updateQuantity(Request $request)
+    {
         $photography_id = $request->get('photography_id');
         $quantity = $request->get('quantity');
 
@@ -138,7 +243,7 @@ class CartController extends Controller
             if ($get_cart_product->cart_product_photography->count() <= 0) {
                 $get_cart_product->delete();
             }
-            
+
             return [
                 "status" => 200,
                 'quantity' => $quantity

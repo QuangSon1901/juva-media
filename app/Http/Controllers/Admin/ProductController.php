@@ -21,9 +21,21 @@ class ProductController extends Controller
     public function data(Request $request)
     {
         $id = $request->get('id');
-        if ($id == -1) return [
-            "status" => 200,
-            "data" => Product::with('service_categories')->with('product_categories')->get()
+        if ($id == -1){
+            return [
+                "status" => 200,
+                "data" => Product::with('service_categories')->with('product_categories')->get()
+            ];
+        } else {
+            return [
+                "status" => 200,
+                "data" => Product::with('service_categories')->with('product_categories')->find($id)
+            ];
+        }
+
+        return [
+            "status" => 403,
+            "message" => 'Không tìm thấy sản phẩm !'
         ];
     }
 

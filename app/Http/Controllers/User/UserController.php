@@ -7,11 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\CartProduct;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactForm;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function getInfoUser(){
+    public function getInfoUser()
+    {
         $cart_quantity = 0;
         if (Auth::user()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
@@ -19,12 +22,43 @@ class UserController extends Controller
         }
         return view('user.profile', compact('cart_quantity'));
     }
-    public function getInfoPurchase(){
+    public function getInfoPurchase()
+    {
         $cart_quantity = 0;
         if (Auth::user()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
         }
         return view('user.purchase', compact('cart_quantity'));
+    }
+
+    public function sendContact(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'title' => 'required',
+                'message' => 'required',
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'email' => ':attribute sai định dạng',
+            ],
+        );
+        if ($validator->fails()) {
+            return [
+                "status" => 403,
+                'message' => $validator->errors()->first()
+            ];
+        }
+        // Send email to company
+        $data = $request->all();
+        Mail::to('lozzradio123@gmail.com')->send(new ContactForm($data));
+        return [
+            "status" => 200,
+            "message" => 'Gửi thành công ! Tổ hỗ trợ sẽ liên lạc với bạn sớm nhất',
+        ];
     }
 }

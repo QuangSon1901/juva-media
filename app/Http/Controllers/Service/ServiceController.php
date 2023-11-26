@@ -113,4 +113,13 @@ class ServiceController extends Controller
             "data" => ServiceCategory::where('service_id', $serviceId)->get()
         ];
     }
+
+    public function getDetailServiceCategory(Request $request)
+    {
+        $serviceCateId = $request->get('service_category_id');
+        return [
+            "status" => 200,
+            "data" => ServiceCategory::with('services')->where('id', $serviceCateId)->first()
+        ];
+    }
 }

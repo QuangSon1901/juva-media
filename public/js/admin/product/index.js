@@ -34,7 +34,7 @@ async function getProductAdmin(id) {
                         </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-lg text-center">
-                                <box-icon type='solid' name='edit' class="cursor-pointer"></box-icon>
+                                <box-icon type='solid' name='edit' class="cursor-pointer" onclick="getDetailProductAdmin(${product.id})"></box-icon>
                                 <box-icon name='trash' class="cursor-pointer" data-id="${product.id}" onclick="deleteCategoryBigAdmin($(this))"></box-icon>
                                 </div>
                         </td>
@@ -43,6 +43,19 @@ async function getProductAdmin(id) {
             );
 
             $("#product-admin-table").html(eleProducts);
+            break;
+    }
+}
+async function getDetailProductAdmin(id) {
+    let method = "get",
+        url = "/product.data",
+        params = { id },
+        data = null;
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            $("#modal-update-category-big-admin input#update-id").data("id", res.data.data.id);
+            openModalUpdateProductAdmin()
             break;
     }
 }

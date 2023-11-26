@@ -1,5 +1,4 @@
 // const { result } = require("lodash");
-
 let dataPhotoSelected = [];
 function increaseQuantity(r) {
     let inputEle = r.parents(".quantity-action").find("input");
@@ -22,7 +21,6 @@ function increaseQuantity(r) {
         }
     }
     totalPhotoSelected();
-    console.log(dataPhotoSelected);
 }
 
 function decreaseQuantity(r) {
@@ -60,13 +58,14 @@ async function addToCart(r) {
         Swal.fire({
             position: "center",
             icon: "warning",
-            title: "Xin chọn sản phẩm",
+            title: "Xin chọn số lượng sản phẩm",
             showConfirmButton: true,
             timer: 1500,
             confirmButtonText: "OK",
         });
-        return false
+        return false;
     }
+    console.log(dataPhotoSelected);
     let method = "post",
         url = "/add-to-cart",
         params = null,
@@ -85,21 +84,12 @@ async function addToCart(r) {
                 timer: 1500,
                 confirmButtonText: "OK",
             });
+            //Add cart to localStorage
+            const cartJson = JSON.stringify(res.data.cart);
+            localStorage.setItem("cart", cartJson);
+
             $("#cart-quantity-header").text(res.data.quantity_cart);
-            break;
-        case 403:
-            Swal.fire({
-                position: "center",
-                icon: "warning",
-                title: res.data.message,
-                showConfirmButton: true,
-                timer: 1500,
-                confirmButtonText: "OK",
-            }).then((result) => {
-                if(result.isConfirmed){
-                    openModalLogin();
-                }
-            });
             break;
     }
 }
+
