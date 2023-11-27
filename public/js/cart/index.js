@@ -1,5 +1,9 @@
 let tabCart = 0;
 
+// $(function () {
+
+// })
+
 async function increaseQuantityCart(r) {
     let inputEle = r.parents(".quantity-action").find("input");
     inputEle.val(Number(inputEle.val()) + 1);

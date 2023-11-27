@@ -11,6 +11,8 @@ use App\Models\ProductPhotography;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
+
 class CartController extends Controller
 {
     public function index()
@@ -62,12 +64,12 @@ class CartController extends Controller
         } else {
             //Display cart without login
 
-            $cartDataString = Cookie::get('cart');
+            $cartDataString = Session::get('cart');
             $cartData = json_decode($cartDataString, true);
             $get_data_cart = $cartData ?? [];
             $data_cart = [
                 "data" => [],
-                "total" => 0
+                "total" => 0     
             ];
             foreach ($get_data_cart as $product) {
                 $productDetail = Product::find($product['product_id']);
@@ -193,13 +195,14 @@ class CartController extends Controller
             }
 
             // Lưu giỏ hàng vào localStorage và set cookie
-            $cookie = cookie('cart', json_encode($cart), 60 * 24 * 30);
+            Session::put('cart', json_encode($cart));
             return response([
                 "status" => 200,
                 "message" => "Thêm vào giỏ hàng thành công! 2",
+                "isAuth" => Auth::check(),
                 'cart' => $cart,
                 "quantity_cart" => count($cart),
-            ])->withCookie($cookie);
+            ]);
         }
     }
 

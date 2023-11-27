@@ -37,6 +37,7 @@ async function loginSubmit() {
         data = {
             email: $("#email-field-login").val(),
             password: $("#password-field-login").val(),
+            cart: localStorage.getItem('cart')
         };
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
@@ -71,6 +72,9 @@ async function loginSubmit() {
                         <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">${res.data.cart_quantity}</span>
                     </a>
             `)
+            localStorage.removeItem('cart')
+            window.location.reload()
+
             break;
         case 403:
             Swal.fire({
@@ -96,6 +100,7 @@ async function registerSubmit() {
             name: $("#name-field-register").val(),
             password: $("#password-field-register").val(),
             password_confirmation: $("#reenter-password-field-register").val(),
+            cart: localStorage.getItem('cart')
         };
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
@@ -130,6 +135,8 @@ async function registerSubmit() {
                         <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">0</span>
                     </a>
             `)
+            localStorage.removeItem('cart')
+            window.location.reload()
             break;
         case 401:
             Swal.fire({

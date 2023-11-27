@@ -84,9 +84,12 @@ async function addToCart(r) {
                 timer: 1500,
                 confirmButtonText: "OK",
             });
-            //Add cart to localStorage
-            const cartJson = JSON.stringify(res.data.cart);
-            localStorage.setItem("cart", cartJson);
+
+            if (!res.data.isAuth) {
+                //Add cart to localStorage
+                const cartJson = JSON.stringify(res.data.cart);
+                localStorage.setItem("cart", cartJson);
+            }
 
             $("#cart-quantity-header").text(res.data.quantity_cart);
             break;

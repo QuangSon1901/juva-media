@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartProduct;
+use App\Models\CartProductPhotography;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -49,6 +51,35 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
+            $cartLocal = json_decode($request->cart);
+            if ($cartLocal != null) {
+                $cart = Cart::where('user_id', Auth::user()->id)->first();
+                foreach ($cartLocal as $item) {
+                    $check_cart_product = CartProduct::where('cart_id', $cart->id)->where('product_id', $item->product_id)->first();
+                    if (!$check_cart_product) {
+                        $check_cart_product = CartProduct::create([
+                            'cart_id' => $cart->id,
+                            'product_id' => $item->product_id
+                        ]);
+                    }
+        
+                    foreach ($item->photos as $photo) {
+                        $check_photo = CartProductPhotography::where('cart_product_id', $check_cart_product->id)->where('product_photography_id', $photo->id)->first();
+                        if ($check_photo) {
+                            $check_photo->update([
+                                'quantity' => $check_photo->quantity + $photo->quantity
+                            ]);
+                        } else {
+                            CartProductPhotography::create([
+                                'cart_product_id' => $check_cart_product->id,
+                                'product_photography_id' => $photo->id,
+                                'quantity' => $photo->quantity
+                            ]);
+                        }
+                    }
+                }
+            }
+            Session::forget('cart');
             return [
                 "status" => 200,
                 "message" => "Đăng nhập thành công!",
@@ -110,6 +141,7 @@ class AuthController extends Controller
             Cart::create([
                 'user_id' => $check->id
             ]);
+            Session::forget('cart');
             return [
                 "status" => 200,
                 "message" => "Đăng ký thành công!",
