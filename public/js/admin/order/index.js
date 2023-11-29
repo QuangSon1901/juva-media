@@ -17,13 +17,18 @@ async function getOrderAdmin(order_id) {
             let eleOrder = res.data.data.map((order) =>` 
             <tr>
                 <td class="p-2 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="font-medium text-gray-800 slice-text">${order.id}</div>
+                    </div>
+                </td>
+                <td class="p-2 whitespace-nowrap">
                 ${order.order_products.map((orderProduct) => {
                         return `
-                            <div class="flex items-center">
+                            <div class="flex items-center w-full">
                                 <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                                     <img class="rounded-full w-full h-full" src="${orderProduct.product.image.split(" ")[0]}" width="40" height="40" alt="Product Image">
                                 </div>
-                                <div class="font-medium text-gray-800 slice-text">${orderProduct.product.name}</div>
+                                <div class="w-full font-medium text-gray-800 slice-text">${orderProduct.product.name}</div>
                             </div>
                         `;
                 }).join('')}
@@ -33,7 +38,7 @@ async function getOrderAdmin(order_id) {
                     <div class="text-lg text-center">
                         <box-icon type='solid' name='edit' class="cursor-pointer" "></box-icon>
                         <box-icon name='trash' class="cursor-pointer" "></box-icon>
-                        </div>
+                    </div>
                 </td>
             </tr>
             `);

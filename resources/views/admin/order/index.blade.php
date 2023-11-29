@@ -10,6 +10,9 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">#id</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Tên sản phẩm</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
