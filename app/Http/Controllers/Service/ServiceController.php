@@ -95,7 +95,7 @@ class ServiceController extends Controller
     {
         return [
             "status" => 200,
-            "data" => Service::all()
+            "data" => Service::with('service_categories')->get()
         ];
     }
 
@@ -120,6 +120,15 @@ class ServiceController extends Controller
         return [
             "status" => 200,
             "data" => ServiceCategory::with('services')->where('id', $serviceCateId)->first()
+        ];
+    }
+
+    public function getDetailService(Request $request)
+    {
+        $serviceCateId = $request->get('service_id');
+        return [
+            "status" => 200,
+            "data" => Service::where('id', $serviceCateId)->first()
         ];
     }
 }

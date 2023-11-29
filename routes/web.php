@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Category\CategoryController;
@@ -47,6 +49,7 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 
     // Cart
     Route::resource('/gio-hang', CartController::class);
+    Route::post('/get-items-cart', [CartController::class, 'getItemsCart']);
     Route::post('/add-to-cart', [CartController::class, 'addToCart']);
     Route::post('/remove-product-in-cart', [CartController::class, 'removeProduct']);
     Route::post('/change-quantity-in-cart', [CartController::class, 'updateQuantity']);
@@ -57,7 +60,7 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
     Route::get('/get-services', [ServiceController::class, 'getServices']);
     Route::get('/get-categories-of-service', [ServiceController::class, 'getCategoriesOfService']);
     Route::get('/get-detail-service-category', [ServiceController::class, 'getDetailServiceCategory']);
-
+    Route::get('/get-detail-service', [ServiceController::class, 'getDetailService']);
 
     // Order
     Route::post('/order', [OrderController::class, 'order']);
@@ -89,6 +92,18 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/product.add-graphy-create', [AdminProductController::class, 'addGraphyCreate']);
     Route::post('/product.create', [AdminProductController::class, 'create']);
     Route::post('/product.delete', [AdminProductController::class, 'delete']);
+
+    // Service
+    Route::resource('/service', AdminServiceController::class);
+    Route::post('/service.update-status', [AdminServiceController::class, 'updateStatus']);
+    Route::post('/service.create', [AdminServiceController::class, 'create']);
+    Route::post('/service.update', [AdminServiceController::class, 'update']);
+    Route::post('/service.delete', [AdminServiceController::class, 'delete']);
+
+    // Order
+    Route::resource('/order', AdminOrderController::class);
+    Route::get('/order.data', [AdminOrderController::class, 'data']);
+
 });
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')

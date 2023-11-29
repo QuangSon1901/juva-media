@@ -17,4 +17,12 @@ class OrderProduct extends Model
         'create_at',
         'update_at',
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function photos()
+    {
+        return $this->hasMany(OrderProductPhotography::class);
+    }
 }

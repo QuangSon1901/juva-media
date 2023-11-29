@@ -576,13 +576,7 @@ $(function () {
         }
     })
 
-    //Click outside hide tooltip warning dateTimePicker
-    $(document).mouseup(function (e) {
-        if (!$('.time-filer-dataTale').is(e.target) && $('.time-filer-dataTale').has(e.target).length === 0) {
-            $('.time-filer-dataTale').tooltip('hide')
-            $('.time-filer-dataTale').removeClass('border-danger')
-        }
-    });
+    
 
 
 })

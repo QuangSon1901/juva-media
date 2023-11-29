@@ -55,10 +55,11 @@ class UserController extends Controller
         }
         // Send email to company
         $data = $request->all();
-        Mail::to('lozzradio123@gmail.com')->send(new ContactForm($data));
+        $conpanyMail = 'mediajuva@gmail.com';
+        Mail::to($conpanyMail)->send(new ContactForm($data));
         return [
             "status" => 200,
-            "message" => 'Gửi thành công ! Tổ hỗ trợ sẽ liên lạc với bạn sớm nhất',
+            "message" => 'Gửi thành công !',
         ];
     }
 }

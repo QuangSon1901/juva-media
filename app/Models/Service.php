@@ -13,6 +13,7 @@ class Service extends Model
 
     protected $fillable = [
         'name',
+        'status',
         'create_at',
         'update_at',
     ];

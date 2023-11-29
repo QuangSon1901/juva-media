@@ -21,4 +21,8 @@ class Order extends Model
         'create_at',
         'update_at',
     ];
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

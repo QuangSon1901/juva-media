@@ -18,4 +18,8 @@ class OrderProductPhotography extends Model
         'create_at',
         'update_at',
     ];
+    public function productPhotography()
+    {
+        return $this->belongsTo(ProductPhotography::class, 'product_photography_id');
+    }
 }

@@ -65,7 +65,6 @@ async function addToCart(r) {
         });
         return false;
     }
-    console.log(dataPhotoSelected);
     let method = "post",
         url = "/add-to-cart",
         params = null,
@@ -86,12 +85,23 @@ async function addToCart(r) {
             });
 
             if (!res.data.isAuth) {
-                //Add cart to localStorage
-                const cartJson = JSON.stringify(res.data.cart);
-                localStorage.setItem("cart", cartJson);
+                const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+            
+                const newProducts = res.data.cart;
+                newProducts.forEach(newProduct => {
+                    const existingProduct = existingCart.find(product => product.product_id === newProduct.product_id);
+            
+                    if (!existingProduct) {
+                        existingCart.push(newProduct);
+                    } 
+                });
+                // Lưu giỏ hàng mới vào localStorage
+                const updatedCartJson = JSON.stringify(existingCart);
+                localStorage.setItem("cart", updatedCartJson);
             }
 
-            $("#cart-quantity-header").text(res.data.quantity_cart);
+            // $("#cart-quantity-header").text(res.data.quantity_cart);
+            loadCartCount()
             break;
     }
 }

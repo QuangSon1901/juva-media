@@ -22,6 +22,7 @@ $(function () {
 
     loadData();
     loadCartCount();
+    
 });
 
 function loadData() {
@@ -88,7 +89,7 @@ async function getProductSearch() {
             break;
     }
 }
-
+let services = []
 async function getServices() {
     let method = "get",
         url = "/get-services",
@@ -97,53 +98,47 @@ async function getServices() {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            let eleServives = res.data.data.map(
+            let eleServices = res.data.data.map(
                 (service) => `
-                    <li class="header-service-item cursor-pointer select-none" onclick="openDropdownService($(this), ${service.id})">
+                    <li class="header-service-item cursor-pointer select-none" onclick="openDropdownService($(this),${service.id})">
                         <a data-id=${service.id} class="block px-2 py-3 rounded-lg hover:bg-juva-grey header-service-item">${service.name}</a>
                     </li>
                 `
             );
 
-            $("#header-service-list").html(eleServives);
+            // Hiển thị danh sách dịch vụ trong #header-service-list
+            $("#header-service-list").html(eleServices);
+            services.push(res.data.data)
             break;
     }
 }
 
-async function getCategoryBig(service_id) {
-    let method = "get",
-        url = "/get-categories-of-service",
-        params = { service_id },
-        data = null;
-    let res = await axiosTemplate(method, url, params, data);
-    switch (res.data.status) {
-        case 200:
-            let eleServiceCategories = res.data.data.map(
-                (service) => `
+function getCategoryBig(categories) {
+    let eleServiceCategories = categories.map(
+        (serviceCate) => `
                     <li>
-                        <a href="/dich-vu/${service.slug}" style="gap: 12px" class="flex gap-3 cursor-pointer items-center p-[2px] rounded-sm hover:bg-juva-grey">
-                            <img class="w-20 h-20 rounded-sm" src="${service.image}" alt="">
+                        <a href="/dich-vu/${serviceCate.slug}" style="gap: 12px" class="flex gap-3 cursor-pointer items-center p-[2px] rounded-sm hover:bg-juva-grey">
+                            <img class="w-20 h-20 rounded-sm" src="${serviceCate.image}" alt="">
                             <div class="flex flex-col">
-                                <span class="font-semibold">${service.name}</span>
-                                <p>${service.description}</p>
+                                <span class="font-semibold">${serviceCate.name}</span>
+                                <p>${serviceCate.description}</p>
                             </div>
                         </a>
                     </li>
                 `
-            );
+    );
 
-            $(".header-service-dropdown ul").html(eleServiceCategories);
-            break;
-    }
+    $(".header-service-dropdown ul").html(eleServiceCategories);
 }
-
-function openDropdownService(r, service_id) {
+function openDropdownService(r,service_id) {
+    // Tìm dịch vụ tương ứng với serviceId
+    const selectedService = services[0].find(service => service.id === service_id);
     $(".header-service-dropdown").addClass("block");
     $(".header-service-dropdown").removeClass("hidden");
     $(".header-service-dropdown .header-service-dropdown-label").text(
         r.find("a").text()
     );
-    getCategoryBig(service_id);
+    getCategoryBig(selectedService.service_categories);
 }
 
 async function axiosTemplate(method, url, params, data, element) {

@@ -100,7 +100,7 @@ class AdminController extends Controller
             ];
         }else{
             return [
-                "status" => 404,
+                "status" => 402,
                 'message' => 'Cập nhật thất bại'
             ];
         }

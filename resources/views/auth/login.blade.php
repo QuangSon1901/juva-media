@@ -17,7 +17,8 @@
                 </button>
             </div>
             <div>
-                <input type="hidden" name="text-red-500 border-red-500 w-[150px]">
+                <input type="hidden" name="text-red-500 border-red-500 w-[150px] w-2/5 h-4/5 left-[0.3rem] bg-blue-600">
+                
                 <div class="grid grid-cols-2 gap-5 p-4">
                     <div>
                         <img class="rounded-lg" src="https://assets.tronhouse.vn/59185068-4c44-404a-a5b6-493d1d50d13d/derived/p_l/tron-house-chuyen-nghiep.jpg" alt="">
@@ -25,7 +26,7 @@
                     <div class="hidden flex-col gap-6 [&.active]:flex active" id="login-form-modal">
                         <label for="" class="flex flex-col">
                             <span class="font-semibold mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Email</span>
-                            <input type="email" id="email-field-login"  class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-mail="1">
+                            <input type="email" id="email-field-login" class="w-full h-9 p-2 rounded-md border outline-none" data-empty="1" data-mail="1">
                         </label>
                         <label for="" class="flex flex-col">
                             <span class="font-semibold mb-1 after:content-['*'] after:ml-0.5 after:text-red-500">Mật khẩu</span>

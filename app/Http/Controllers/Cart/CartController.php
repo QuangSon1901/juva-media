@@ -17,6 +17,24 @@ class CartController extends Controller
 {
     public function index()
     {
+        $breadcrumbs = [
+            [
+                'title' => 'Giỏ hàng',
+                'url' => '/gio-hang'
+            ]
+        ];
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+            $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
+
+            return view('cart.index', compact('breadcrumbs', 'cart_quantity'));
+        } else {
+            $cart_quantity = 0;
+            return view('cart.index', compact('breadcrumbs', 'cart_quantity'));
+        }
+    }
+    public function getItemsCart(Request $request)
+    {
         if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $get_data_cart = CartProduct::where('cart_id', $cart->id)->get();
@@ -54,22 +72,18 @@ class CartController extends Controller
             $data_cart['total'] = $this->numberFormat($data_cart['total']);
 
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
-            $breadcrumbs = [
-                [
-                    'title' => 'Giỏ hàng',
-                    'url' => '/gio-hang'
-                ]
+            return [
+                'status' => 200,
+                'data'  => $data_cart,
+                'cart_quantity' => $cart_quantity
             ];
-            return view('cart.index', compact('data_cart', 'breadcrumbs', 'cart_quantity'));
         } else {
             //Display cart without login
-
-            $cartDataString = Session::get('cart');
-            $cartData = json_decode($cartDataString, true);
-            $get_data_cart = $cartData ?? [];
+            $cartData = $request->get('cart');
+            $get_data_cart = $cartData;
             $data_cart = [
                 "data" => [],
-                "total" => 0     
+                "total" => 0
             ];
             foreach ($get_data_cart as $product) {
                 $productDetail = Product::find($product['product_id']);
@@ -101,17 +115,12 @@ class CartController extends Controller
             }
             $data_cart['total'] = $this->numberFormat($data_cart['total']);
 
-            $cart_quantity = count($get_data_cart);
-            $breadcrumbs = [
-                [
-                    'title' => 'Giỏ hàng',
-                    'url' => '/gio-hang'
-                ]
+            return [
+                'status' => 200,
+                'data'  => $data_cart,
             ];
-            return view('cart.index', compact('data_cart', 'breadcrumbs', 'cart_quantity'));
         }
     }
-
     public function addToCart(Request $request)
     {
         $product_id = $request->get('product_id');
@@ -148,7 +157,7 @@ class CartController extends Controller
             ];
         } else {
             // Thêm vào giỏ hàng khi chưa đăng nhập
-            $cart = json_decode($request->cookie('cart'), true) ?? [];
+            $cart =  [];
 
             // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
             $found = false;
@@ -194,11 +203,9 @@ class CartController extends Controller
                 ];
             }
 
-            // Lưu giỏ hàng vào localStorage và set cookie
-            Session::put('cart', json_encode($cart));
             return response([
                 "status" => 200,
-                "message" => "Thêm vào giỏ hàng thành công! 2",
+                "message" => "Thêm vào giỏ hàng thành công! ",
                 "isAuth" => Auth::check(),
                 'cart' => $cart,
                 "quantity_cart" => count($cart),
@@ -224,37 +231,39 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        $photography_id = $request->get('photography_id');
-        $quantity = $request->get('quantity');
+        if (Auth::check()) {
+            $photography_id = $request->get('photography_id');
+            $quantity = $request->get('quantity');
 
-        if ((int) $quantity > 0) {
-            CartProductPhotography::where('id', $photography_id)->update([
-                'quantity' => $quantity
-            ]);
+            if ((int) $quantity > 0) {
+                CartProductPhotography::where('id', $photography_id)->update([
+                    'quantity' => $quantity
+                ]);
 
-            return [
-                "status" => 200,
-                'quantity' => $quantity
-            ];
-        } else if ((int) $quantity <= 0) {
-            $check = CartProductPhotography::where('id', $photography_id)->first();
-            $cart_product_id = $check->cart_products->id;
+                return [
+                    "status" => 200,
+                    'quantity' => $quantity
+                ];
+            } else if ((int) $quantity <= 0) {
+                $check = CartProductPhotography::where('id', $photography_id)->first();
+                $cart_product_id = $check->cart_products->id;
 
-            $check->delete();
+                $check->delete();
 
-            $get_cart_product = CartProduct::where('id', $cart_product_id)->first();
-            if ($get_cart_product->cart_product_photography->count() <= 0) {
-                $get_cart_product->delete();
+                $get_cart_product = CartProduct::where('id', $cart_product_id)->first();
+                if ($get_cart_product->cart_product_photography->count() <= 0) {
+                    $get_cart_product->delete();
+                }
+
+                return [
+                    "status" => 200,
+                    'quantity' => $quantity
+                ];
             }
 
             return [
-                "status" => 200,
-                'quantity' => $quantity
+                "status" => 500
             ];
         }
-
-        return [
-            "status" => 500
-        ];
     }
 }
