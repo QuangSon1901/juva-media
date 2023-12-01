@@ -175,6 +175,53 @@ async function axiosTemplate(method, url, params, data, element) {
     }
 }
 
+function uploadMediaTemplate(file, type, thumb = null, size = null) {
+    /**
+     * Type
+     * 0-ảnh
+     * 1-video
+     * 2-audio
+     * 3-file
+     */
+    if (![0, 1, 2, 3].includes(type)) {
+        console.log('Media type không hợp lệ !')
+        return false;
+    }
+    if (type === 1 && !thumb) {
+        console.log('Video phải có thumb !')
+        return false;
+    }
+    if (!size) size = file.size;
+    let data = new FormData();
+    data.append("file", file);
+    data.append("type", type);
+    data.append("size", size);
+    data.append("thumb", thumb);
+    let method = 'post',
+        url = 'upload-media-template',
+        params = null;
+    return axiosFileTemplate(method, url, params, data);
+}
+
+async function axiosFileTemplate(method, url, params, data) {
+    try {
+        let res = await axios({
+            method: method, url: url, params: params, data: data, headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+        console.log(res);
+        if (res.data[0] === '500') {
+            return false;
+        } else {
+            return res;
+        }
+    } catch (e) {
+        console.log(e + ' AxiosTemplate' + '\n' + 'url: ' + url);
+        return e;
+    }
+}
+
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }

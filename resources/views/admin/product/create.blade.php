@@ -123,6 +123,72 @@
                             <textarea name="description" id="description" cols="30" rows="10"></textarea>
                         </div>
 
+                        <div class="md:col-span-5">
+                            <label>Ảnh chính</label>
+                            <article aria-label="File Upload Modal" class="relative flex flex-col bg-white rounded-md">
+                                <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                                    <i>
+                                        <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                                        </svg>
+                                    </i>
+                                    <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
+                                </div>
+
+                                <section class="h-full overflow-auto p-8 w-full space-y-2">
+                                    <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
+                                        <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                            <span>Kéo và thả vào ảnh của bạn</span>
+                                        </p>
+                                        <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                            Tải ảnh
+                                        </button>
+                                        <input id="main-image-create-product" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
+                                    </header>
+
+                                    <ul id="main-gallery-create-product" class="flex flex-1 flex-wrap -m-1">
+                                        <li id="main-empty-create-product" class="h-full w-full text-center flex flex-col items-center justify-center">
+                                            <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                            <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </article>
+                        </div>
+
+                        <div class="md:col-span-5">
+                            <label>Ảnh phụ</label>
+                            <article aria-label="File Upload Modal" class="relative flex flex-col bg-white rounded-md">
+                                <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                                    <i>
+                                        <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                                        </svg>
+                                    </i>
+                                    <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
+                                </div>
+
+                                <section class="h-full overflow-auto p-8 w-full space-y-2">
+                                    <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
+                                        <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                            <span>Kéo và thả vào ảnh của bạn</span>
+                                        </p>
+                                        <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                            Tải ảnh
+                                        </button>
+                                        <input id="more-image-create-product" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
+                                    </header>
+
+                                    <ul id="more-gallery-create-product" class="flex flex-1 flex-wrap -m-1">
+                                        <li id="more-empty-create-product" class="h-full w-full text-center flex flex-col items-center justify-center">
+                                            <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                            <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </article>
+                        </div>
+
                         <div class="md:col-span-5 text-right">
                             <div class="inline-flex items-end gap-2">
                                 <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onclick="closeModalCreateProductAdmin()">Thoát</button>
@@ -134,8 +200,7 @@
                 </div>
 
                 <div class="text-gray-600 lg:col-span-2">
-                    <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
-                        <!-- overlay -->
+                    <!-- <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
                         <div id="overlay" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
                             <i>
                                 <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -145,13 +210,12 @@
                             <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
                         </div>
 
-                        <!-- scroll area -->
                         <section class="h-full overflow-auto p-8 w-full space-y-2">
                             <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                     <span>Kéo và thả vào ảnh của bạn</span>
                                 </p>
-                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
+                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
                                 <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
@@ -164,7 +228,7 @@
                                 </li>
                             </ul>
                         </section>
-                    </article>
+                    </article> -->
                 </div>
             </div>
         </div>
@@ -197,7 +261,7 @@
         </article>
     </li>
 </template>
-<script>
+<!-- <script>
     const imageTempl = document.getElementById("image-template"),
         empty = document.getElementById("empty");
 
@@ -303,7 +367,7 @@
             delete FILES[ou];
         }
     };
-</script>
+</script> -->
 
 @include('ckfinder::setup')
 @push('scripts')

@@ -1,4 +1,6 @@
-let checkCreateProduct = 0;
+let checkCreateProduct = 0, mainImageURL = "";
+let emptyImageMain = document.getElementById("main-empty-create-product"),
+    emptyImageMore = document.getElementById("more-empty-create-product")
 
 $(function () {
     $(".dropdown-button").on("click", function () {
@@ -21,6 +23,55 @@ $(function () {
             }
         });
     });
+
+    $('.upload-btn').on('click', function () {
+        $(this).next('input').click()
+    })
+
+    $('#main-image-create-product').on('change',async function () {
+        let gallery = document.getElementById("main-gallery-create-product")
+        gallery.innerHTML = ""
+        addFile(gallery, emptyImageMain, $(this).prop('files')[0], URL.createObjectURL($(this).prop('files')[0]))
+        gallery.onclick = ({
+            target
+        }) => {
+            if (target.classList.contains("delete")) {
+                const ou = target.dataset.target;
+                document.getElementById(ou).remove(ou);
+                gallery.children.length === 0 && gallery.append(emptyImageMain)
+                mainImageURL = "";
+            }
+        };
+
+        let res = await uploadMediaTemplate($(this).prop('files')[0], 0);
+        switch (res.data.status) {
+            case 200:
+                mainImageURL = res.data.data
+                break;
+            default: 
+                alert('Upload ảnh bị lỗi, vui lòng thử lại!')
+        }
+        $(this).replaceWith($(this).val('').clone(true));
+    })
+
+    $('#more-image-create-product').on('change',async function () {
+        let gallery = document.getElementById("more-gallery-create-product")
+        jQuery.each($(this).prop('files'), async function (i, v) {
+            let res = await uploadMediaTemplate($(v)[0], 0);
+            addFile(gallery, emptyImageMore, $(v)[0], res.data.data)
+        })
+        gallery.onclick = ({
+            target
+        }) => {
+            if (target.classList.contains("delete")) {
+                const ou = target.dataset.target;
+                document.getElementById(ou).remove(ou);
+                gallery.children.length === 0 && gallery.append(emptyImageMain)
+                mainImageURL = "";
+            }
+        };
+        $(this).replaceWith($(this).val('').clone(true));
+    })
 
     $("#modal-create-product-admin").on("focus", "input", function () {
         $(this).select();
@@ -48,11 +99,18 @@ $(function () {
     $("#modal-create-product-admin").on(
         "change",
         ".graphy-item-file-input",
-        function () {
-            $(this)
-                .parents(".graphy-item-image-group")
-                .find(".graphy-item-image")
-                .attr("src", URL.createObjectURL($(this).prop("files")[0]));
+        async function () {
+            $(this).parents(".graphy-item-image-group").find(".graphy-item-image").attr("src", URL.createObjectURL($(this).prop("files")[0]));
+
+            let res = await uploadMediaTemplate($(this).prop('files')[0], 0);
+            switch (res.data.status) {
+                case 200:
+                    $(this).parents(".graphy-item-image-group").find(".graphy-item-image").attr("src", res.data.data);
+                    break;
+                default: 
+                    alert('Upload ảnh bị lỗi, vui lòng thử lại!')
+            }
+            $(this).replaceWith($(this).val('').clone(true));
         }
     );
 
@@ -78,9 +136,9 @@ $(function () {
                 "id"
             )}" data-text="${$(this).text()}" class="graphy-item flex rounded-md bg-gray-50 border border-[#d1d1d1] p-1 justify-between items-center pr-4">
                 <div class="flex gap-2">
-                    <div class="w-10 h-10 object-cover rounded-md graphy-item-image-group">
-                        <input type="file" class="hidden graphy-item-file-input" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1">
-                        <img class="w-full h-full object-cover rounded-md cursor-pointer graphy-item-image" src="/images/images/9261177.png" alt="">
+                    <div class="!w-10 !h-10 object-cover rounded-md graphy-item-image-group">
+                        <input type="file" class="hidden graphy-item-file-input" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1">
+                        <img class="!w-10 !h-10 object-cover rounded-md cursor-pointer graphy-item-image" src="/images/images/9261177.png" alt="">
                     </div>
                     <div class="flex flex-col">
                         <label for="">${$(this).text()}</label>
@@ -176,57 +234,91 @@ function resetModalCreateProductAdmin() {
             <div data-id="${$(item).data('id')}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${$(item).data('text')}</div>
         `);
     })
+    mainImageURL = "";
+
     $("#modal-create-product-admin .graphy-list").html("");
     CKEDITOR.instances['description'].setData('')
 
-    let gallery = document.getElementById("gallery"),
-    empty = document.getElementById("empty");
-    while (gallery.children.length > 0) {
-        gallery.lastChild.remove();
-    }
-
-    FILES = {};
-    empty.classList.remove("hidden");
-    gallery.append(empty);
-    $("#hidden-input").replaceWith($("#hidden-input").val('').clone(true));
+    $('#main-gallery-create-product').html(emptyImageMain.outerHTML)
+    $('#more-gallery-create-product').html(emptyImageMore.outerHTML)
 }
 
 async function saveModalCreateProductAdmin() {
     if (checkCreateProduct === 1) return;
     if(!checkValidateSave($('#modal-create-product-admin'))) return false
-    let graphy = $(".graphy-list li").map((index, item) => ({
+
+    if (!$("#modal-create-product-admin .category-menu div.selected").data("id")) {
+        alert('Vui lòng chọn danh mục')
+        return
+    }
+
+    if (!$("#modal-create-product-admin .type-menu div.selected").data("id")) {
+        alert('Vui lòng chọn loại sản phẩm')
+        return
+    }
+
+    let graphy = $("#modal-create-product-admin .graphy-list li")
+    if (graphy.length === 0) {
+        alert('Vui lòng chọn góc chụp')
+        return
+    }
+
+    if (mainImageURL === '') {
+        alert('Vui lòng chọn ảnh chính')
+        return
+    }
+
+    if ($('#more-gallery-create-product li:not(#more-empty-create-product)').length === 0) {
+        alert('Vui lòng chọn ảnh phụ')
+        return
+    }
+    
+    graphy = graphy.map((index, item) => ({
         id: $(item).data("id"),
         title: $(item).data("text"),
         price: $(item).find(".graphy-price").val(),
         description: "",
-        image: $(item).find(".graphy-item-file-input").prop("files")[0],
+        image: $(item).find(".graphy-item-image").attr("src"),
     }));
 
-    let data = new FormData();
-    data.append("name", $("#modal-create-product-admin input#name").val());
-    data.append("price", $("#modal-create-product-admin input#price").val());
-    data.append(
-        "service_category_id",
-        $("#modal-create-product-admin .category-menu div.selected").data("id")
-    );
-    data.append(
-        "product_category_id",
-        $("#modal-create-product-admin .type-menu div.selected").data("id")
-    );
-    data.append("description", CKEDITOR.instances["description"].getData());
+    let imageMore = $('#more-gallery-create-product li:not(#more-empty-create-product)').map((index, item) => $(item).find("img").attr("src")).get().join(' ')
 
-    graphy.each((index, item) => {
-        data.append(`graphy[${index}][title]`, item.title);
-        data.append(`graphy[${index}][id]`, item.id);
-        data.append(`graphy[${index}][description]`, item.description);
-        data.append(`graphy[${index}][price]`, item.price);
-        data.append(`graphy[${index}][image]`, item.image);
-    });
+    let data = {
+        name: $("#modal-create-product-admin input#name").val(),
+        price: $("#modal-create-product-admin input#price").val(),
+        service_category_id: $("#modal-create-product-admin .category-menu div.selected").data("id"),
+        product_category_id: $("#modal-create-product-admin .type-menu div.selected").data("id"),
+        description: CKEDITOR.instances["description"].getData(),
+        main_image: mainImageURL,
+        image_more: imageMore,
+        graphy: graphy.toArray(),
+    }
 
-    let files = Object.values(FILES).reverse();
-    $(files).each((index, item) => {
-        data.append(`image[${index}]`, item);
-    });
+    // let data = new FormData();
+    // data.append("name", $("#modal-create-product-admin input#name").val());
+    // data.append("price", $("#modal-create-product-admin input#price").val());
+    // data.append(
+    //     "service_category_id",
+    //     $("#modal-create-product-admin .category-menu div.selected").data("id")
+    // );
+    // data.append(
+    //     "product_category_id",
+    //     $("#modal-create-product-admin .type-menu div.selected").data("id")
+    // );
+    // data.append("description", CKEDITOR.instances["description"].getData());
+
+    // graphy.each((index, item) => {
+    //     data.append(`graphy[${index}][title]`, item.title);
+    //     data.append(`graphy[${index}][id]`, item.id);
+    //     data.append(`graphy[${index}][description]`, item.description);
+    //     data.append(`graphy[${index}][price]`, item.price);
+    //     data.append(`graphy[${index}][image]`, item.image);
+    // });
+
+    // let files = Object.values(FILES).reverse();
+    // $(files).each((index, item) => {
+    //     data.append(`image[${index}]`, item);
+    // });
 
     let method = "post",
         url = "/product.create",
@@ -310,4 +402,33 @@ async function addGraphyProductCreate() {
             break;
     }
 
+}
+
+function addFile(target, empty, file, objectURL) {
+    const imageTempl = document.getElementById("image-template")
+
+    const isImage = file.type.match("image.*");
+
+    if (!isImage) return;
+
+    const clone = imageTempl.content.cloneNode(true);
+
+    clone.querySelector("h1").textContent = file.name;
+    clone.querySelector("li").id = objectURL;
+    clone.querySelector(".delete").dataset.target = objectURL;
+    clone.querySelector(".size").textContent =
+        file.size > 1024 ?
+        file.size > 1048576 ?
+        Math.round(file.size / 1048576) + "mb" :
+        Math.round(file.size / 1024) + "kb" :
+        file.size + "b";
+
+    isImage &&
+        Object.assign(clone.querySelector("img"), {
+            src: objectURL,
+            alt: file.name
+        });
+
+    $(empty).remove()
+    target.prepend(clone);
 }

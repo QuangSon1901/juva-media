@@ -69,3 +69,38 @@
         </div>
     </div>
 </div>
+<div id="button-contact-vr">
+    <div id="gom-all-in-one">
+        <div id="fanpage-vr" class="button-contact">
+            <div class="phone-vr">
+                <div class="phone-vr-circle-fill"></div>
+                <div class="phone-vr-img-circle">
+                    <a target="_blank" href="https://www.facebook.com/juvamedia">
+                        <img alt="Fanpage" src="{{asset('images/images/Facebook.png')}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="zalo-vr" class="button-contact">
+            <div class="phone-vr">
+                <div class="phone-vr-circle-fill"></div>
+                <div class="phone-vr-img-circle">
+                    <a target="_blank" href="https://zalo.me/0397838804">
+                        <img alt="Zalo" src="{{asset('images/images/zalo.png')}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="phone-vr" class="button-contact">
+            <div class="phone-vr">
+                <div class="phone-vr-circle-fill"></div>
+                <div class="phone-vr-img-circle">
+                    <a href="tel:0397838804">
+                        <img alt="Phone" src="{{asset('images/images/phone.png')}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="w-10 !w-10 h-10 !h-10"></div>

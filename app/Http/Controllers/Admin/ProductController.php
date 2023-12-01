@@ -59,41 +59,41 @@ class ProductController extends Controller
         $product_category_id = $request->get('product_category_id');
         $description = $request->get('description');
 
-        $images = $request->file('image');
+        $image_more = $request->get('image_more');
+        $main_image = $request->get('main_image');
 
         $graphy = $request->get('graphy');
-        $graphyFile = $request->file('graphy');
+        // $graphyFile = $request->file('graphy');
 
-        for ($i=0; $i < count($graphyFile); $i++) { 
-            $upload = Cloudinary::upload($graphyFile[$i]['image']->getRealPath())->getSecurePath();
+        // for ($i=0; $i < count($graphyFile); $i++) { 
+        //     $upload = Cloudinary::upload($graphyFile[$i]['image']->getRealPath())->getSecurePath();
 
-            if ($upload) {
-                $graphy[$i]['image'] = $upload;
-            }
-        }
+        //     if ($upload) {
+        //         $graphy[$i]['image'] = $upload;
+        //     }
+        // }
 
-        $imageUrl = "";
-        for ($i=0; $i < count($images); $i++) { 
-            $upload = Cloudinary::upload($images[$i]->getRealPath())->getSecurePath();
+        // $imageUrl = "";
+        // for ($i=0; $i < count($images); $i++) { 
+        //     $upload = Cloudinary::upload($images[$i]->getRealPath())->getSecurePath();
 
-            if ($upload) {
-                $imageUrl .= $upload . " ";
-            }
-        }
+        //     if ($upload) {
+        //         $imageUrl .= $upload . " ";
+        //     }
+        // }
 
         $createPr = Product::create([
             "name" => $name,
             "description" => $description,
-            "image" => $imageUrl,
+            "image" => $main_image . " " . $image_more,
             "price" => $price,
             "service_category_id" => $service_category_id,
             "product_category_id" => $product_category_id,
         ]);
-
         $graphyPro = [];
         foreach ($graphy as $gra) {
             $graphyPro[] = [
-                "price" => $gra['price'],
+                "price" => (int) $gra['price'],
                 "image" => $gra['image'],
                 "product_id" => $createPr->id,
                 "photography_id" => $gra['id'],

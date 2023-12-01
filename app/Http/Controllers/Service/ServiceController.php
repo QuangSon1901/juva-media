@@ -95,7 +95,7 @@ class ServiceController extends Controller
     {
         return [
             "status" => 200,
-            "data" => Service::with('service_categories')->get()
+            "data" => Service::with('service_categories')->where('status', 1)->get()
         ];
     }
 

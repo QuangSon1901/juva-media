@@ -11,6 +11,7 @@ use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Service\ServiceController;
+use App\Http\Controllers\UploadNodeController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,6 +105,7 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::resource('/order', AdminOrderController::class);
     Route::get('/order.data', [AdminOrderController::class, 'data']);
 
+    Route::post('/upload-media-template', [UploadNodeController::class, 'uploadMedia']);
 });
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
