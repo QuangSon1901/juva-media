@@ -2,14 +2,7 @@
 @section('content')
 <div>
     <div class="relative w-full">
-        <div class="slider h-[calc(100vh-168px)] w-full">
-            <div>
-                <img class="w-full h-[calc(100vh-168px)]" src="https://classic.vn/wp-content/uploads/2022/11/banner-website-1200x600-1200-900-px-1200-600-px.png" alt="">
-            </div>
-            <div>
-                <img class="w-full h-[calc(100vh-168px)]" src="https://littletreasury.com/wp-content/uploads/2016/12/Meistersinger-Web-Banner-1200-x-600.jpg" alt="">
-            </div>
-        </div>
+        <div id="home-slider" class="slider h-[calc(100vh-168px)] w-full"></div>
     </div>
     <div>
         <div class="mt-14">
@@ -83,16 +76,6 @@
 @endsection
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $('.slider').slick({
-            dots: false,
-            arrows: false,
-            infinite: true,
-            speed: 500,
-            autoplay: true,
-            autoplaySpeed: 5000,
-        });
-    });
     async function sendContact() {
         if (!checkValidateSave($('#contact-form'))) return false
         let method = "post",

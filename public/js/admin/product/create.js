@@ -66,7 +66,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImageMain)
+                gallery.children.length === 0 && gallery.append(emptyImageMore)
                 mainImageURL = "";
             }
         };

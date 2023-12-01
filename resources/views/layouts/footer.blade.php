@@ -103,4 +103,6 @@
         </div>
     </div>
 </div>
-<div class="w-10 !w-10 h-10 !h-10"></div>
+<div class="hidden">
+    <div class="w-10 !w-10 h-10 !h-10 w-full h-[calc(100vh-168px)]"></div>
+</div>

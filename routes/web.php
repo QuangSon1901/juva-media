@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
@@ -42,7 +43,7 @@ Route::post('/contact', [UserController::class, 'sendContact']);
 Route::group(['as' => 'home.', 'middleware' => []], function () {
     // Home
     Route::resource('/', IndexController::class);
-
+    Route::get('/banner.data-index', [BannerController::class, 'dataIndex']);
 
     // Product
     Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
@@ -106,6 +107,12 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::get('/order.data', [AdminOrderController::class, 'data']);
 
     Route::post('/upload-media-template', [UploadNodeController::class, 'uploadMedia']);
+
+    Route::resource('/banner', BannerController::class);
+    Route::get('/banner.data', [BannerController::class, 'data']);
+    Route::post('/banner.create', [BannerController::class, 'create']);
+    Route::post('/banner.delete', [BannerController::class, 'delete']);
+    Route::post('/banner.update-status', [BannerController::class, 'updateStatus']);
 });
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')

@@ -1,3 +1,5 @@
+let services = [];
+
 $(function () {
     $(document).on("click", (event) => {
         if (
@@ -27,6 +29,7 @@ $(function () {
 
 function loadData() {
     getServices();
+    getBanners();
 }
 
 function loadCartCount() {
@@ -89,7 +92,7 @@ async function getProductSearch() {
             break;
     }
 }
-let services = []
+
 async function getServices() {
     let method = "get",
         url = "/get-services",
@@ -111,6 +114,36 @@ async function getServices() {
             services.push(res.data.data)
             break;
     }
+}
+
+async function getBanners() {
+    let method = "get",
+        url = "/banner.data-index",
+        params = null,
+        data = null;
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            let eleServices = res.data.data.map(
+                (service) => `
+                    <div>
+                        <img class="w-full h-[calc(100vh-168px)]" src="${service.image}" alt="">
+                    </div>
+                `
+            );
+
+            $("#home-slider").html(eleServices);
+            $('.slider').slick({
+                dots: false,
+                arrows: false,
+                infinite: true,
+                speed: 500,
+                autoplay: true,
+                autoplaySpeed: 5000,
+            });
+            break;
+    }
+    
 }
 
 function getCategoryBig(categories) {
