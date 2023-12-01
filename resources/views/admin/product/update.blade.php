@@ -41,13 +41,13 @@
                     <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                         <div class="md:col-span-5">
                             <label for="name">Tên sản phẩm</label>
-                            <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="50"/>
+                            <input type="text" name="name" id="name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="100"/>
+                            <input type="hidden" name="update-id" id="update-product_id">
                         </div>
-
                         <div class="md:col-span-2">
                             <label for="service_id">Danh mục</label>
                             <div class="relative group mt-1 select-group">
-                                <button class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
+                                <button id="cate-update" class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
                                     <span class="mr-2">Danh mục</span>
                                     <button tabindex="-1" for="show_more" class="absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
                                         <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -65,7 +65,7 @@
                         <div class="md:col-span-2">
                             <label for="service_id">Loại</label>
                             <div class="relative group mt-1 select-group">
-                                <button class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
+                                <button id="type-update" class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
                                     <span class="mr-2">Loại</span>
                                     <button tabindex="-1" for="show_more" class="absolute top-1/2 -translate-y-1/2 right-8 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
                                         <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -123,10 +123,76 @@
                             <textarea name="description" id="description-update" cols="30" rows="10"></textarea>
                         </div>
 
+                        <div class="md:col-span-5">
+                            <label>Ảnh chính</label>
+                            <article aria-label="File Upload Modal" class="relative flex flex-col bg-white rounded-md">
+                                <div id="overlay-update" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                                    <i>
+                                        <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                                        </svg>
+                                    </i>
+                                    <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
+                                </div>
+
+                                <section class="h-full overflow-auto p-8 w-full space-y-2">
+                                    <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
+                                        <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                            <span>Kéo và thả vào ảnh của bạn</span>
+                                        </p>
+                                        <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                            Tải ảnh
+                                        </button>
+                                        <input id="main-image-update-product" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp"/>
+                                    </header>
+
+                                    <ul id="main-gallery-update-product" class="flex flex-1 flex-wrap -m-1">
+                                        <li id="main-empty-update-product" class="h-full w-full text-center flex flex-col items-center justify-center">
+                                            <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                            <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </article>
+                        </div>
+
+                        <div class="md:col-span-5">
+                            <label>Ảnh phụ</label>
+                            <article aria-label="File Upload Modal" class="relative flex flex-col bg-white rounded-md">
+                                <div id="overlay-update" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                                    <i>
+                                        <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                                        </svg>
+                                    </i>
+                                    <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
+                                </div>
+
+                                <section class="h-full overflow-auto p-8 w-full space-y-2">
+                                    <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
+                                        <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                            <span>Kéo và thả vào ảnh của bạn</span>
+                                        </p>
+                                        <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                            Tải ảnh
+                                        </button>
+                                        <input id="more-image-update-product" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp"/>
+                                    </header>
+
+                                    <ul id="more-gallery-update-product" class="flex flex-1 flex-wrap -m-1">
+                                        <li id="more-empty-update-product" class="h-full w-full text-center flex flex-col items-center justify-center">
+                                            <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
+                                            <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </article>
+                        </div>
+
                         <div class="md:col-span-5 text-right">
                             <div class="inline-flex items-end gap-2">
                                 <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" onclick="closeModalUpdateProductAdmin()">Thoát</button>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="">Lưu lại</button>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="saveModalUpdateProductAdmin()">Lưu lại</button>
                             </div>
                         </div>
 
@@ -134,8 +200,7 @@
                 </div>
 
                 <div class="text-gray-600 lg:col-span-2">
-                    <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler2(event);" ondragover="dragOverHandler2(event);" ondragleave="dragLeaveHandler2(event);" ondragenter="dragEnterHandler2(event);">
-                        <!-- overlay -->
+                    <!-- <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
                         <div id="overlay-update" class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
                             <i>
                                 <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -145,26 +210,25 @@
                             <p class="text-lg text-blue-700">Thả tập tin để tải lên</p>
                         </div>
 
-                        <!-- scroll area -->
                         <section class="h-full overflow-auto p-8 w-full space-y-2">
                             <header class="w-full border-dashed border-2 border-gray-400 py-12 px-4 flex flex-col justify-center items-center">
                                 <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                     <span>Kéo và thả vào ảnh của bạn</span>
                                 </p>
-                                <input id="hidden-input-update" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
-                                <button id="button-img-update" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                <input id="hidden-input" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
+                                <button id="button" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
                             </header>
 
-                            <ul id="gallery-update" class="flex flex-1 flex-wrap -m-1">
-                                <li id="empty-update" class="h-full w-full text-center flex flex-col items-center justify-center">
+                            <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
+                                <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center">
                                     <img class="mx-auto w-32" src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png" alt="no data" />
                                     <span class="text-small text-gray-500">Chưa có ảnh được chọn</span>
                                 </li>
                             </ul>
                         </section>
-                    </article>
+                    </article> -->
                 </div>
             </div>
         </div>
@@ -197,113 +261,7 @@
         </article>
     </li>
 </template>
-<script>
-    const imageTemp2 = document.getElementById("image-template-update"),
-        emptyUpdate = document.getElementById("empty-update");
 
-    // use to store pre selected files
-    let FILES2 = {};
-
-    // check if file is of type image and prepend the initialied
-    // template to the target element
-    function addFile2(target, file) {
-        const isImage = file.type.match("image.*"),
-            objectURL = URL.createObjectURL(file);
-
-        if (!isImage) return;
-
-        const clone = imageTemp2.content.cloneNode(true);
-
-        clone.querySelector("h1").textContent = file.name;
-        clone.querySelector("li").id = objectURL;
-        clone.querySelector(".delete").dataset.target = objectURL;
-        clone.querySelector(".size").textContent =
-            file.size > 1024 ?
-            file.size > 1048576 ?
-            Math.round(file.size / 1048576) + "mb" :
-            Math.round(file.size / 1024) + "kb" :
-            file.size + "b";
-
-        isImage &&
-            Object.assign(clone.querySelector("img"), {
-                src: objectURL,
-                alt: file.name
-            });
-
-        emptyUpdate.classList.add("hidden");
-        target.prepend(clone);
-
-        FILES2[objectURL] = file;
-    }
-
-    const galleryUpdate = document.getElementById("gallery-update"),
-        overlayUpdate = document.getElementById("overlay-update");
-
-    // click the hidden input of type file if the visible button is clicked
-    // and capture the selected files
-    const hidden = document.getElementById("hidden-input-update");
-    document.getElementById("button-img-update").onclick = () => hidden.click();
-    hidden.onchange = (e) => {
-        for (const file of e.target.files) {
-            addFile2(galleryUpdate, file);
-        }
-    };
-
-    // use to check if a file is being dragged
-    const hasFiles = ({
-            dataTransfer: {
-                types = []
-            }
-        }) =>
-        types.indexOf("Files") > -1;
-
-    // use to drag dragenter and dragleave events.
-    // this is to know if the outermost parent is dragged over
-    // without issues due to drag events on its children
-    let counter = 0;
-
-    // reset counter and append file to gallery when file is dropped
-    function dropHandler2(ev) {
-        ev.preventDefault();
-        for (const file of ev.dataTransfer.files) {
-            addFile2(galleryUpdate, file);
-            overlayUpdate.classList.remove("draggedover");
-            counter = 0;
-        }
-    }
-
-    // only react to actual files being dragged
-    function dragEnterHandler2(e) {
-        e.preventDefault();
-        if (!hasFiles(e)) {
-            return;
-        }
-        ++counter && overlayUpdate.classList.add("draggedover");
-    }
-
-    function dragLeaveHandler2(e) {
-        1 > --counter && overlayUpdate.classList.remove("draggedover");
-    }
-
-    function dragOverHandler2(e) {
-        if (hasFiles(e)) {
-            e.preventDefault();
-        }
-    }
-
-    // event delegation to caputre delete events
-    // fron the waste buckets in the file preview cards
-    galleryUpdate.onclick = ({
-        target
-    }) => {
-        if (target.classList.contains("delete")) {
-            const ou = target.dataset.target;
-            document.getElementById(ou).remove(ou);
-            galleryUpdate.children.length === 1 && empty.classList.remove("hidden");
-            delete FILES2[ou];
-        }
-    };
-</script>
 
 @include('ckfinder::setup')
 @push('scripts')

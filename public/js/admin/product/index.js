@@ -35,7 +35,7 @@ async function getProductAdmin(id) {
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-lg text-center">
                                 <box-icon type='solid' name='edit' class="cursor-pointer" onclick="getDetailProductAdmin(${product.id})"></box-icon>
-                                <box-icon name='trash' class="cursor-pointer" data-id="${product.id}" onclick="deleteCategoryBigAdmin($(this))"></box-icon>
+                                <box-icon name='trash' class="cursor-pointer" data-id="${product.id}" onclick="deleteProductAdmin($(this))"></box-icon>
                                 </div>
                         </td>
                     </tr>
@@ -47,6 +47,7 @@ async function getProductAdmin(id) {
     }
 }
 async function getDetailProductAdmin(id) {
+
     let method = "get",
         url = "/product.data",
         params = { id },
@@ -54,8 +55,80 @@ async function getDetailProductAdmin(id) {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            $("#modal-update-category-big-admin input#update-id").data("id", res.data.data.id);
+            console.log(res.data.data);
+            $("#modal-update-product-admin input#update-product_id").val(id)
+            $("#modal-update-product-admin input#name").val(res.data.data.name)
+            $("#modal-update-product-admin input#price").val(res.data.data.price)
+
+            $("#cate-update > span").text(res.data.data.service_categories.name);
+            $("#modal-update-product-admin .category-menu div[data-id]").each(function() {
+                const dataId = $(this).data("id");
+                
+                if (dataId && dataId === res.data.data.service_category_id) {
+                    $(this).addClass("selected");
+                }
+            });
+
+            $("#type-update > span").text(res.data.data.product_categories.title);
+            $("#modal-update-product-admin .type-menu div[data-id]").each(function() {
+                const dataId = $(this).data("id");
+                
+                if (dataId && dataId === res.data.data.product_category_id) {
+                    $(this).addClass("selected");
+                }
+            });
+
+            CKEDITOR.instances["description-update"].setData(res.data.data.description)
+            //Product photography
+            const graphyEle =  res.data.data.product_photography.map(graphy => `
+                <li data-id="${graphy.photography.id}" data-text="${graphy.photography.title}" class="graphy-item flex rounded-md bg-gray-50 border border-[#d1d1d1] p-1 justify-between items-center pr-4">
+                    <div class="flex gap-2">
+                        <div class="!w-10 !h-10 object-cover rounded-md graphy-item-image-group">
+                            <input type="file" class="hidden graphy-item-file-input" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1">
+                            <img class="!w-10 !h-10 object-cover rounded-md cursor-pointer graphy-item-image" src="${graphy.image}" alt="">
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="">${graphy.photography.title}</label>
+                            <div><input type="text" value="${graphy.price}" class="text-end graphy-price">&nbsp;đ</div>
+                        </div>
+                    </div>
+                    <div class="graphy-remove cursor-pointer">
+                        <box-icon color="red" name='trash'></box-icon>
+                    </div>
+                </li>
+            `)
+            $("#modal-update-product-admin .graphy-list").append(graphyEle);
+            
+            $("#main-empty-update-product").remove()
+            $("#more-empty-update-product").remove()
+
+            const imageArr = res.data.data.image.split(" ")
+            const imageNewArr = imageArr.filter(img => img.trim() !== '')
+            const mainImage = imageNewArr[0]
+            const moreImage = imageNewArr.slice(1)
+            //Main image
+            $("#main-gallery-update-product").append(`<img class="block p-1 w-1/4 h-auto" src="${mainImage}" alt="Main Image">`);
+            mainUpdateImageURL = mainImage;
+            //More image
+            const liEle =  moreImage.map(img => 
+                `<li class="block p-1 w-1/4 h-auto"><img src="${img}" alt="More Image"></li>`
+            );
+            $("#more-gallery-update-product").append(liEle)
+        
+            
             openModalUpdateProductAdmin()
+            break;
+    }
+}
+async function deleteProductAdmin(r) {
+    let method = "post",
+        url = "/product.delete",
+        params = null,
+        data = { id: r.data("id") };
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            r.parents("tr").remove();
             break;
     }
 }
