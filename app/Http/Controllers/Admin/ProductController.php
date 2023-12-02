@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function data(Request $request)
     {
         $id = $request->get('id');
-        if ($id == -1){
+        if ($id == -1) {
             return [
                 "status" => 200,
                 "data" => Product::with('service_categories')->with('product_categories')->get()
@@ -29,7 +29,7 @@ class ProductController extends Controller
         } else {
             return [
                 "status" => 200,
-                "data" => Product::with('service_categories')->with('product_categories')->find($id)
+                "data" => Product::with('service_categories')->with('product_categories')->with('product_photography.photography')->find($id)
             ];
         }
 
@@ -104,14 +104,66 @@ class ProductController extends Controller
             ProductPhotography::insert($graphyPro);
         }
 
-        
+
         return [
             "status" => 200,
             "data" => Product::with('service_categories')->with('product_categories')->where('id', $createPr->id)->first()
         ];
     }
+    public function update(Request $request)
+    {
+        $name = $request->get('name');
+        $price = $request->get('price');
+        $service_category_id = $request->get('service_category_id');
+        $product_category_id = $request->get('product_category_id');
+        $description = $request->get('description');
 
-    public function addTypeCreate(Request $request) {
+        $image_more = $request->get('image_more');
+        $main_image = $request->get('main_image');
+
+        $graphy = $request->get('graphy');
+
+        Product::where('id', $request->get('id'))->update([
+            "name" => $name,
+            "description" => $description,
+            "image" => $main_image . " " . $image_more,
+            "price" => $price,
+            "service_category_id" => $service_category_id,
+            "product_category_id" => $product_category_id,
+        ]);
+
+        foreach ($graphy as $gra) {
+            $graphyPro = [
+                "price" => (int) $gra['price'],
+                "image" => $gra['image'],
+            ];
+            ProductPhotography::where('product_id', $request->get('id'))->where('photography_id',$gra['id'])->update($graphyPro);
+        }
+
+        return [
+            "status" => 200,
+            "data" => Product::with('service_categories')->with('product_categories')->where('id', $request->get('id'))->first()
+        ];
+    }
+
+    public function delete(Request $request){
+            $delete =  Product::where('id', $request->get('id'))->delete();
+
+            if($delete){
+
+                return [
+                    'status' => 200
+                ];
+            }else{
+                
+                return [
+                    'status' => 500
+                ];
+            }
+    }
+
+    public function addTypeCreate(Request $request)
+    {
         $created = ProductCategory::create([
             "title" => $request->get('title')
         ]);
@@ -128,7 +180,8 @@ class ProductController extends Controller
         ];
     }
 
-    public function addGraphyCreate(Request $request) {
+    public function addGraphyCreate(Request $request)
+    {
         $created = Photography::create([
             "title" => $request->get('title'),
             "description" => ""

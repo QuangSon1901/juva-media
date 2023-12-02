@@ -8,7 +8,7 @@ function loadData() {
 
 async function getServiceAdmin() {
     let method = "get",
-        url = "/get-services",
+        url = "/service.data",
         params = null,
         data = null;
     let res = await axiosTemplate(method, url, params, data);

@@ -143,7 +143,7 @@
                                         <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                             Tải ảnh
                                         </button>
-                                        <input id="main-image-create-product" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
+                                        <input id="main-image-create-product" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp"/>
                                     </header>
 
                                     <ul id="main-gallery-create-product" class="flex flex-1 flex-wrap -m-1">
@@ -176,7 +176,7 @@
                                         <button class="upload-btn mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                             Tải ảnh
                                         </button>
-                                        <input id="more-image-create-product" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1"/>
+                                        <input id="more-image-create-product" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp"/>
                                     </header>
 
                                     <ul id="more-gallery-create-product" class="flex flex-1 flex-wrap -m-1">

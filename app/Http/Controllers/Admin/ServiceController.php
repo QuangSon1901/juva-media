@@ -13,6 +13,14 @@ class ServiceController extends Controller
         return view('admin.service.index');
     }
 
+    public function data()
+    {
+        return [
+            "status" => 200,
+            "data" => Service::with('service_categories')->get()
+        ];
+    }
+
     public function create(Request $request) {
         
 

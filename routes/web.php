@@ -93,10 +93,12 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/product.add-type-create', [AdminProductController::class, 'addTypeCreate']);
     Route::post('/product.add-graphy-create', [AdminProductController::class, 'addGraphyCreate']);
     Route::post('/product.create', [AdminProductController::class, 'create']);
+    Route::post('/product.update', [AdminProductController::class, 'update']);
     Route::post('/product.delete', [AdminProductController::class, 'delete']);
 
     // Service
     Route::resource('/service', AdminServiceController::class);
+    Route::get('/service.data', [AdminServiceController::class, 'data']);
     Route::post('/service.update-status', [AdminServiceController::class, 'updateStatus']);
     Route::post('/service.create', [AdminServiceController::class, 'create']);
     Route::post('/service.update', [AdminServiceController::class, 'update']);

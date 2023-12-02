@@ -351,8 +351,8 @@ async function saveModalCreateProductAdmin() {
                     </td>
                     <td class="p-2 whitespace-nowrap">
                         <div class="text-lg text-center">
-                            <box-icon type='solid' name='edit' class="cursor-pointer"></box-icon>
-                            <box-icon name='trash' class="cursor-pointer" data-id="${res.data.data.id}" onclick="deleteCategoryBigAdmin($(this))"></box-icon>
+                            <box-icon type='solid' name='edit' class="cursor-pointer" onclick="getDetailProductAdmin(${res.data.data.id})"></box-icon>
+                            <box-icon name='trash' class="cursor-pointer" data-id="${res.data.data.id}" onclick="deleteProductAdmin($(this))"></box-icon>
                             </div>
                     </td>
                 </tr>
