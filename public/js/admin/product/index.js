@@ -1,3 +1,4 @@
+
 $(function () {
     loadData();
 });
@@ -55,7 +56,6 @@ async function getDetailProductAdmin(id) {
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            console.log(res.data.data);
             $("#modal-update-product-admin input#update-product_id").val(id)
             $("#modal-update-product-admin input#name").val(res.data.data.name)
             $("#modal-update-product-admin input#price").val(res.data.data.price)
@@ -98,6 +98,15 @@ async function getDetailProductAdmin(id) {
                 </li>
             `)
             $("#modal-update-product-admin .graphy-list").append(graphyEle);
+            $("#modal-update-product-admin .graphy-menu div[data-id]").each(function() {
+                const dataId = $(this).data("id");
+                res.data.data.product_photography.forEach((graphy) => {
+                    if (dataId && dataId === graphy.photography.id) {
+                        $(this).remove();
+                    }
+                })
+                
+            });
             
             $("#main-empty-update-product").remove()
             $("#more-empty-update-product").remove()

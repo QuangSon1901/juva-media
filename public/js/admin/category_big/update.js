@@ -22,7 +22,7 @@ async function saveModalUpdateCategoryBigAdmin() {
     if (checkUpdateCategoryBig === 1) return;
     let data = new FormData();
     data.append("id",$("#modal-update-category-big-admin input#update-id").data("id"));
-    data.append("file", Object.values(FILES)[0]);
+    data.append("file", $('#gallery-update img').attr('src'));
     data.append("name", $("#modal-update-category-big-admin input#name").val());
     data.append("description",$("#modal-update-category-big-admin input#description").val());
     data.append("service_id",$("#modal-update-category-big-admin #dropdown-menu-update div.selected").data("id"));
@@ -38,7 +38,7 @@ async function saveModalUpdateCategoryBigAdmin() {
     switch (res.data.status) {
         case 200:
             closeModalUpdateCategoryBigAdmin();
-            loadData()
+            getCategoryBigAdmin(-1);
             break;
         case 403:
             Swal.fire({

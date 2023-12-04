@@ -212,10 +212,7 @@ function addFile(target, file) {
     empty.classList.add("hidden");
     target.prepend(clone);
    
-    FILES[objectURL] = file;
-
-    console.log(Object.values(FILES)[0]);
-    
+    FILES[objectURL] = file;    
 }
 const galleryCreate = document.getElementById("gallery-create"),
       galleryUpdate = document.getElementById("gallery-update"),

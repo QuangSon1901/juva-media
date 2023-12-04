@@ -3,14 +3,14 @@ let emptyImageMain = document.getElementById("main-empty-create-product"),
     emptyImageMore = document.getElementById("more-empty-create-product")
 
 $(function () {
-    $(".dropdown-button").on("click", function () {
+    $("#modal-create-product-admin .dropdown-button").on("click", function () {
         $(this)
             .parents(".select-group")
             .find(".dropdown-menu")
             .toggleClass("hidden");
     });
 
-    $(".search-input").on("input", function () {
+    $("#modal-create-product-admin .search-input").on("input", function () {
         const searchTerm = $(this).val().toLowerCase();
         const items = $(this).parents(".dropdown-menu").find("div");
 
@@ -24,7 +24,7 @@ $(function () {
         });
     });
 
-    $('.upload-btn').on('click', function () {
+    $('#modal-create-product-admin .upload-btn').on('click', function () {
         $(this).next('input').click()
     })
 
@@ -79,7 +79,7 @@ $(function () {
 
     $("#modal-create-product-admin").on("click", ".graphy-remove", function () {
         let graphy = $(this).parents(".graphy-item");
-        $(".graphy-menu").append(`
+        $("#modal-create-product-admin .graphy-menu").append(`
             <div data-id="${graphy.data(
                 "id"
             )}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${graphy.data("text")}</div>
@@ -131,7 +131,7 @@ $(function () {
     });
 
     $("#modal-create-product-admin").on("click", ".graphy-menu div", function () {
-        $(".graphy-list").append(`
+        $("#modal-create-product-admin .graphy-list").append(`
             <li data-id="${$(this).data(
                 "id"
             )}" data-text="${$(this).text()}" class="graphy-item flex rounded-md bg-gray-50 border border-[#d1d1d1] p-1 justify-between items-center pr-4">
@@ -154,7 +154,7 @@ $(function () {
             .parents(".select-group")
             .find(".dropdown-button")
             .click();
-        $(this).remove();
+        $(this).remove()
     });
 
     CKEDITOR.replace("description", {
@@ -202,7 +202,8 @@ async function getDataProductAdmin() {
 
             $(".category-menu").append(eleCategory);
             $(".type-menu").append(eleType);
-            $(".graphy-menu").append(eleGraphy);
+            $("#modal-create-product-admin .graphy-menu").append(eleGraphy);
+            $("#modal-update-product-admin .graphy-menu").append(eleGraphy);
             
             break;
     }
@@ -230,7 +231,7 @@ function resetModalCreateProductAdmin() {
     $("#modal-create-product-admin .graphy-menu div.selected").removeClass('selected')
     $("#modal-create-product-admin .graphy-menu").parents('.select-group').find('span').text('Danh mục')
     $("#modal-create-product-admin .graphy-list li").each((index, item) => {
-        $(".graphy-menu").append(`
+        $("#modal-create-product-admin .graphy-menu").append(`
             <div data-id="${$(item).data('id')}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${$(item).data('text')}</div>
         `);
     })
@@ -270,6 +271,10 @@ async function saveModalCreateProductAdmin() {
 
     if ($('#more-gallery-create-product li:not(#more-empty-create-product)').length === 0) {
         alert('Vui lòng chọn ảnh phụ')
+        return
+    }
+    if(CKEDITOR.instances["description"].getData() === ""){
+        alert('Vui lòng nhập mô tả')
         return
     }
     
