@@ -23,8 +23,8 @@
     <label class="hidden pl-[0.15rem] hover:cursor-pointer" for="toggleSwitchStatus_${service.id}"></label>
 </body>
 @include('layouts.script')
-<script src="{{asset('js/validate.js?version=1')}}"></script>
-<script src="{{asset('js/index.js?version=1')}}"></script>
+<script src="{{asset('js/validate.js?version=2')}}"></script>
+<script src="{{asset('js/index.js?version=2')}}"></script>
 @stack('scripts')
 
 </html>

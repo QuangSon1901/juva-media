@@ -3,6 +3,30 @@ let emptyImageMain2 = document.getElementById("main-empty-update-product"),
     emptyImageMore2 = document.getElementById("more-empty-update-product")
 
 $(function () {
+    $("#modal-update-product-admin .dropdown-button").on("click", function () {
+        $(this)
+            .parents(".select-group")
+            .find(".dropdown-menu")
+            .toggleClass("hidden");
+    });
+
+    $("#modal-update-product-admin .search-input").on("input", function () {
+        const searchTerm = $(this).val().toLowerCase();
+        const items = $(this).parents(".dropdown-menu").find("div");
+
+        items.each((index, item) => {
+            const text = $(item).text();
+            if (text.includes(searchTerm)) {
+                $(item).css("display", "block");
+            } else {
+                $(item).css("display", "none");
+            }
+        });
+    });
+
+    $('#modal-update-product-admin .upload-btn').on('click', function () {
+        $(this).next('input').click()
+    })
     $('#main-image-update-product').on('change',async function () {
         let gallery = document.getElementById("main-gallery-update-product")
         gallery.innerHTML = ""
@@ -53,14 +77,14 @@ $(function () {
     });
 
     $("#modal-update-product-admin").on("click", ".graphy-remove", function () {
-        let graphy = $(this).parents(".graphy-item");
-        $(".graphy-menu").append(`
-            <div data-id="${graphy.data(
+        let graphy2 = $(this).parents(".graphy-item");
+        $("#modal-update-product-admin .graphy-menu").append(`
+            <div data-id="${graphy2.data(
                 "id"
-            )}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${graphy.data("text")}</div>
+            )}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${graphy2.data("text")}</div>
         `);
 
-        graphy.remove();
+        graphy2.remove();
     });
 
     $("#modal-update-product-admin").on(
@@ -106,7 +130,7 @@ $(function () {
     });
 
     $("#modal-update-product-admin").on("click", ".graphy-menu div", function () {
-        $(".graphy-list").append(`
+        $("#modal-update-product-admin .graphy-list").append(`
             <li data-id="${$(this).data(
                 "id"
             )}" data-text="${$(this).text()}" class="graphy-item flex rounded-md bg-gray-50 border border-[#d1d1d1] p-1 justify-between items-center pr-4">
@@ -129,7 +153,7 @@ $(function () {
             .parents(".select-group")
             .find(".dropdown-button")
             .click();
-        $(this).remove();
+        $(this).remove()
     });
 
     CKEDITOR.replace("description-update", {
@@ -171,7 +195,11 @@ function resetModalUpdateProductAdmin() {
     $("#modal-update-product-admin .type-menu").parents('.select-group').find('span').text('Danh mục')
     $("#modal-update-product-admin .graphy-menu div.selected").removeClass('selected')
     $("#modal-update-product-admin .graphy-menu").parents('.select-group').find('span').text('Danh mục')
-    
+    $("#modal-update-product-admin .graphy-list li").each((index, item) => {
+        $("#modal-update-product-admin .graphy-menu").append(`
+            <div data-id="${$(item).data('id')}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">${$(item).data('text')}</div>
+        `);
+    })
     mainUpdateImageURL = "";
 
     $("#modal-update-product-admin .graphy-list").empty();

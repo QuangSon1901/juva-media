@@ -112,6 +112,7 @@ class ProductController extends Controller
     }
     public function update(Request $request)
     {
+        $product = Product::find($request->get('id'));
         $name = $request->get('name');
         $price = $request->get('price');
         $service_category_id = $request->get('service_category_id');
@@ -123,7 +124,7 @@ class ProductController extends Controller
 
         $graphy = $request->get('graphy');
 
-        Product::where('id', $request->get('id'))->update([
+        $product->update([
             "name" => $name,
             "description" => $description,
             "image" => $main_image . " " . $image_more,
@@ -132,13 +133,18 @@ class ProductController extends Controller
             "product_category_id" => $product_category_id,
         ]);
 
+        $product->product_photography()->delete();
+
+        $graphyPro = [];
         foreach ($graphy as $gra) {
-            $graphyPro = [
-                "price" => (int) $gra['price'],
-                "image" => $gra['image'],
+            $graphyPro[] = [
+                'price' => (int) $gra['price'],
+                'image' => $gra['image'],
+                'product_id' => $product->id,
+                'photography_id' => $gra['id'],
             ];
-            ProductPhotography::where('product_id', $request->get('id'))->where('photography_id',$gra['id'])->update($graphyPro);
         }
+        ProductPhotography::insert($graphyPro);
 
         return [
             "status" => 200,
@@ -146,20 +152,21 @@ class ProductController extends Controller
         ];
     }
 
-    public function delete(Request $request){
-            $delete =  Product::where('id', $request->get('id'))->delete();
+    public function delete(Request $request)
+    {
+        $delete =  Product::where('id', $request->get('id'))->delete();
 
-            if($delete){
+        if ($delete) {
 
-                return [
-                    'status' => 200
-                ];
-            }else{
-                
-                return [
-                    'status' => 500
-                ];
-            }
+            return [
+                'status' => 200
+            ];
+        } else {
+
+            return [
+                'status' => 500
+            ];
+        }
     }
 
     public function addTypeCreate(Request $request)

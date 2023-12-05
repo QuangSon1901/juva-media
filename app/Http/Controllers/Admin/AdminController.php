@@ -83,14 +83,14 @@ class AdminController extends Controller
         }
 
 
-        if ($request->hasFile('file')) {
-            $uploadCloudinary = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
-        }
+        // if ($request->hasFile('file')) {
+        //     $uploadCloudinary = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
+        // }
         $serviceCategory = ServiceCategory::find($request->id);
         $serviceCategory->update([
             "name" => $request->get('name'),
             "description" => $request->get('description'),
-            "image" => $uploadCloudinary,
+            "image" => $request->get('file'),
             "service_id" => $request->get('service_id'),
         ]);
         if($serviceCategory){
