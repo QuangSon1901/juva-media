@@ -30,5 +30,5 @@
 @include('admin.service.update')
 @endsection
 @push('scripts')
-<script type="text/javascript" src="{{ asset('js/admin/service/index.js?version=1')}}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/service/index.js?version=2')}}"></script>
 @endpush
