@@ -37,7 +37,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImageMain2)
+                gallery.children.length == 0 && gallery.append(emptyImageMain2)
                 mainUpdateImageURL = "";
             }
         };
@@ -65,7 +65,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImageMain2)
+                gallery.children.length == 0 && gallery.append(emptyImageMain2)
                 mainUpdateImageURL = "";
             }
         };
@@ -210,7 +210,7 @@ function resetModalUpdateProductAdmin() {
 }
 
 async function saveModalUpdateProductAdmin() {
-    if (checkUpdateProduct === 1) return;
+    if (checkUpdateProduct == 1) return;
     if(!checkValidateSave($('#modal-update-product-admin'))) return false
 
     if (!$("#modal-update-product-admin .category-menu div.selected").data("id")) {
@@ -225,17 +225,17 @@ async function saveModalUpdateProductAdmin() {
 
     let graphy = $("#modal-update-product-admin .graphy-list li")
     
-    if (graphy.length === 0) {
+    if (graphy.length == 0) {
         alert('Vui lòng chọn góc chụp')
         return
     }
 
-    if (mainUpdateImageURL === '') {
+    if (mainUpdateImageURL == '') {
         alert('Vui lòng chọn ảnh chính')
         return
     }
 
-    if ($('#more-gallery-update-product li:not(#more-empty-update-product)').length === 0) {
+    if ($('#more-gallery-update-product li:not(#more-empty-update-product)').length == 0) {
         alert('Vui lòng chọn ảnh phụ')
         return
     }

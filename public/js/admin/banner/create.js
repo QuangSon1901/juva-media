@@ -17,7 +17,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImage)
+                gallery.children.length == 0 && gallery.append(emptyImage)
                 mainImageURL = "";
             }
         };
@@ -31,8 +31,8 @@ function openModalCreateBannerAdmin() {
 }
 
 async function saveModalCreateBannerAdmin() {
-    if (checkCreateBanner === 1) return;
-    if ($('#gallery-create-banner li:not(#empty-create-banner)').length === 0) {
+    if (checkCreateBanner == 1) return;
+    if ($('#gallery-create-banner li:not(#empty-create-banner)').length == 0) {
         alert('Vui lòng chọn ảnh')
         return
     }

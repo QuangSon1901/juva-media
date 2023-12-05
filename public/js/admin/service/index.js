@@ -25,7 +25,7 @@ async function getServiceAdmin() {
                                     type="checkbox" 
                                     role="switch" 
                                     id="toggleSwitchStatus_${service.id}" 
-                                    ${service.status === 1 ? 'checked' : ''}
+                                    ${service.status == 1 ? 'checked' : ''}
                                     onchange="updateServiceStatus(${service.id}, this.checked)"/>
                             <label class="inline-block pl-[0.15rem] hover:cursor-pointer" for="toggleSwitchStatus_${service.id}"></label>
                         </td>

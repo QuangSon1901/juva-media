@@ -38,7 +38,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImageMain)
+                gallery.children.length == 0 && gallery.append(emptyImageMain)
                 mainImageURL = "";
             }
         };
@@ -66,7 +66,7 @@ $(function () {
             if (target.classList.contains("delete")) {
                 const ou = target.dataset.target;
                 document.getElementById(ou).remove(ou);
-                gallery.children.length === 0 && gallery.append(emptyImageMore)
+                gallery.children.length == 0 && gallery.append(emptyImageMore)
                 mainImageURL = "";
             }
         };
@@ -245,7 +245,7 @@ function resetModalCreateProductAdmin() {
 }
 
 async function saveModalCreateProductAdmin() {
-    if (checkCreateProduct === 1) return;
+    if (checkCreateProduct == 1) return;
     if(!checkValidateSave($('#modal-create-product-admin'))) return false
 
     if (!$("#modal-create-product-admin .category-menu div.selected").data("id")) {
@@ -259,21 +259,21 @@ async function saveModalCreateProductAdmin() {
     }
 
     let graphy = $("#modal-create-product-admin .graphy-list li")
-    if (graphy.length === 0) {
+    if (graphy.length == 0) {
         alert('Vui lòng chọn góc chụp')
         return
     }
 
-    if (mainImageURL === '') {
+    if (mainImageURL == '') {
         alert('Vui lòng chọn ảnh chính')
         return
     }
 
-    if ($('#more-gallery-create-product li:not(#more-empty-create-product)').length === 0) {
+    if ($('#more-gallery-create-product li:not(#more-empty-create-product)').length == 0) {
         alert('Vui lòng chọn ảnh phụ')
         return
     }
-    if(CKEDITOR.instances["description"].getData() === ""){
+    if(CKEDITOR.instances["description"].getData() == ""){
         alert('Vui lòng nhập mô tả')
         return
     }

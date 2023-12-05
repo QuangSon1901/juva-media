@@ -39,7 +39,7 @@ function resetModalCreateCategoryBigAdmin() {
 }
 
 async function saveModalCreateCategoryBigAdmin() {
-    if (checkCreateCategoryBig === 1) return;
+    if (checkCreateCategoryBig == 1) return;
     if(!checkValidateSave($('#modal-create-category-big-admin'))) return false
     let data = new FormData();
     data.append("file", Object.values(FILES)[0]);

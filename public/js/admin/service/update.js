@@ -13,7 +13,7 @@ function closeModalUpdateServiceAdmin() {
 }
 
 async function saveModalUpdateServiceAdmin() {
-    if (checkUpdateService === 1) return;
+    if (checkUpdateService == 1) return;
     if(!checkValidateSave($('#modal-update-service-admin'))) return false
     let data = new FormData();
     data.append("id",$("#modal-update-service-admin input#update-id").data("id"));

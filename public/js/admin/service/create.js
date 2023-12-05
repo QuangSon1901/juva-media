@@ -18,7 +18,7 @@ function resetModalCreateServiceAdmin() {
 }
 
 async function saveModalCreateServiceAdmin() {
-    if (checkCreateService === 1) return;
+    if (checkCreateService == 1) return;
     if(!checkValidateSave($('#modal-create-service-admin'))) return false
     let data = new FormData();
     data.append("name", $("#modal-create-service-admin input#name").val());
@@ -43,7 +43,7 @@ async function saveModalCreateServiceAdmin() {
                             type="checkbox" 
                             role="switch" 
                             id="toggleSwitchStatus_${res.data.data.id}" 
-                            ${res.data.data.status === 1 ? 'checked' : ''}
+                            ${res.data.data.status == 1 ? 'checked' : ''}
                             onchange="updateServiceStatus(${res.data.data.id}, this.checked)"/>
                     <label class="inline-block pl-[0.15rem] hover:cursor-pointer" for="toggleSwitchStatus_${res.data.data.id}"></label>
                 </td>

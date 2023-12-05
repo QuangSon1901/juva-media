@@ -85,7 +85,7 @@ async function getCategoryBigAdminToModel(service_category_id) {
             $("#dropdown-menu-update div[data-id]").each(function() {
                 const dataId = $(this).data("id");
                 
-                if (dataId && dataId === res.data.data.service_id) {
+                if (dataId && dataId == res.data.data.service_id) {
                     $(this).addClass("selected");
                 }
             });
@@ -161,7 +161,7 @@ let FILES = {};
 function addFile(target, file) {
     let objectURL;
 
-    if (typeof file === "string") {
+    if (typeof file == "string") {
         // Trường hợp file là URL từ database
         objectURL = file;
     } else {
@@ -181,7 +181,7 @@ function addFile(target, file) {
 
     const clone = imageTempl.content.cloneNode(true);
 
-    if (typeof file === "string") {
+    if (typeof file == "string") {
         // Trường hợp file là URL từ database
         clone.querySelector("h1").textContent = "Tên tệp từ URL";
         Object.assign(clone.querySelector("img"), {
@@ -286,7 +286,7 @@ galleryCreate.onclick = ({ target }) => {
     if (target.classList.contains("delete")) {
         const ou = target.dataset.target;
         document.getElementById(ou).remove(ou);
-        galleryCreate.children.length === 1 && empty.classList.remove("hidden");
+        galleryCreate.children.length == 1 && empty.classList.remove("hidden");
         delete FILES[ou];
     }
 };

@@ -19,7 +19,7 @@ function closeModalUpdateCategoryBigAdmin() {
 }
 
 async function saveModalUpdateCategoryBigAdmin() {
-    if (checkUpdateCategoryBig === 1) return;
+    if (checkUpdateCategoryBig == 1) return;
     let data = new FormData();
     data.append("id",$("#modal-update-category-big-admin input#update-id").data("id"));
     data.append("file", $('#gallery-update img').attr('src'));

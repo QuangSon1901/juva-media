@@ -64,7 +64,7 @@ async function getDetailProductAdmin(id) {
             $("#modal-update-product-admin .category-menu div[data-id]").each(function() {
                 const dataId = $(this).data("id");
                 
-                if (dataId && dataId === res.data.data.service_category_id) {
+                if (dataId && dataId == res.data.data.service_category_id) {
                     $(this).addClass("selected");
                 }
             });
@@ -73,7 +73,7 @@ async function getDetailProductAdmin(id) {
             $("#modal-update-product-admin .type-menu div[data-id]").each(function() {
                 const dataId = $(this).data("id");
                 
-                if (dataId && dataId === res.data.data.product_category_id) {
+                if (dataId && dataId == res.data.data.product_category_id) {
                     $(this).addClass("selected");
                 }
             });
@@ -101,7 +101,7 @@ async function getDetailProductAdmin(id) {
             $("#modal-update-product-admin .graphy-menu div[data-id]").each(function() {
                 const dataId = $(this).data("id");
                 res.data.data.product_photography.forEach((graphy) => {
-                    if (dataId && dataId === graphy.photography.id) {
+                    if (dataId && dataId == graphy.photography.id) {
                         $(this).remove();
                     }
                 })
