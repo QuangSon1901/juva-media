@@ -265,5 +265,5 @@
 
 @include('ckfinder::setup')
 @push('scripts')
-<script type="text/javascript" src="{{ asset('js/admin/product/update.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/product/update.js?version=2')}}"></script>
 @endpush
