@@ -7,7 +7,7 @@
 <meta name="turbolinks-cache-control" content="no-cache" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-<link rel="icon" href="{{asset('images/logo/juva.png')}}" type="image/x-icon"/>
+<link rel="icon" href="{{asset('images/logo/ico.jpg')}}" type="image/x-icon"/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
