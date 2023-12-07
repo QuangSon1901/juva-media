@@ -161,6 +161,13 @@ html ::-webkit-scrollbar-track {
     -o-transform: translate(-50%,-50%);
 }
 
+.max-text-flow-200 {
+    overflow: hidden;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
 @keyframes phone-vr-circle-fill {
     0% {
         -webkit-transform: rotate(0) scale(1) skew(1deg);

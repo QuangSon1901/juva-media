@@ -32,6 +32,9 @@ async function getBannerData() {
                                     onchange="updateBannerStatus(${service.id}, this.checked)"/>
                             <label class="inline-block pl-[0.15rem] hover:cursor-pointer" for="toggleSwitchStatus_${service.id}"></label>
                         </td>
+                        <td class="p-2 whitespace-nowrap text-center">    
+                            ${service.url && service.url != "" ? `<a href="${service.url}" class="max-text-flow-200">${service.url}</a>` : '<span class="max-text-flow-200">Chưa có</span>'}
+                        </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-lg text-center">
                                 <box-icon name='trash' class="cursor-pointer" data-id="${service.id}" onclick="deleteBannerAdmin($(this))"></box-icon>
