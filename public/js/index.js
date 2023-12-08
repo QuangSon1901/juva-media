@@ -125,9 +125,11 @@ async function getBanners() {
     switch (res.data.status) {
         case 200:
             let eleServices = res.data.data.map(
-                (service) => `
+                (banner) => `
                     <div>
-                        <img class="w-full h-[calc(100vh-168px)]" src="${service.image}" alt="">
+                        <a href="${banner.url}">
+                            <img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt="">
+                        <a/>
                     </div>
                 `
             );

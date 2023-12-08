@@ -12,7 +12,14 @@ class BannerController extends Controller
         return view('admin.banner.index');
     }
 
-    public function data() {
+    public function data(Request $request) {
+        $id = $request->get('id');
+        if($id){
+            return [
+                "status" => 200,
+                "data" => Banner::find($id)
+            ];
+        }
         return [
             "status" => 200,
             "data" => Banner::all()
@@ -46,6 +53,24 @@ class BannerController extends Controller
 
         return [
             "status" => 400,
+        ];
+    }
+
+    public function update(Request $request) {
+        $banner = Banner::find($request->get('id'));
+
+        if(!$banner){
+            return [
+                "status" => 400,
+            ];
+        }
+
+        $banner->update([
+            'image' => $request->get('image'),
+            'url' => $request->get('url'),
+        ]);
+        return [
+            "status" => 200,
         ];
     }
 
