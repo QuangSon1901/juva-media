@@ -33,9 +33,13 @@ function loadData() {
 }
 
 function loadCartCount() {
-    const cartDataString = localStorage.getItem("cart");
+    let cartDataString = localStorage.getItem("cart");
+    
+    let cartData = [];
 
-    const cartData = JSON.parse(cartDataString);
+    if (cartDataString) {
+         cartData = JSON.parse(cartDataString);
+    }
     $("#cart-quantity-header").text(cartData.length);
 }
 
@@ -127,9 +131,9 @@ async function getBanners() {
             let eleServices = res.data.data.map(
                 (banner) => `
                     <div>
-                        <a href="${banner.url}">
-                            <img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt="">
-                        <a/>
+                        
+                    <a href="${banner.url}"><img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt=""></a>
+                        
                     </div>
                 `
             );
