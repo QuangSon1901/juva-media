@@ -30,6 +30,7 @@
     </div>
 </div>
 @include('admin.banner.create')
+@include('admin.banner.update')
 @endsection
 @push('scripts')
 <script type="text/javascript" src="{{ asset('js/admin/banner/index.js?version=2')}}"></script>

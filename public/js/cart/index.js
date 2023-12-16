@@ -5,9 +5,14 @@ $(function () {
 });
 
 async function getItemsCart() {
-    const cartDataString = localStorage.getItem("cart");
+    let cartDataString = localStorage.getItem("cart");
+    
+    let cartData = [];
 
-    const cartData = JSON.parse(cartDataString);
+    if (cartDataString) {
+         cartData = JSON.parse(cartDataString);
+    }
+    
     let method = "post",
         url = "/get-items-cart",
         params = null,

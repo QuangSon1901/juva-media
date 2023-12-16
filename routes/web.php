@@ -113,6 +113,7 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::resource('/banner', BannerController::class);
     Route::get('/banner.data', [BannerController::class, 'data']);
     Route::post('/banner.create', [BannerController::class, 'create']);
+    Route::post('/banner.update', [BannerController::class, 'update']);
     Route::post('/banner.delete', [BannerController::class, 'delete']);
     Route::post('/banner.update-status', [BannerController::class, 'updateStatus']);
 });
