@@ -21,10 +21,12 @@ class ProductController extends Controller
     public function data(Request $request)
     {
         $id = $request->get('id');
+        $page = $request->get('page');
+
         if ($id == -1) {
             return [
                 "status" => 200,
-                "data" => Product::with('service_categories')->with('product_categories')->get()
+                "data" => Product::with('service_categories')->with('product_categories')->paginate(3)
             ];
         } else {
             return [

@@ -30,6 +30,9 @@
                 <tbody id="product-admin-table" class="text-sm divide-y divide-gray-100"></tbody>
             </table>
         </div>
+        <nav class="flex justify-center mt-6">
+            <ul class="flex space-x-2" id="pagination"></ul>
+        </nav>
     </div>
 </div>
 @include('admin.product.create')

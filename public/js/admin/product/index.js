@@ -6,16 +6,16 @@ $(function () {
 function loadData() {
     getProductAdmin(-1);
 }
-
-async function getProductAdmin(id) {
+let currentPage
+async function getProductAdmin(id, page) {
     let method = "get",
         url = "/product.data",
-        params = { id },
+        params = { id, page },
         data = null;
     let res = await axiosTemplate(method, url, params, data);
     switch (res.data.status) {
         case 200:
-            let eleProducts = res.data.data.map(
+            let eleProducts = res.data.data.data.map(
                 (product) => `
                     <tr>
                         <td class="p-2 whitespace-nowrap">
@@ -44,9 +44,51 @@ async function getProductAdmin(id) {
             );
 
             $("#product-admin-table").html(eleProducts);
+            displayPagination(res.data.data)
             break;
     }
 }
+
+function displayPagination(paginationData) {
+    const totalPages = paginationData.last_page;
+    const currentPage = paginationData.current_page;
+
+    const paginationContainer = $('#pagination');
+    paginationContainer.empty();
+
+    if (currentPage > 1) {
+        paginationContainer.append(`
+            <li>
+                <a href="#" onclick="setCurrentPage(${currentPage - 1})" class="py-2 px-4 border border-gray-300 rounded">Previous</a>
+            </li>
+        `);
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+        const activeClass = i === currentPage ? 'bg-blue-500 text-white' : 'border border-gray-300';
+        paginationContainer.append(`
+            <li>
+                <a href="#" onclick="setCurrentPage(${i})" class="py-2 px-4 ${activeClass} rounded">${i}</a>
+            </li>
+        `);
+    }
+
+    if (currentPage < totalPages) {
+        paginationContainer.append(`
+            <li>
+                <a href="#" onclick="setCurrentPage(${currentPage + 1})" class="py-2 px-4 border border-gray-300 rounded">Next</a>
+            </li>
+        `);
+    }
+}
+
+// Hàm để cập nhật currentPage
+function setCurrentPage(page) {
+    currentPage = page;
+    getProductAdmin(-1, currentPage);
+}
+
+
 async function getDetailProductAdmin(id) {
 
     let method = "get",
