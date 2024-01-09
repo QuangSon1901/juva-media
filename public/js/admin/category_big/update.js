@@ -34,7 +34,7 @@ async function saveModalUpdateCategoryBigAdmin() {
     $("#modal-update-category-big-admin-loading").removeClass("hidden");
     let res = await axiosTemplate(method, url, params, data);
     $("#modal-update-category-big-admin-loading").addClass("hidden");
-    checkCreateCategoryBig = 0;
+    checkUpdateCategoryBig = 0;
     switch (res.data.status) {
         case 200:
             closeModalUpdateCategoryBigAdmin();

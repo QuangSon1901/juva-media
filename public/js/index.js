@@ -112,6 +112,9 @@ async function getServices() {
                     </li>
                 `
             );
+            eleServices.push(`<li class="header-service-item cursor-pointer select-none">
+                <a href="/blog" class="block px-2 py-3 rounded-lg hover:bg-juva-grey header-service-item">Blog</a>
+            </li>`);
 
             // Hiển thị danh sách dịch vụ trong #header-service-list
             $("#header-service-list").html(eleServices);
@@ -131,9 +134,7 @@ async function getBanners() {
             let eleServices = res.data.data.map(
                 (banner) => `
                     <div>
-                        
-                    <a href="${banner.url}"><img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt=""></a>
-                        
+                        <a href="${banner.url !== null ? banner.url : '#'}"><img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt=""></a>
                     </div>
                 `
             );

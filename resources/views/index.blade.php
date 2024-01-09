@@ -4,7 +4,7 @@
     <div class="relative w-full">
         <div id="home-slider" class="slider h-[calc(100vh-168px)] w-full"></div>
     </div>
-    <div>
+    <!-- <div>
         <div class="mt-14">
             <div class="text-center text-4xl font-bold">
                 <h2>Dịch vụ nổi bật</h2>
@@ -13,7 +13,7 @@
                 <img class="w-full" src="{{asset('images/banner/banner1.png')}}" alt="">
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 <div>
     <div class="mt-14">

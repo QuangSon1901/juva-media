@@ -22,7 +22,8 @@
                 <li class="py-3 border-b-2"><a href="/product" class="list-none hover:text-indigo-600">Sản phẩm</a>
                 </li>
                 <li class="py-3 border-b-2"><a href="/order" class="list-none hover:text-indigo-600">Đơn hàng</a></li>
-                <li class="py-3"><a href="/banner" class="list-none hover:text-indigo-600">Banner</a></li>
+                <li class="py-3 border-b-2"><a href="/banner" class="list-none hover:text-indigo-600">Banner</a></li>
+                <li class="py-3"><a href="/admin-blog" class="list-none hover:text-indigo-600">Blog</a></li>
             </div>
         </div>
         <div class="flex-1">

@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Blogger\BloggerController;
 use App\Http\Controllers\Cart\CartController;
-use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Home\IndexController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Product\ProductController;
@@ -44,6 +45,10 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
     // Home
     Route::resource('/', IndexController::class);
     Route::get('/banner.data-index', [BannerController::class, 'dataIndex']);
+
+    // Blogger
+    Route::get('/blog', [BloggerController::class, 'index']);
+    Route::get('/blog/{slug}', [BloggerController::class, 'blog']);
 
     // Product
     Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
@@ -86,6 +91,9 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/category-big.delete', [AdminController::class, 'delete']);
     Route::post('/category-big.update', [AdminController::class, 'update']);
 
+    // Admin
+    Route::resource('/admin-blog', AdminBlogController::class);
+
     // Product
     Route::resource('/product', AdminProductController::class);
     Route::get('/product.data', [AdminProductController::class, 'data']);
@@ -95,6 +103,12 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/product.create', [AdminProductController::class, 'create']);
     Route::post('/product.update', [AdminProductController::class, 'update']);
     Route::post('/product.delete', [AdminProductController::class, 'delete']);
+
+    // Blog
+    Route::get('/blog-topic.data-create', [AdminBlogController::class, 'dataCreate']);
+    Route::post('/blog-topic.add-topic-create', [AdminBlogController::class, 'addTopicCreate']);
+    Route::post('/blog-topic.create', [AdminBlogController::class, 'create']);
+    Route::get('/blog-topic.data', [AdminBlogController::class, 'data']);
 
     // Service
     Route::resource('/service', AdminServiceController::class);

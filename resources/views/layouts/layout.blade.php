@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="light">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 <body>
     <div>
         @include('layouts.header')
-        @if (Request::path() !== '/' && Request::path() == '/logout')
+        @if (Request::path() !== '/' && Request::path() !== '/logout')
         @include('layouts.breadcrumb')
         @endif
         @yield('content')
