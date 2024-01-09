@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blogger;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use Illuminate\Http\Request;
@@ -42,5 +43,14 @@ class BloggerController extends Controller
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
         }
         return view('blogger.blog', compact('breadcrumbs', 'cart_quantity'));
+    }
+
+    public function getDetailBlog(Request $request) {
+        $id = $request->get('id');
+
+        return [
+            "status" => 200,
+            "data" => Blog::with('topic')->find($id)
+        ];
     }
 }

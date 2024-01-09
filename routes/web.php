@@ -49,6 +49,7 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
     // Blogger
     Route::get('/blog', [BloggerController::class, 'index']);
     Route::get('/blog/{slug}', [BloggerController::class, 'blog']);
+    Route::get('/get-detail-blog', [BloggerController::class, 'getDetailBlog']);
 
     // Product
     Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
@@ -109,6 +110,9 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/blog-topic.add-topic-create', [AdminBlogController::class, 'addTopicCreate']);
     Route::post('/blog-topic.create', [AdminBlogController::class, 'create']);
     Route::get('/blog-topic.data', [AdminBlogController::class, 'data']);
+    Route::post('/blog-topic.update', [AdminBlogController::class, 'update']);
+    Route::post('/blog-topic.delete', [AdminBlogController::class, 'delete']);
+    Route::post('/blog-topic.update-status', [AdminBlogController::class, 'updateStatus']);
 
     // Service
     Route::resource('/service', AdminServiceController::class);
@@ -124,6 +128,7 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
 
     Route::post('/upload-media-template', [UploadNodeController::class, 'uploadMedia']);
 
+    //Banner
     Route::resource('/banner', BannerController::class);
     Route::get('/banner.data', [BannerController::class, 'data']);
     Route::post('/banner.create', [BannerController::class, 'create']);

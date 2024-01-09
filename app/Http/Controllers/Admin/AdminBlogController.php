@@ -65,4 +65,69 @@ class AdminBlogController extends Controller
             "data" => $createPr
         ];
     }
+
+    public function update(Request $request){
+        $id = $request->get('id');
+        $title = $request->get('title');
+        $topic_id = $request->get('topic_id');
+        $description = $request->get('description');
+        $content = $request->get('content');
+
+        $blog = Blog::find($id);
+
+        if(!$blog){
+            return [
+                "status" => 400,
+            ];
+        }
+
+        $blog->update([
+            "title" => $title,
+            "description" => $description,
+            "content" => $content,
+            "topic_id" => $topic_id,
+        ]);
+
+        return [
+            "status" => 200,
+        ];
+        
+    }
+
+    public function delete(Request $request){
+        $delete = Blog::where('id', $request->get('id'))->delete();
+
+        if($delete){
+            return [
+                'status' => 200,
+                'message' => 'Xóa thành công'
+            ];
+        }
+
+        return [
+            'status' => 402,
+            'message' => 'Xóa thất bại'
+        ];
+        
+    }
+    
+    public function updateStatus(Request $request){
+        $blog = Blog::find($request->get('blog_id'));
+
+        $blog->update([
+            'status' => $request->get('status')
+        ]);
+
+        if($blog){
+            return [
+                'status' => 200,
+                'message' => 'Cập nhật thành công'
+            ];
+        } else {
+            return [
+                'status' => 402,
+                'message' => 'Cập nhật thất bại'
+            ];
+        }
+    }
 }
