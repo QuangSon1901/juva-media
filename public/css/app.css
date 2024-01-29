@@ -630,6 +630,10 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -637,10 +641,6 @@ video {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
 }
 .mb-1 {
   margin-bottom: 0.25rem;
@@ -720,9 +720,6 @@ video {
 .hidden {
   display: none;
 }
-.aspect-\[2\/1\] {
-  aspect-ratio: 2/1;
-}
 .\!h-10 {
   height: 2.5rem !important;
 }
@@ -765,6 +762,9 @@ video {
 .h-\[100px\] {
   height: 100px;
 }
+.h-\[1px\] {
+  height: 1px;
+}
 .h-\[235px\] {
   height: 235px;
 }
@@ -783,9 +783,6 @@ video {
 .h-max {
   height: -moz-max-content;
   height: max-content;
-}
-.h-\[1px\] {
-  height: 1px;
 }
 .max-h-\[80vh\] {
   max-height: 80vh;
@@ -844,6 +841,9 @@ video {
 .w-9 {
   width: 2.25rem;
 }
+.w-96 {
+  width: 24rem;
+}
 .w-\[100px\] {
   width: 100px;
 }
@@ -874,12 +874,6 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-.w-80 {
-  width: 20rem;
-}
-.w-96 {
-  width: 24rem;
 }
 .max-w-2xl {
   max-width: 42rem;
@@ -1004,9 +998,6 @@ video {
 .gap-6 {
   gap: 1.5rem;
 }
-.gap-3 {
-  gap: 0.75rem;
-}
 .gap-x-24 {
   -moz-column-gap: 6rem;
        column-gap: 6rem;
@@ -1048,11 +1039,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-y-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
@@ -1211,6 +1197,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -1245,14 +1235,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-.bg-gray-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 .bg-contain {
   background-size: contain;

@@ -26,7 +26,7 @@ class ProductController extends Controller
         if ($id == -1) {
             return [
                 "status" => 200,
-                "data" => Product::with('service_categories')->with('product_categories')->paginate(3)
+                "data" => Product::with('service_categories')->with('product_categories')->paginate(10)
             ];
         } else {
             return [
