@@ -15,7 +15,7 @@
         </a>
         <div class="relative">
             <div class="h-9 px-4 pl-9 relative w-[420px] flex overflow-hidden bg-white border rounded-full border-neutral-400">
-                <input type="text" placeholder="Tìm kiếm" id="search-header" class="outline-none border-none bg-transparent w-full" onchange="getProductSearch()">
+                <input type="text" placeholder="Tìm kiếm" id="search-header" class="outline-none border-none bg-transparent w-full">
                 <button class="absolute top-0 left-0 h-9 w-9 text-sm flex items-center justify-center cursor-pointer">
                     <box-icon name='search' color="#aaa" class="w-5 h-5"></box-icon>
                 </button>

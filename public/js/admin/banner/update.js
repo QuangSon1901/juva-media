@@ -40,6 +40,7 @@ function resetModaUpdateBannerAdmin() {
     $('#gallery-update-banner').html(emptyImage2.outerHTML)
 }
 async function saveModalUpdateBannerAdmin() {
+    if(!checkValidateSave($('#modal-update-banner-admin'))) return false
     if (checkUpdateBanner == 1) return;
     // if ($('#gallery-update-banner li:not(#empty-update-banner)').length == 0) {
     //     alert('Vui lòng chọn ảnh')
@@ -53,7 +54,8 @@ async function saveModalUpdateBannerAdmin() {
         data = { 
             id: $("#modal-update-banner-admin input#id-banner").val(),
             image: $('#gallery-update-banner img').attr('src'),
-            url:  $('#modal-update-banner-admin input#url-banner').val()
+            url:  $('#modal-update-banner-admin input#url-banner').val(),
+            level:  $('#modal-update-banner-admin input#level-banner').val(),
         };
 
     checkUpdateBanner = 1;

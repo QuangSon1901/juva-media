@@ -61,7 +61,7 @@ async function deleteBlogAdmin(r) {
 
 async function getDetailBlogAdmin(id) {
     let method = "get",
-        url = "/get-detail-blog",
+        url = "/blog-topic.detail",
         params = { id },
         data = null;
     let res = await axiosTemplate(method, url, params, data);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\CartProduct;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,13 +28,14 @@ class BloggerController extends Controller
     }
 
     public function blog($slug) {
+        $post_data = Blog::with('topic')->where('slug', $slug)->first();
         $breadcrumbs = [
             [
                 'title' => 'Blog',
                 'url' => '/blog'
             ],
             [
-                'title' => 'blog name',
+                'title' => $post_data->title,
                 'url' => '#'
             ]
         ];
@@ -42,15 +44,41 @@ class BloggerController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
         }
-        return view('blogger.blog', compact('breadcrumbs', 'cart_quantity'));
+
+        return view('blogger.blog', compact('breadcrumbs', 'cart_quantity', 'post_data'));
     }
 
-    public function getDetailBlog(Request $request) {
-        $id = $request->get('id');
-
+    public function topicData() {
         return [
             "status" => 200,
-            "data" => Blog::with('topic')->find($id)
+            "data" => [
+                "topic" => Topic::withCount('blogs')->orderByDesc('blogs_count')->limit(10)->get(),
+            ]
+        ];
+    }
+
+    public function blogData(Request $request) {
+        $topic = $request->get('topic') ?? '';
+        $keysearch = $request->get('search') ?? '';
+        $blog = Blog::query();
+        $blog->with('topic');
+        if ($topic != '') {
+            $blog->whereHas('topic', function ($query) use ($topic) {
+                return $query->where('slug', $topic);
+            });
+        }
+        if ($keysearch != '') {
+            $blog->where('title', 'LIKE', '%' . $keysearch . '%');
+        }
+        
+        $blog->orderByDesc('created_at')->limit(20);
+        $blog = $blog->get();
+        return [
+            "status" => 200,
+            "data" => [
+                "blogs" => $blog,
+                "blog_quantity" => count($blog)
+            ]
         ];
     }
 }

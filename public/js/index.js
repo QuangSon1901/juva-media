@@ -22,6 +22,10 @@ $(function () {
         $("#search-popup-hint").removeClass("active");
     });
 
+    $(document).on("input", "#search-header", function () {
+        getProductSearch()
+    });
+
     loadData();
     loadCartCount();
     
@@ -139,7 +143,14 @@ async function getBanners() {
                 `
             );
 
+            let banners = res.data.banner_section.map(
+                (banner) => `
+                    <a href="${banner.url !== null ? banner.url : '#'}" tabindex="0"><img class="aspect-[2/1] object-cover bg-gray-600 w-full" src="${banner.image}" alt=""></a>
+                `
+            );
+
             $("#home-slider").html(eleServices);
+            $("#home-banner").html(banners);
             $('.slider').slick({
                 dots: false,
                 arrows: false,
@@ -273,4 +284,28 @@ function formatNumberLimit(num) {
 function removeformatNumber(num) {
     num = String(num);
     return Number(num.replace(/[^0-9.-]+/g, ""));
+}
+
+function formatFromTimeTemplate(time) {
+    try {
+        const dateCurrent = new Date();
+        const date = new Date(time);
+        const daysDiff = Math.floor((dateCurrent - date) / (1000 * 60 * 60 * 24));
+        const hoursDiff = Math.floor((dateCurrent - date) / (1000 * 60 * 60));
+        const minutesDiff = Math.floor((dateCurrent - date) / (1000 * 60));
+
+        if (daysDiff > 9) {
+            return date.toLocaleDateString('vi-VN', { day: 'numeric', month: 'numeric' })
+        } else if (daysDiff > 0) {
+            return daysDiff + ' ngày';
+        } else if (hoursDiff > 0) {
+            return hoursDiff + ' giờ';
+        } else if (minutesDiff > 0) {
+            return minutesDiff + ' phút';
+        } else {
+            return 'Vài giây';
+        }
+    } catch (error) {
+        console.error(error, time);
+    }
 }

@@ -29,7 +29,8 @@ class BannerController extends Controller
     public function dataIndex() {
         return [
             "status" => 200,
-            "data" => Banner::where('status', 1)->get()
+            "data" => Banner::where('status', 1)->where('level', 0)->get(),
+            "banner_section" => Banner::where('status', 1)->where('level', '!=', 0)->orderBy('level')->limit(3)->get()
         ];
     }
 
@@ -39,7 +40,8 @@ class BannerController extends Controller
         foreach ($images as $image) {
             $banners[] = [
                 "image" => $image,
-                "status" => 1
+                "status" => 1,
+                "level" => 0
             ];
         }
 
@@ -68,6 +70,7 @@ class BannerController extends Controller
         $banner->update([
             'image' => $request->get('image'),
             'url' => $request->get('url'),
+            'level' => $request->get('level')
         ]);
         return [
             "status" => 200,

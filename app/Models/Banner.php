@@ -15,6 +15,7 @@ class Banner extends Model
         'status',
         'image',
         'url',
+        'level',
         'create_at',
         'update_at',
     ];

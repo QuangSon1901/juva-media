@@ -60,6 +60,7 @@ class ProductController extends Controller
         $searchTerm = $request->input('search');
 
         $products = Product::where('name', 'LIKE', '%' . $searchTerm . '%')
+            ->limit(10)
             ->get();
 
         $groupedData = [];

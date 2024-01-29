@@ -47,9 +47,11 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
     Route::get('/banner.data-index', [BannerController::class, 'dataIndex']);
 
     // Blogger
+    // Route::resource('/blog', BloggerController::class);
     Route::get('/blog', [BloggerController::class, 'index']);
     Route::get('/blog/{slug}', [BloggerController::class, 'blog']);
-    Route::get('/get-detail-blog', [BloggerController::class, 'getDetailBlog']);
+    Route::get('/blog.topic-data', [BloggerController::class, 'topicData']);
+    Route::get('/blog.blog-data', [BloggerController::class, 'blogData']);
 
     // Product
     Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
@@ -113,6 +115,7 @@ Route::group(['as' => 'admin.', 'middleware' => []], function () {
     Route::post('/blog-topic.update', [AdminBlogController::class, 'update']);
     Route::post('/blog-topic.delete', [AdminBlogController::class, 'delete']);
     Route::post('/blog-topic.update-status', [AdminBlogController::class, 'updateStatus']);
+    Route::get('/blog-topic.detail', [AdminBlogController::class, 'getDetailBlog']);
 
     // Service
     Route::resource('/service', AdminServiceController::class);

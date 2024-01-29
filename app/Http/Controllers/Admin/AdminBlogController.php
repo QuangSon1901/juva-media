@@ -130,4 +130,13 @@ class AdminBlogController extends Controller
             ];
         }
     }
+
+    public function getDetailBlog(Request $request) {
+        $id = $request->get('id');
+
+        return [
+            "status" => 200,
+            "data" => Blog::with('topic')->find($id)
+        ];
+    }
 }

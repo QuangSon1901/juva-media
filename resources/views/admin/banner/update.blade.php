@@ -20,7 +20,7 @@
                                 <button class="upload-btn-update-banner mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
                                     Tải ảnh
                                 </button>
-                                <input id="image-update-banner" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp" data-file="1" data-min-file="1"/>
+                                <input id="image-update-banner" type="file" multiple class="hidden" accept="image/png, image/jpg, image/jpeg, image/webp"/>
                             </header>
 
                             <div class="flex-1">
@@ -39,7 +39,11 @@
                         <input type="hidden" name="id" id="id-banner"/>
                         <div class="md:col-span-5">
                             <label for="name">Url Banner</label>
-                            <input type="text" name="url" id="url-banner" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="50" />
+                            <input type="text" name="url" id="url-banner" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-max-length="50" />
+                        </div>
+                        <div class="md:col-span-5">
+                            <label for="name">Level</label>
+                            <input type="text" name="level" id="level-banner" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="0" data-number="1" data-empty="1" data-max="10" />
                         </div>
                     </div>
                     <div class="md:col-span-5 text-right pt-3">

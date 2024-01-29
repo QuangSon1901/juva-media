@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div>
-    <div class="relative w-full">
+    <div class="relative w-full container mx-auto px-0">
         <div id="home-slider" class="slider h-[calc(100vh-168px)] w-full"></div>
     </div>
     <!-- <div>
@@ -14,6 +14,10 @@
             </div>
         </div>
     </div> -->
+</div>
+<div>
+    <div class="w-full container mx-auto flex justify-center"><span class="block w-96 h-[1px] bg-gray-300 my-10"></span></div>
+    <div class="relative w-full container mx-auto flex flex-col gap-5" id="home-banner"></div>
 </div>
 <div>
     <div class="mt-14">
@@ -91,17 +95,17 @@
         switch (res.data.status) {
             case 200:
                 Swal.fire({
-                position: "center",
-                icon: "success",
-                title: res.data.message,
-                showConfirmButton: true,
-                timer: 1500,
-                confirmButtonText: "OK",
-            });
-            $("#name-field-contact").val("")
-            $("#email-field-contact").val("")
-            $("#title-field-contact").val("")
-            $("#content-field-contact").val("")
+                    position: "center",
+                    icon: "success",
+                    title: res.data.message,
+                    showConfirmButton: true,
+                    timer: 1500,
+                    confirmButtonText: "OK",
+                });
+                $("#name-field-contact").val("")
+                $("#email-field-contact").val("")
+                $("#title-field-contact").val("")
+                $("#content-field-contact").val("")
         }
     }
 </script>

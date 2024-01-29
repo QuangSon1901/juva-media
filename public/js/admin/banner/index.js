@@ -34,6 +34,9 @@ async function getBannerData() {
                         <td class="p-2 whitespace-nowrap text-center">    
                             ${banner.url && banner.url != "" ? `<a href="${banner.url}" class="max-text-flow-200">${banner.url}</a>` : '<span class="max-text-flow-200">Chưa có</span>'}
                         </td>
+                        <td class="p-2 whitespace-nowrap text-center">    
+                            ${banner.level == 0 ? 'Slider' : banner.level} 
+                        </td>
                         <td class="p-2 whitespace-nowrap">
                             <div class="text-lg text-center">
                                 <box-icon type='solid' name='edit' class="cursor-pointer" onclick="getDetailBannerAdmin(${banner.id})"></box-icon>
@@ -61,7 +64,7 @@ async function getDetailBannerAdmin(id) {
             $("#gallery-update-banner").append(`<img class="block p-1 w-1/4 h-auto" src="${res.data.data.image}" alt="Banner Image">`);
             $("#modal-update-banner-admin input#id-banner").val(id);
             $("#modal-update-banner-admin input#url-banner").val(res.data.data.url);
-
+            $("#modal-update-banner-admin input#level-banner").val(res.data.data.level);
 
             openModalUpdateBannerAdmin()
             break;

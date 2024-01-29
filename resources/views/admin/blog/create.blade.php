@@ -41,7 +41,7 @@
                     <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                         <div class="md:col-span-3">
                             <label for="title">Tiêu đề</label>
-                            <input type="text" name="title" id="title" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="50"/>
+                            <input type="text" name="title" id="title" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="255"/>
                         </div>
 
                         <div class="md:col-span-2">

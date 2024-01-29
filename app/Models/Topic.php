@@ -14,9 +14,19 @@ class Topic extends Model
     protected $fillable = [
         'name',
         'status',
+        'slug',
         'create_at',
         'update_at',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function blogs()
     {

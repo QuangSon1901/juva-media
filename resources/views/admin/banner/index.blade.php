@@ -20,6 +20,9 @@
                             <div class="font-semibold text-center">Chuyển hướng</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">Level</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center"></div>
                         </th>
                     </tr>
