@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -36,6 +37,9 @@ Route::post('/post-login', [AuthController::class, 'postLogin'])->name('login.po
 Route::post('/post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/contact', [UserController::class, 'sendContact']); 
+//Login Admin
+Route::get('/admin-login', [AdminLoginController::class, 'index'])->name('adminLogin');
+Route::post('/post-login-admin', [AdminLoginController::class, 'postLoginAdmin']); 
 
 
 /**
@@ -87,7 +91,7 @@ Route::group(['as' => 'home.', 'middleware' => []], function () {
 /**
  * Trans: Admin
  */
-Route::group(['as' => 'admin.', 'middleware' => []], function () {
+Route::group(['as' => 'admin.', 'middleware' => ['adminCheck']], function () {
     // Admin
     Route::resource('/admin', AdminController::class);
     Route::post('/category-big.create', [AdminController::class, 'create']);
