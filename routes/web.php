@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminLoginController;
@@ -142,6 +143,11 @@ Route::group(['as' => 'admin.', 'middleware' => ['adminCheck']], function () {
     Route::post('/banner.update', [BannerController::class, 'update']);
     Route::post('/banner.delete', [BannerController::class, 'delete']);
     Route::post('/banner.update-status', [BannerController::class, 'updateStatus']);
+
+    //Account
+    Route::resource('/account', AdminAccountController::class);
+    Route::post('/account.update', [AdminAccountController::class, 'update']);
+
 });
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
