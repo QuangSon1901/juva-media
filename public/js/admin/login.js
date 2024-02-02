@@ -20,7 +20,7 @@ async function loginAdminSubmit() {
             });
             window.location.href = "/admin";
             break;
-        case 201:
+        case 460:
             Swal.fire({
                 position: "center",
                 icon: "success",

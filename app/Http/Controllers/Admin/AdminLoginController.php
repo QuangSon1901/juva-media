@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class AdminLoginController extends Controller
@@ -49,7 +50,7 @@ class AdminLoginController extends Controller
                 ];
             }
                 return [
-                    "status" => 201,
+                    "status" => 460,
                     "message" => "Bạn không phải là admin!!!",
                 ];
         }
@@ -58,5 +59,11 @@ class AdminLoginController extends Controller
             "status" => 403,
             "message" => "Email hoặc mật khẩu không đúng!"
         ];
+    }
+
+    public function logout() {
+        Session::flush();
+        Auth::logout();
+        return redirect('/admin-login');
     }
 }
