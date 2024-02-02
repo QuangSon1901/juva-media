@@ -80,13 +80,22 @@ function displayPagination(paginationData) {
             <li>
                 <a href="#" onclick="setCurrentPage(${
                     currentPage - 1
-                })" class="py-2 px-4 border border-gray-300 rounded"> <- </a>
+                })" class="py-2 px-4  border border-gray-300 rounded"> <- </a>
             </li>
 
             <li>
-                <a href="#" onclick="setCurrentPage(1)" class="py-2 px-4 border border-gray-300 rounded">1</a>
+                <a href="#" onclick="setCurrentPage(1)" class="py-2 px-4 ${
+                    currentPage === 1
+                        ? "bg-blue-500 text-white"
+                        : "border border-gray-300"
+                } rounded">1</a>
             </li>
     `);
+
+    // Kiểm tra nếu currentPage đã là trang đầu tiên thì vô hiệu hóa nút "Previous"
+    if (currentPage === 1) {
+        paginationContainer.find('li:first-child a').addClass('opacity-50 pointer-events-none');
+    }
 
     if (startPage > 2) {
         paginationContainer.append(`
@@ -98,7 +107,10 @@ function displayPagination(paginationData) {
 
     // Hiển thị các trang xung quanh trang hiện tại
     for (let i = startPage; i <= endPage; i++) {
-        const activeClass = i === currentPage ? 'bg-blue-500 text-white' : 'border border-gray-300';
+        const activeClass =
+            i === currentPage
+                ? "bg-blue-500 text-white"
+                : "border border-gray-300";
         paginationContainer.append(`
             <li>
                 <a href="#" onclick="setCurrentPage(${i})" class="py-2 px-4 ${activeClass} rounded">${i}</a>
@@ -113,18 +125,28 @@ function displayPagination(paginationData) {
             </li>
         `);
     }
+    if (endPage < totalPages) {
+        paginationContainer.append(`
+            <li>
+                <a href="#" onclick="setCurrentPage(${totalPages})" class="py-2 px-4 ${
+                    currentPage === totalPages ? "bg-blue-500 text-white" : "border border-gray-300"
+                } rounded">${totalPages}</a>
+            </li>
+        `);
+    }
 
     paginationContainer.append(`
-        <li>
-            <a href="#" onclick="setCurrentPage(${totalPages})" class="py-2 px-4 border border-gray-300 rounded">${totalPages}</a>
-        </li>
-
         <li>
             <a href="#" onclick="setCurrentPage(${
                 currentPage + 1
             })" class="py-2 px-4 border border-gray-300 rounded"> -> </a>
         </li>
     `);
+
+    // Kiểm tra nếu currentPage đã là trang cuối cùng thì vô hiệu hóa nút "Next"
+    if (currentPage === totalPages) {
+        paginationContainer.find('li:last-child a').addClass('opacity-50 pointer-events-none');
+    }
 }
 
 // Hàm để cập nhật currentPage

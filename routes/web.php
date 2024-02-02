@@ -41,6 +41,7 @@ Route::post('/contact', [UserController::class, 'sendContact']);
 //Login Admin
 Route::get('/admin-login', [AdminLoginController::class, 'index'])->name('adminLogin');
 Route::post('/post-login-admin', [AdminLoginController::class, 'postLoginAdmin']); 
+Route::get('/logout-admin', [AdminLoginController::class, 'logout'])->name('logout');
 
 
 /**
