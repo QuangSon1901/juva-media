@@ -1,7 +1,7 @@
 <div class="mt-14">
     <div class="border-t border-neutral-200 py-16">
         <div class="container mx-auto">
-            <div class="grid grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 <div>
                     <h4 class="mb-3"><b>Hỗ trợ khách hàng</b></h4>
                     <ul class="space-y-2">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="bg-juva-grey py-10">
-        <div class="container mx-auto flex items-center justify-between">
+        <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between">
             <div>
                 <img src="{{asset('images/logo/juva-rectangle.png')}}" alt="" class="h-20">
             </div>

@@ -19,6 +19,7 @@ async function ChangePass() {
                 timer: 2000,
                 confirmButtonText: "OK",
             });
+            $('#account-info-form input#password-field-account').val('')
             break;
         case 403:
             Swal.fire({

@@ -19,8 +19,8 @@
             <div>
                 <input type="hidden" name="text-red-500 border-red-500 w-[150px] w-2/5 h-4/5 left-[0.3rem] bg-blue-600">
                 
-                <div class="grid grid-cols-2 gap-5 p-4">
-                    <div>
+                <div class="grid lg:grid-cols-2 gap-5 p-4">
+                    <div class="hidden lg:block">
                         <img class="rounded-lg" src="https://assets.tronhouse.vn/59185068-4c44-404a-a5b6-493d1d50d13d/derived/p_l/tron-house-chuyen-nghiep.jpg" alt="">
                     </div>
                     <div class="hidden flex-col gap-6 [&.active]:flex active" id="login-form-modal">

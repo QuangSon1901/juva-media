@@ -65,13 +65,13 @@ async function loginSubmit() {
                         </div>
                     </div>
                 `);
-            $('#cart-quantity-header').parent().remove()
-            $("#header-action-user").append(`
-                    <a class="cursor-pointer relative"  href="/gio-hang">
-                        <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
-                        <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">${res.data.cart_quantity}</span>
-                    </a>
-            `)
+            // $('#cart-quantity-header').parent().remove()
+            // $("#header-action-user").append(`
+            //         <a class="cursor-pointer relative"  href="/gio-hang">
+            //             <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
+            //             <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">${res.data.cart_quantity}</span>
+            //         </a>
+            // `)
             localStorage.removeItem('cart')
             window.location.reload()
 
@@ -128,13 +128,13 @@ async function registerSubmit() {
                         </div>
                     </div>
                 `);
-            $('#cart-quantity-header').parent().remove()
-            $("#header-action-user").append(`
-                    <a class="cursor-pointer relative"  href="/gio-hang">
-                        <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
-                        <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">0</span>
-                    </a>
-            `)
+            // $('#cart-quantity-header').parent().remove()
+            // $("#header-action-user").append(`
+            //         <a class="cursor-pointer relative"  href="/gio-hang">
+            //             <box-icon name='shopping-bag' class="w-7 h-7"></box-icon>
+            //             <span id="cart-quantity-header" class="absolute -top-1 -right-1 rounded-full bg-red-500 w-4 h-4 text-xs flex items-center justify-center text-juva-white font-semibold">0</span>
+            //         </a>
+            // `)
             localStorage.removeItem('cart')
             window.location.reload()
             break;

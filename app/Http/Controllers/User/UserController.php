@@ -20,7 +20,14 @@ class UserController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
         }
-        return view('user.profile', compact('cart_quantity'));
+
+        $breadcrumbs = [
+            [
+                'title' => 'Thông tin cá nhân',
+                'url' => '/tai-khoan/thong-tin-ca-nhan'
+            ]
+        ];
+        return view('user.profile', compact('cart_quantity', 'breadcrumbs'));
     }
     public function getInfoPurchase()
     {
@@ -29,7 +36,14 @@ class UserController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cart_quantity = CartProduct::where('cart_id', $cart->id)->count();
         }
-        return view('user.purchase', compact('cart_quantity'));
+
+        $breadcrumbs = [
+            [
+                'title' => 'Đơn hàng',
+                'url' => '/tai-khoan/don-hang'
+            ]
+        ];
+        return view('user.purchase', compact('cart_quantity', 'breadcrumbs'));
     }
 
     public function sendContact(Request $request)

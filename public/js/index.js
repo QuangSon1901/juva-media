@@ -27,13 +27,17 @@ $(function () {
     });
 
     loadData();
-    loadCartCount();
+    // loadCartCount();
     
 });
 
 function loadData() {
     getServices();
     getBanners();
+}
+
+function handleOpenMenuMobile() {
+    $('#menu-mobile').toggleClass('hidden')
 }
 
 function loadCartCount() {
@@ -123,6 +127,19 @@ async function getServices() {
             // Hiển thị danh sách dịch vụ trong #header-service-list
             $("#header-service-list").html(eleServices);
             services.push(res.data.data)
+
+            let menuMobile = res.data.data.map(menu => {
+                if (menu.service_categories.length === 0) return ''; 
+                let service_categories = menu.service_categories.map(item => `<li><a href="/dich-vu/${item.slug}">${item.name}</a></li>`).join('')
+                return `<li class="space-y-2">
+                <b style="overflow-wrap: anywhere;">${menu.name}</b>
+                <ul class="space-y-2">
+                    ${service_categories}
+                </ul>
+            </li>`
+            })
+
+            $("#header-servive-mobile").html(menuMobile);
             break;
     }
 }
@@ -138,7 +155,7 @@ async function getBanners() {
             let eleServices = res.data.data.map(
                 (banner) => `
                     <div>
-                        <a href="${banner.url !== null ? banner.url : '#'}"><img class="w-full h-[calc(100vh-168px)]" src="${banner.image}" alt=""></a>
+                        <a href="${banner.url !== null ? banner.url : '#'}"><img class="slider w-full aspect-[2/1] lg:h-[calc(100vh-168px)] object-cover" src="${banner.image}" alt=""></a>
                     </div>
                 `
             );

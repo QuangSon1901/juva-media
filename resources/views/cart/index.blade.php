@@ -2,7 +2,7 @@
 @section('content')
 <div>
     <div class="container mx-auto  py-8">
-        <div class="grid grid-cols-[2fr,1fr] gap-12 cart">
+        <div class="grid lg:grid-cols-[2fr,1fr] gap-12 cart">
             <div class="cart-list">
                 <h2 class="font-bold text-xl">Giỏ hàng</h2>
                 <hr class="my-4" />
@@ -13,7 +13,7 @@
             <div class="form-order hidden">
                 <h2 class="font-bold text-xl">Nhập thông tin gửi trả hàng</h2>
                 <hr class="my-4" />
-                <div class="grid grid-cols-2 gap-4" id="delivery-information-form">
+                <div class="grid lg:grid-cols-2 gap-4" id="delivery-information-form">
                     <label for="" class="flex flex-col gap-2">
                         <p class="after:content-['*'] after:ml-0.5 after:text-red-500">Họ tên đầy đủ</p>
                         <div>

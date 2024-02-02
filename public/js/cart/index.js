@@ -42,8 +42,7 @@ async function getItemsCart() {
                                 <div class="flex text-sm space-x-4 text-neutral-500">
                                     <div data-id="${
                                         product.product_id
-                                    }" class="cursor-pointer">Chi tiết <box-icon class="w-[14px] h-[14px] translate-y-[1px]" color='#737373' name='expand-alt'></box-icon></div>
-                                    <!-- <div class="cursor-pointer">Chỉnh sửa <box-icon class="w-[14px] h-[14px] translate-y-[1px]" color='#737373' name='edit' type='solid'></box-icon></div> -->
+                                    }" class="cursor-pointer"></div>
                                 </div>
                             </div>
                         </div>
@@ -69,9 +68,6 @@ async function getItemsCart() {
                                     <p class="text-sm font-semibold">${photography.photography_title}</p>
                                     <p class="text-sm">${photography.photography_price_unit} <sup class="font-semibold">đ</sup></p>
                                 </div>
-                                <div>
-                                    <box-icon name='help-circle' color='#2251CC' class="w-5 h-5 cursor-pointer"></box-icon>
-                                </div>
                             </div>
                         </div>
                         <div>
@@ -88,7 +84,7 @@ async function getItemsCart() {
                             </div>
                         </div>
                     </li> `
-                )}
+                ).join('')}
                 </ul>
             </li>
                 `

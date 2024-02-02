@@ -29,7 +29,7 @@ async function loginAdminSubmit() {
                 timer: 2000,
                 confirmButtonText: "OK",
             });
-            window.location.href = "/";
+            // window.location.href = "/";
             break;
         case 403:
             Swal.fire({
