@@ -4,13 +4,13 @@
     <div class="container mx-auto py-8">
         <main class="grow">
             <main class="pt-6 pb-8 bg-white lg:pb-16 ">
-                <div class="flex justify-between px-4 mx-auto max-w-8xl">
+                <div class="flex justify-between lg:px-4 mx-auto max-w-8xl">
                     <div class="w-full max-w-3xl mx-auto">
                         <div class="divide-y divide-gray-200">
                             <article class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue">
                                 <header class="mb-4 not-format">
                                     <h1 class="mb-2 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl">{{$post_data->title}}</h1>
-                                    <div class="flex flex-wrap mb-4"><a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-blue-200  mb-2" href="/blog/tag/flowbite/">#{{$post_data->topic->name}}</a></div>
+                                    <div class="flex flex-wrap mb-4"><a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-blue-200  mb-2" href="/blog?topic={{$post_data->topic->slug}}">#{{$post_data->topic->name}}</a></div>
                                     <!-- <div class="text-base">
                                         <address class="inline">Published by <a rel="author" class="text-gray-900 no-underline hover:underline" href="/blog/author/zoltan/">Zoltán Szőgyényi</a></address> <time pubdate="true" datetime="2023-02-23T10:01:43.000+00:00"><time datetime="1677146503000">10 months ago</time></time>
                                     </div> -->
@@ -49,12 +49,7 @@
                             </div>
                             <div class="p-6 pb-4 mt-6 mb-6 font-medium text-gray-500 bg-white border border-gray-200 rounded-lg">
                                 <h4 class="mb-4 font-bold text-gray-900 uppercase ">Chủ đề được đề xuất</h4>
-                                <div class="flex flex-wrap" id="topic-post-tag">
-                                    <a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  hover:bg-blue-200  mb-2" href="/blog/tag/alpine-js/">Kinh nghiệm kinh doanh</a>
-                                    <a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  hover:bg-blue-200  mb-2" href="/blog/tag/alpine-js/">Tin Juva</a>
-                                    <a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  hover:bg-blue-200  mb-2" href="/blog/tag/alpine-js/">Media</a>
-                                    <a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded  hover:bg-blue-200  mb-2" href="/blog/tag/alpine-js/">Quản lý dòng tiền</a>
-                                </div>
+                                <div class="flex flex-wrap" id="topic-post-tag"></div>
                             </div>
                         </div>
                     </aside>

@@ -4,7 +4,7 @@
     <div class="container mx-auto py-8">
         <main class="grow">
             <main class="pt-6 pb-8 bg-white lg:pb-16 ">
-                <div class="flex justify-between px-4 mx-auto max-w-8xl">
+                <div class="flex justify-between lg:px-4 mx-auto max-w-8xl">
                     <div class="w-full max-w-3xl mx-auto">
                         <div class="flex items-center justify-between py-4 border-t border-b border-gray-200 not-format"><span class="text-sm font-bold text-gray-900 lg:mb-0" id="total-post-count"></span></div>
                         <div class="divide-y divide-gray-200" id="blog-post-article">

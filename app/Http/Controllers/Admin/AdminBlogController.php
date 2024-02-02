@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminBlogController extends Controller
 {
@@ -57,6 +58,7 @@ class AdminBlogController extends Controller
             "description" => $description,
             "content" => $content,
             "topic_id" => $topic_id,
+            "user_id" => Auth::user()->id,
             "status" => 1
         ]);
 

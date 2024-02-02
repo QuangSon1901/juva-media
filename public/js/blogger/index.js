@@ -50,7 +50,7 @@ async function getBlogData() {
         case 200:
             let posts = res.data.data.blogs.map((item) => `<article class="py-6">
                 <div class="flex items-center justify-between mb-3 text-gray-500">
-                    <div><a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-blue-200 mb-2" href="/blog/tag/flowbite/">${item.topic.name}</a></div><span class="text-sm"><time datetime="1677146503000">${formatFromTimeTemplate(item.created_at)}</time></span>
+                    <div><a class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-blue-200 mb-2" href="/blog?topic=${item.topic.slug}">${item.topic.name}</a></div><span class="text-sm"><time datetime="1677146503000">${formatFromTimeTemplate(item.created_at)}</time></span>
                 </div>
                 <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:underline"><a href="/blog/${item.slug}">${item.title}</a></h2>
                 <p class="mb-5 text-gray-500">${item.description}</p>

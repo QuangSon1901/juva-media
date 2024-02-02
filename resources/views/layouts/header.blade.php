@@ -7,6 +7,9 @@
             <li>
                 <a href="#">Liên hệ</a>
             </li>
+            <li class="lg:hidden">
+                <a href="/blog">Blog</a>
+            </li>
         </ul>
     </div>
     <div class="container mx-auto flex flex-col lg:flex-row justify-between items-center">
