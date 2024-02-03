@@ -1,7 +1,6 @@
-let checkCreateBlog = 0;
+let checkCreateBlog = 0, mainImageURLCreate = '';
 
 $(function () {
-
     $("#modal-create-blog-admin .dropdown-button").on("click", function () {
         $(this)
             .parents(".select-group")
@@ -38,6 +37,20 @@ $(function () {
             .find(".dropdown-button")
             .click();
     });
+
+    $('#image-blog').on('change', async function () {
+        $('#image-blog-thumb').attr('src', URL.createObjectURL(this.files[0]))
+        let res = await uploadMediaTemplate($(this).prop('files')[0], 0);
+        switch (res.data.status) {
+            case 200:
+                mainImageURLCreate = res.data.data
+                break;
+            default: 
+                alert('Upload ảnh bị lỗi, vui lòng thử lại!')
+        }
+        $(this).replaceWith($(this).val('').clone(true));
+    })
+
     getDataTopicBlogAdmin();
 })
 
@@ -92,6 +105,11 @@ async function saveModalCreateBlogAdmin() {
         return
     }
 
+    if(mainImageURLCreate == ""){
+        alert('Vui lòng chọn ảnh')
+        return
+    }
+
     if(CKEDITOR.instances["content"].getData() == ""){
         alert('Vui lòng nhập nội dung')
         return
@@ -102,6 +120,7 @@ async function saveModalCreateBlogAdmin() {
         topic_id: $("#modal-create-blog-admin .topic-menu div.selected").data("id"),
         description: $('#description').val(),
         content: CKEDITOR.instances["content"].getData(),
+        image: mainImageURLCreate,
     }
 
     let method = "post",

@@ -1,4 +1,4 @@
-let checkUpdateBlog = 0;
+let checkUpdateBlog = 0, mainImageURLUpdate = '';
 
 $(function () {
 
@@ -38,6 +38,19 @@ $(function () {
             .find(".dropdown-button")
             .click();
     });
+
+    $('#image-blog-update').on('change', async function () {
+        $('#image-blog-thumb-update').attr('src', URL.createObjectURL(this.files[0]))
+        let res = await uploadMediaTemplate($(this).prop('files')[0], 0);
+        switch (res.data.status) {
+            case 200:
+                mainImageURLUpdate = res.data.data
+                break;
+            default: 
+                alert('Upload ảnh bị lỗi, vui lòng thử lại!')
+        }
+        $(this).replaceWith($(this).val('').clone(true));
+    })
 })
 
 
@@ -65,6 +78,7 @@ async function saveModalUpdateBlogAdmin() {
         topic_id: $("#modal-update-blog-admin .topic-menu div.selected").data("id"),
         description: $('#blog-description-update').val(),
         content: CKEDITOR.instances["blog-content-update"].getData(),
+        image: mainImageURLUpdate,
     }
 
     let method = "post",
@@ -86,6 +100,35 @@ async function saveModalUpdateBlogAdmin() {
 function openModalUpdateBlogAdmin() {
     $("#modal-update-blog-admin").removeClass("hidden");
     $("#modal-update-blog-admin").addClass("flex");
+}
+
+async function getDetailBlogAdmin(id) {
+    let method = "get",
+        url = "/blog-topic.detail",
+        params = { id },
+        data = null;
+    let res = await axiosTemplate(method, url, params, data);
+    switch (res.data.status) {
+        case 200:
+            $("#modal-update-blog-admin input#blog-id-update").val(res.data.data.id);
+            $("#modal-update-blog-admin input#blog-title-update").val(res.data.data.title);
+            $("#modal-update-blog-admin .dropdown-button > span").text(res.data.data.topic.name);
+            $("#modal-update-blog-admin .topic-menu div[data-id]").each(function() {
+                const dataId = $(this).data("id");
+                
+                if (dataId && dataId == res.data.data.topic_id) {
+                    $(this).addClass("selected");
+                }
+            });
+            $("#modal-update-blog-admin #blog-description-update").val(res.data.data.description);
+            $("#modal-update-blog-admin #image-blog-thumb-update").attr('src', res.data.data.image);
+            mainImageURLUpdate = res.data.data.image;
+            CKEDITOR.instances["blog-content-update"].setData(res.data.data.content)
+
+            
+            openModalUpdateBlogAdmin();
+            break;
+    }
 }
 
 function closeModalUpdateBlogAdmin() {

@@ -52,6 +52,7 @@ class AdminBlogController extends Controller
         $topic_id = $request->get('topic_id');
         $description = $request->get('description');
         $content = $request->get('content');
+        $image = $request->get('image');
 
         $createPr = Blog::create([
             "title" => $title,
@@ -59,7 +60,8 @@ class AdminBlogController extends Controller
             "content" => $content,
             "topic_id" => $topic_id,
             "user_id" => Auth::user()->id,
-            "status" => 1
+            "status" => 1,
+            "image" => $image,
         ]);
 
         return [
@@ -73,6 +75,7 @@ class AdminBlogController extends Controller
         $title = $request->get('title');
         $topic_id = $request->get('topic_id');
         $description = $request->get('description');
+        $image = $request->get('image');
         $content = $request->get('content');
 
         $blog = Blog::find($id);
@@ -88,6 +91,7 @@ class AdminBlogController extends Controller
             "description" => $description,
             "content" => $content,
             "topic_id" => $topic_id,
+            "image" => $image,
         ]);
 
         return [

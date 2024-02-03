@@ -25,7 +25,6 @@ $(function () {
     $(document).on("input", "#search-header", function () {
         getProductSearch()
     });
-
     loadData();
     // loadCartCount();
     

@@ -39,35 +39,44 @@
             <div class="grid gap-y-2 text-sm grid-cols-1">
                 <div class="bg-white shadow-xl rounded-md p-4">
                     <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                        <div class="md:col-span-3">
-                            <label for="title">Tiêu đề</label>
-                            <input type="text" name="title" id="title" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="255"/>
-                        </div>
+                        <div class="md:col-span-3 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                            <div class="md:col-span-5">
+                                <label for="title">Tiêu đề</label>
+                                <input type="text" name="title" id="title" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" data-empty="1" data-max-length="255" />
+                            </div>
 
-                        <div class="md:col-span-2">
-                            <label for="service_id">Chủ đề</label>
-                            <div class="relative group mt-1 select-group">
-                                <button class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
-                                    <span class="mr-2">Chủ đề</span>
-                                    <button tabindex="-1" for="show_more" class="absolute top-1/2 -translate-y-1/2 right-8 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="18 15 12 9 6 15"></polyline>
-                                        </svg>
+                            <div class="md:col-span-5">
+                                <label for="service_id">Chủ đề</label>
+                                <div class="relative group mt-1 select-group">
+                                    <button class="dropdown-button relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center px-4 appearance-none outline-none text-gray-800 w-full">
+                                        <span class="mr-2">Chủ đề</span>
+                                        <button tabindex="-1" for="show_more" class="absolute top-1/2 -translate-y-1/2 right-8 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                            <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="18 15 12 9 6 15"></polyline>
+                                            </svg>
+                                        </button>
+                                        <button onclick="addTopicBlogCreate()" tabindex="-1" for="show_more" class="w-8 h-4 flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                            <box-icon name='plus' size="sm" color="#D1D5DB"></box-icon>
+                                        </button>
                                     </button>
-                                    <button onclick="addTopicBlogCreate()" tabindex="-1" for="show_more" class="w-8 h-4 flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-0 cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                        <box-icon name='plus' size="sm" color="#D1D5DB"></box-icon>
-                                    </button>
-                                </button>
-                                <div class="z-20 dropdown-menu topic-menu hidden absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
-                                    <!-- Search input -->
-                                    <input class="search-input block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none" type="text" placeholder="Search items" autocomplete="off">
+                                    <div class="z-20 dropdown-menu topic-menu hidden absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                                        <!-- Search input -->
+                                        <input class="search-input block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none" type="text" placeholder="Search items" autocomplete="off">
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="md:col-span-5">
+                                <label for="description">Mô tả</label>
+                                <textarea name="description" id="description" class="border mt-1 rounded px-4 w-full bg-gray-50" cols="20" rows="5"></textarea>
                             </div>
                         </div>
 
-                        <div class="md:col-span-5">
-                            <label for="description">Mô tả</label>
-                            <textarea name="description" id="description" class="border mt-1 rounded px-4 w-full bg-gray-50" cols="20" rows="5"></textarea>
+                        <div class="md:col-span-2">
+                            <label for="image-blog" class="relative">
+                                <img src="" alt="" id="image-blog-thumb" onerror="imageDefaultOnLoadError($(this))">
+                                <input id="image-blog" type="file" class="hidden">
+                            </label>
                         </div>
 
                         <div class="md:col-span-5">
@@ -98,16 +107,11 @@
     $(function() {
         CKEDITOR.replace("content", {
             filebrowserBrowseUrl: "{{ route('ckfinder_browser') }}",
-            filebrowserImageBrowseUrl:
-                "{{ route('ckfinder_browser') }}?type=Images&token=123",
-            filebrowserFlashBrowseUrl:
-                "{{ route('ckfinder_browser') }}?type=Flash&token=123",
-            filebrowserUploadUrl:
-                "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Files",
-            filebrowserImageUploadUrl:
-                "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Images",
-            filebrowserFlashUploadUrl:
-                "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Flash",
+            filebrowserImageBrowseUrl: "{{ route('ckfinder_browser') }}?type=Images&token=123",
+            filebrowserFlashBrowseUrl: "{{ route('ckfinder_browser') }}?type=Flash&token=123",
+            filebrowserUploadUrl: "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Files",
+            filebrowserImageUploadUrl: "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Images",
+            filebrowserFlashUploadUrl: "{{ route('ckfinder_connector') }}?command=QuickUpload&type=Flash",
         });
     })
 </script>

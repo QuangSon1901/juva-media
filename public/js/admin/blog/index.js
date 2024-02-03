@@ -59,33 +59,6 @@ async function deleteBlogAdmin(r) {
     }
 }
 
-async function getDetailBlogAdmin(id) {
-    let method = "get",
-        url = "/blog-topic.detail",
-        params = { id },
-        data = null;
-    let res = await axiosTemplate(method, url, params, data);
-    switch (res.data.status) {
-        case 200:
-            $("#modal-update-blog-admin input#blog-id-update").val(res.data.data.id);
-            $("#modal-update-blog-admin input#blog-title-update").val(res.data.data.title);
-            $("#modal-update-blog-admin .dropdown-button > span").text(res.data.data.topic.name);
-            $("#modal-update-blog-admin .topic-menu div[data-id]").each(function() {
-                const dataId = $(this).data("id");
-                
-                if (dataId && dataId == res.data.data.topic_id) {
-                    $(this).addClass("selected");
-                }
-            });
-            $("#modal-update-blog-admin #blog-description-update").val(res.data.data.description);
-            CKEDITOR.instances["blog-content-update"].setData(res.data.data.content)
-
-            
-            openModalUpdateBlogAdmin();
-            break;
-    }
-}
-
 async function updateBlogStatus(id, isChecked) {
     const status = isChecked ? 1 : 0;
 

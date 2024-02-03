@@ -100,8 +100,8 @@ async function addToCart(r) {
                 localStorage.setItem("cart", updatedCartJson);
             }
 
-            // $("#cart-quantity-header").text(res.data.quantity_cart);
-            loadCartCount()
+            $("#cart-quantity-header").text(res.data.quantity_cart);
+            // loadCartCount()
             break;
     }
 }

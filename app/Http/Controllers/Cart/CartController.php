@@ -153,6 +153,7 @@ class CartController extends Controller
             return [
                 "status" => 200,
                 "message" => "Thêm vào giỏ hàng thành công!",
+                "isAuth" => Auth::check(),
                 "quantity_cart" => CartProduct::count()
             ];
         } else {

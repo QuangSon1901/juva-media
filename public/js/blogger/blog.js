@@ -8,6 +8,7 @@ $(function () {
 })
 
 function loadData() {
+    getServices();
     getTopicData()
 }
 

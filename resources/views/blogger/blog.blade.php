@@ -4,7 +4,7 @@
     <div class="container mx-auto py-8">
         <main class="grow">
             <main class="pt-6 pb-8 bg-white lg:pb-16 ">
-                <div class="flex justify-between lg:px-4 mx-auto max-w-8xl">
+                <div class="flex justify-between lg:px-4 mx-auto max-w-8xl gap-8">
                     <div class="w-full max-w-3xl mx-auto">
                         <div class="divide-y divide-gray-200">
                             <article class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue">
