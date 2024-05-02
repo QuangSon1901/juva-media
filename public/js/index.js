@@ -26,8 +26,7 @@ $(function () {
         getProductSearch()
     });
     loadData();
-    // loadCartCount();
-    
+    loadCartCount();
 });
 
 function loadData() {

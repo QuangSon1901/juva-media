@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th2 19, 2024 lúc 02:29 PM
--- Phiên bản máy phục vụ: 8.0.36
+-- Thời gian đã tạo: Th5 02, 2024 lúc 05:29 PM
+-- Phiên bản máy phục vụ: 8.0.37
 -- Phiên bản PHP: 8.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -97,7 +97,8 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 (5, 11, '2024-01-29 01:39:24', '2024-01-29 01:39:24'),
-(6, 13, '2024-02-02 06:41:39', '2024-02-02 06:41:39');
+(6, 13, '2024-02-02 06:41:39', '2024-02-02 06:41:39'),
+(7, 14, '2024-02-19 23:30:23', '2024-02-19 23:30:23');
 
 -- --------------------------------------------------------
 
@@ -380,7 +381,24 @@ INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `slug`, `
 (75, 'Áo thun 3 lổ nam', '<p>Đ&acirc;y chỉ l&agrave; c&aacute;c g&oacute;c phổ biến b&ecirc;n Juva thường chụp cho kh&aacute;ch, ngo&agrave;i những g&oacute;c tr&ecirc;n nếu bạn muốn chụp g&oacute;c kh&aacute;c th&igrave; h&atilde;y inbox cho Juva nh&eacute;.</p>\n\n<p>&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1702886137/mf7pxl2r52oo3renvkps.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1702886140/fdvva9y6hukt1ghdsdym.jpg', 45000, 'ao-thun-3-lo-nam', 27, 8, '2023-12-18 00:55:58', '2023-12-18 00:55:58'),
 (76, 'Túi xách nam', '<p>Đ&acirc;y chỉ l&agrave; c&aacute;c g&oacute;c phổ biến b&ecirc;n Juva thường chụp cho kh&aacute;ch, ngo&agrave;i những g&oacute;c tr&ecirc;n nếu bạn muốn chụp g&oacute;c kh&aacute;c th&igrave; h&atilde;y inbox cho Juva nh&eacute;.</p>\n\n<p>&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1702886237/kyej09bvfnsvbqnqq2pw.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1702886241/fhqxus8qnnrdo9eyffp7.jpg', 60000, 'tui-xach-nam', 33, 11, '2023-12-18 00:57:31', '2023-12-18 00:57:31'),
 (77, 'Ccách chup ảnh sản phẩm', '<p><strong>C&aacute;ch chụp ảnh sản phẩm đẹp bằng điện thoại</strong>&nbsp;l&agrave; cả một nghệ thuật. B&agrave;i viết n&agrave;y sẽ chia sẻ tới bạn c&aacute;c loại điện thoại c&oacute; thể sử dụng để chụp ảnh, phương ph&aacute;p thiết lập ph&ocirc;ng nền, kỹ thuật c&ugrave;ng nhiều t&iacute;p chụp chuy&ecirc;n nghiệp v&agrave; xử l&yacute; hậu kỳ kh&aacute;c.&nbsp;<br />\nThay v&igrave; phải tốn k&eacute;m đầu tư một m&aacute;y ảnh chuy&ecirc;n nghiệp, sao bạn kh&ocirc;ng t&igrave;m đến những chiếc smartphone, vừa để li&ecirc;n lạc v&agrave; chụp ảnh sản phẩm, chi ph&iacute; lại tiết kiệm hơn nhiều nhỉ. Những c&aacute;ch chụp ảnh bằng điện thoại đẹp Sapo tổng hợp chia sẻ b&ecirc;n dưới chắc chắn sẽ gi&uacute;p &iacute;ch cho bạn rất nhiều.</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1703661856/dxljo8ybqedhvbwkfrsg.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1703661900/cqa9oxfzqps9r68g6iaj.jpg', 0, 'ccach-chup-anh-san-pham', 37, 8, '2023-12-27 00:25:06', '2023-12-27 00:25:06'),
-(78, 'Nước hoa mini THOM', '<p>Đ&acirc;y chỉ l&agrave; c&aacute;c g&oacute;c phổ biến b&ecirc;n Juva thường chụp cho kh&aacute;ch, ngo&agrave;i những g&oacute;c tr&ecirc;n nếu bạn muốn chụp g&oacute;c kh&aacute;c th&igrave; h&atilde;y inbox cho Juva nh&eacute;.</p>\n\n<p>Đối với những sản phẩm c&oacute; nước b&ecirc;n trong n&ecirc;n ưu ti&ecirc;n chụp 2 mặt trước sau để l&agrave;m r&otilde; được chất liệu v&agrave; m&agrave;u sắc của dung dịch.</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925574/vuornuyoaj2rig3fzb3d.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925586/q9iisjqoxqd4hzcmkj8b.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925584/du6oqtmhvnbajibko56i.jpg', 80000, 'nuoc-hoa-mini-thom', 38, 14, '2024-02-02 18:59:53', '2024-02-02 18:59:53');
+(78, 'Nước hoa mini THOM', '<p>Đ&acirc;y chỉ l&agrave; c&aacute;c g&oacute;c phổ biến b&ecirc;n Juva thường chụp cho kh&aacute;ch, ngo&agrave;i những g&oacute;c tr&ecirc;n nếu bạn muốn chụp g&oacute;c kh&aacute;c th&igrave; h&atilde;y inbox cho Juva nh&eacute;.</p>\n\n<p>Đối với những sản phẩm c&oacute; nước b&ecirc;n trong n&ecirc;n ưu ti&ecirc;n chụp 2 mặt trước sau để l&agrave;m r&otilde; được chất liệu v&agrave; m&agrave;u sắc của dung dịch.</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925574/vuornuyoaj2rig3fzb3d.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925586/q9iisjqoxqd4hzcmkj8b.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925584/du6oqtmhvnbajibko56i.jpg', 80000, 'nuoc-hoa-mini-thom', 38, 14, '2024-02-02 18:59:53', '2024-02-02 18:59:53'),
+(79, 'Chụp flatlay áo thun', '<p>H&igrave;nh ảnh sản phẩm chất lượng n&acirc;ng cao sự h&agrave;i l&ograve;ng cho kh&aacute;ch h&agrave;ng</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713515031/d9ndydbuvnauwqhwugrh.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713519098/yboorua7szvybyswtiow.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713515233/mg9dzidivdkwfnqftq9s.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713515209/tuswzmo3sezb2pi60ylj.jpg', 45000, 'chup-flatlay-ao-thun', 27, 8, '2024-04-19 01:27:15', '2024-04-19 02:31:47'),
+(80, 'Quần suông dài vải dù', '<p>Tạo Sự Kh&aacute;c Biệt Từ Ảnh Sản Phẩm Chuy&ecirc;n Nghiệp</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713516118/wft65dh8f9a6zqrjmvva.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518947/mebcsjwhfw3detso4hxu.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518946/ndpla9efe6vlt5dvakk6.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518945/l0v011czunoyvbcm3mt5.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518942/jahq1mlhk39nuvj3dynm.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713516123/upv3ogtztprxe1dikwfz.jpg', 60000, 'chup-flatlay-quan-suong-dai-vai-du', 32, 9, '2024-04-19 01:42:08', '2024-04-19 02:29:11'),
+(81, 'Áo thể thao 3D', '<p>H&igrave;nh Ảnh Đẹp Quyết Định Đến Cảm X&uacute;c Khi Mua H&agrave;ng&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517148/kphiygwx92bvhwzne4x4.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517167/qoz9vgmatgpfsumy8mo0.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517156/bwqespkxfuwhcpoigrh5.jpg', 80000, 'ao-the-thao-3d', 40, 8, '2024-04-19 01:59:30', '2024-04-19 02:13:51'),
+(83, 'Áo thun 3 lỗ 3D', '<p>H&igrave;nh Ảnh Đẹp Quyết Định Đến Cảm X&uacute;c Khi Mua H&agrave;ng&nbsp;<br />\n&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517957/iehabcsu2vbhfzeh4x43.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517964/lgqocssrwafix4fwqcki.jpg', 80000, 'ao-thun-3-lo-3d', 30, 8, '2024-04-19 02:12:48', '2024-04-19 02:12:48'),
+(84, 'Áo thể thao 3D tay ngắn', '<p>H&igrave;nh Ảnh Đẹp Quyết Định Đến Cảm X&uacute;c Khi Mua H&agrave;ng&nbsp;<br />\n&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518126/yygnvdfelc88zczepxka.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518133/tr1yfn1ybypoo5gjhyqc.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518131/u1mfg5oojd6k5udljwli.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518133/tr1yfn1ybypoo5gjhyqc.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518131/u1mfg5oojd6k5udljwli.jpg', 120000, 'ao-the-thao-3d-tay-ngan', 40, 8, '2024-04-19 02:16:05', '2024-04-19 02:18:17'),
+(85, 'Chụp flatlay áo thun', '<p>Juva Media &ndash; Một kh&ocirc;ng gian s&aacute;ng tạo chuy&ecirc;n nghiệp d&agrave;nh cho Photographer, Videographer, ch&uacute;ng t&ocirc;i kh&ocirc;ng chỉ tạo ra những sản phẩm ảnh chuy&ecirc;n nghiệp m&agrave; c&ograve;n l&agrave; nơi biến mọi &yacute; tưởng của kh&aacute;ch h&agrave;ng bằng hiện thực th&ocirc;ng qua h&igrave;nh ảnh&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942850/efo8atvnoxueeonft4th.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942868/qofo8q7y2lej7sqeyhno.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942867/lyvdfawvqe8lzsbrnwia.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942866/fkhlihbzua8mb6qxidef.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942864/ejoz5vbkxyy2nzjgqw5a.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942864/pz5fv3xjuazxodtpfxfq.jpg', 45000, 'ao-thun', 27, 8, '2024-04-24 00:14:39', '2024-04-24 00:16:25'),
+(86, 'Quần short', '<p>Để c&oacute; được những h&igrave;nh ảnh đẹp v&agrave; chất lượng Juva Media lu&ocirc;n đầu tư v&agrave;o trang thiết bị hiện đại c&ugrave;ng kỹ thuật chụp ảnh chuy&ecirc;n nghiệp nhằm mang lại cho kh&aacute;ch h&agrave;ng sự trải nghiệm về h&igrave;nh ảnh tốt nhất&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943336/jd3egc0n1ly4fvadc1aa.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943347/p4kkl6jrxyufp2p64f5r.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943347/aahzq8w5l5tmfypfpghx.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943347/ltyvkdxpjytenabmayi9.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943346/pfqeackdrj3pqirku9tp.jpg', 45000, 'quan-short-2', 29, 9, '2024-04-24 00:22:30', '2024-04-24 00:22:30'),
+(88, 'Áo thun concept Sofa', '<p>Đến với Juva Media nơi c&oacute; thể biến mọi &yacute; tưởng của bạn bằng hiện thực&nbsp;<br />\n&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944160/fh5vdtcorxalwwjpcklt.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944174/jwgbmmsldvsbmeoypsdc.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944172/bzamcb9yqtjm5nydbbqo.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944168/lralwzqywyvi6ctsou7k.jpg', 60000, 'ao-thun-concept-sofa', 36, 8, '2024-04-24 00:36:42', '2024-04-24 00:36:42'),
+(89, 'Nước hoa', '<p>Kh&ocirc;ng chỉ gi&uacute;p cho sản phẩm của bạn trở n&ecirc;n nổi bật Juva Media c&ograve;n tạo điểm nhấn ri&ecirc;ng biệt cho sản phẩm của bạn chỉ bằng h&igrave;nh ảnh&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944504/h7chtmmsgeuyxw8ouaee.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944511/wmv2utvgtcmf8bdyfdcx.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944511/xtrbdyooawac7eroc1al.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944510/wysmbyxjabtjfbbvvgrg.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944510/kbypzw7v2ni8sy1iwnfk.jpg', 80000, 'nuoc-hoa-2', 38, 14, '2024-04-24 00:42:02', '2024-04-24 00:42:02'),
+(90, 'VÍ nam', '<p>Đến với Juva Media bạn kh&ocirc;ng chỉ c&oacute; nhiều bức ảnh đẹp m&agrave; c&ograve;n c&oacute; thể mang lại được nhiều gi&aacute; trị về mặt về mặt truyền th&ocirc;ng bởi những bức ảnh sẽ l&agrave; c&ocirc;ng cụ truyền tải tốt nhất những th&ocirc;ng điệp &yacute; nghĩa</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944842/k1qj92xukop8zuvk4maj.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944850/p2gatrmdromm3p9zfhq3.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944849/dtdakwwiymmjnhntyejb.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944849/rolzijaaxcsmaab6ukby.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944848/bzyggh6sxmapkjnldrn1.jpg', 60000, 'vi-nam', 33, 10, '2024-04-24 00:47:35', '2024-04-24 00:47:35'),
+(91, 'Ví', '<p>H&igrave;nh ảnh đẹp v&agrave; chất lượng l&agrave; cầu nối giữa kh&aacute;ch h&agrave;ng v&agrave; doanh nghiệp&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028585/gxm3fyp6riimntpmgf8w.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028595/z0niycypc2eyaxxltvcq.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028593/czhs7eqccd1vyxnak7lz.jpg', 60000, 'vi', 33, 10, '2024-04-25 00:03:19', '2024-04-25 00:03:19'),
+(92, 'Áo hoodie', '<p>Với Juva Media kh&ocirc;ng chỉ mang đến cho bạn sự chất lượng về h&igrave;nh ảnh m&agrave; c&ograve;n l&agrave; yếu tố then chốt để x&acirc;y dựng thương hiệu cho ri&ecirc;ng bạn&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028832/bgt3sltdlgwbvzw3wh00.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028847/ubbfuvu8lpuamsns0vxc.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028847/ufahdsgicxs3uccrax3k.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028843/cyvu4mtniphnqxsdgpyd.jpg', 60000, 'ao-hoodie', 31, 8, '2024-04-25 00:07:45', '2024-04-25 00:14:30'),
+(93, 'Quần ông suông trắng', '<p>H&igrave;nh ảnh kh&ocirc;ng đơn giản chỉ mang &yacute; nghĩa về mặt nghệ thuật m&agrave; n&oacute; c&ograve;n c&aacute;nh cửa b&iacute; mật dẫn đến sự b&ugrave;ng nổ về doanh số cho sản phẩm của bạn&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029230/lzvmaexegjkrvlinbyvw.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029239/wflu6zmbq1ty3mqelhlw.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029236/abhai3rtrrcmk3tjbza3.jpg', 60000, 'quan', 32, 9, '2024-04-25 00:14:00', '2024-04-25 00:37:10'),
+(94, 'Áo thun', '<p>Cảm x&uacute;c kh&ocirc;ng thể diễn tả h&atilde;y để Juva Media gi&uacute;p bạn diễn tả bằng h&igrave;nh ảnh&nbsp;</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029373/fvrp8lsh4nhgtqhcp3ve.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029410/wjb20twxtan0g1vinq7d.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029405/hsnf9eyvvsey9dndyamk.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029405/pivkyngibqzpfxakanvg.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029404/bal6hvucw54rfq7er11c.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029404/evrouzhwm3t8bcps8c6h.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029403/o7h9frkjunesi2kxtbab.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029403/lbxxaq1uza3vpxur7vhw.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029398/h0k2swjkxmvsmml4widy.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029397/jfy3uwagbqbnj12oqxka.jpg', 60000, 'ao-thun-4', 36, 8, '2024-04-25 00:18:25', '2024-04-25 00:18:25'),
+(95, 'Chụp phông trắng mũ lưỡi trai', '<p>Juva Media lu&ocirc;n tạo ra những bức ảnh đẹp bằng những cảm x&uacute;c ch&acirc;n thật v&agrave; những khoảnh khắc đẹp của tự nhi&ecirc;n</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029881/fsduew1djldevb2li9ta.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029894/xqxoblk9lc5bpq05yixf.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029893/xtgvdsipqca7ucaloisf.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029892/alz7seuyqako3yvku0ff.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029891/ydcdtijg8nfszgju4ctj.jpg', 60000, 'chup-phong-trang-mu-luoi-trai', 37, 16, '2024-04-25 00:24:56', '2024-04-25 00:24:56');
+INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `slug`, `service_category_id`, `product_category_id`, `created_at`, `updated_at`) VALUES
+(96, 'Chụp ảnh mũ lưỡi trai phông trắng', '<p>Juva Media lu&ocirc;n tạo ra những bức ảnh đẹp bằng những cảm x&uacute;c ch&acirc;n thật v&agrave; những khoảnh khắc đẹp của tự nhi&ecirc;n</p>', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030239/ez2ppa42aoedq3af1a3i.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030245/gtbck8fcfnxnld6a1qwg.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030245/dgttqdw4xhkjeozcnxtr.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030244/njcrruydaioh0ylulqpx.jpg https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030244/upb2qksfb6m2tmpzuryg.jpg', 60000, 'chup-anh-mu-luoi-trai-phong-trang', 43, 16, '2024-04-25 00:30:52', '2024-04-25 00:30:52');
 
 -- --------------------------------------------------------
 
@@ -406,7 +424,9 @@ INSERT INTO `product_categories` (`id`, `title`, `created_at`, `updated_at`) VAL
 (11, 'Túi', '2023-12-13 23:51:51', '2023-12-13 23:51:51'),
 (12, 'Handmade', '2023-12-14 00:52:07', '2023-12-14 00:52:07'),
 (13, 'Váy', '2023-12-16 08:41:29', '2023-12-16 08:41:29'),
-(14, 'Nước hoa', '2024-02-02 18:56:07', '2024-02-02 18:56:07');
+(14, 'Nước hoa', '2024-02-02 18:56:07', '2024-02-02 18:56:07'),
+(15, 'Set', '2024-04-24 00:30:02', '2024-04-24 00:30:02'),
+(16, 'Nón', '2024-04-25 00:11:37', '2024-04-25 00:11:37');
 
 -- --------------------------------------------------------
 
@@ -705,7 +725,45 @@ INSERT INTO `product_photography` (`id`, `price`, `image`, `product_id`, `photog
 (379, 80000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925426/tpuao7gi5q1ejv9ix1oq.jpg', 78, 14, '2024-02-03 01:59:53', '2024-02-03 01:59:53'),
 (380, 150000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925450/gs7ndocvcxfkwy442oyq.jpg', 78, 33, '2024-02-03 01:59:53', '2024-02-03 01:59:53'),
 (381, 80000, '/images/images/9261177.png', 78, 25, '2024-02-03 01:59:53', '2024-02-03 01:59:53'),
-(382, 80000, '/images/images/9261177.png', 78, 28, '2024-02-03 01:59:53', '2024-02-03 01:59:53');
+(382, 80000, '/images/images/9261177.png', 78, 28, '2024-02-03 01:59:53', '2024-02-03 01:59:53'),
+(430, 60000, 'blob:https://juvamedia.vn/4c11ada9-2fd7-416e-bbb5-ce2db7e62789', 80, 8, '2024-04-19 09:29:11', '2024-04-19 09:29:11'),
+(433, 80000, 'blob:https://juvamedia.vn/1c964297-1bb9-4a52-9fa9-3ea7123d1c18', 81, 8, '2024-04-19 09:29:35', '2024-04-19 09:29:35'),
+(434, 80000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518617/epkv8nq0uwdjcs8ncdpa.jpg', 81, 10, '2024-04-19 09:29:35', '2024-04-19 09:29:35'),
+(435, 80000, 'blob:https://juvamedia.vn/1deac418-8b2a-4cb2-93d2-c74560525ca9', 83, 8, '2024-04-19 09:29:56', '2024-04-19 09:29:56'),
+(436, 80000, 'blob:https://juvamedia.vn/0415dd46-403c-4f09-b55f-3241a5852e30', 83, 10, '2024-04-19 09:29:56', '2024-04-19 09:29:56'),
+(437, 120000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518677/hsjiv2mh37nn29am31eb.jpg', 84, 8, '2024-04-19 09:30:21', '2024-04-19 09:30:21'),
+(438, 120000, 'blob:https://juvamedia.vn/21a5d416-c146-4b0f-885c-b1877e5b944a', 84, 9, '2024-04-19 09:30:21', '2024-04-19 09:30:21'),
+(439, 120000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518681/pny6dg6j2hgexfcccm3v.jpg', 84, 10, '2024-04-19 09:30:21', '2024-04-19 09:30:21'),
+(440, 45000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713518550/mqpjutj9l2up5eu0ua39.jpg', 79, 8, '2024-04-19 09:31:47', '2024-04-19 09:31:47'),
+(441, 45000, 'blob:https://juvamedia.vn/345e7b23-a143-4f44-b64e-004abd22b88a', 79, 9, '2024-04-19 09:31:47', '2024-04-19 09:31:47'),
+(443, 45000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713942573/ceap2azh5j9j5wbiljyw.jpg', 85, 8, '2024-04-24 07:16:25', '2024-04-24 07:16:25'),
+(444, 45000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713943323/zfctkwravkzlomwos5dg.jpg', 86, 8, '2024-04-24 07:22:30', '2024-04-24 07:22:30'),
+(446, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944142/giscebomrgrx1h0n905h.jpg', 88, 8, '2024-04-24 07:36:42', '2024-04-24 07:36:42'),
+(447, 80000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944490/mru0dnqd6z5atrhgmaav.jpg', 89, 8, '2024-04-24 07:42:02', '2024-04-24 07:42:02'),
+(448, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944786/ap6sfysxyzy00er9xbbr.jpg', 90, 8, '2024-04-24 07:47:35', '2024-04-24 07:47:35'),
+(449, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944794/l9zluo6sv2akovpoqgnc.jpg', 90, 31, '2024-04-24 07:47:35', '2024-04-24 07:47:35'),
+(450, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944802/z1dsiueu9azcmpm07afy.jpg', 90, 29, '2024-04-24 07:47:35', '2024-04-24 07:47:35'),
+(451, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713944815/ugyfgzzkm7nzgy3j9vog.jpg', 90, 28, '2024-04-24 07:47:35', '2024-04-24 07:47:35'),
+(452, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028548/jpmxgojl0hkrgvqls7ub.jpg', 91, 8, '2024-04-25 07:03:19', '2024-04-25 07:03:19'),
+(458, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028764/d3hzyrwe9zouhybslmba.jpg', 92, 9, '2024-04-25 07:14:30', '2024-04-25 07:14:30'),
+(459, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028768/gibdbvd3ticu4fwja4ss.jpg', 92, 8, '2024-04-25 07:14:30', '2024-04-25 07:14:30'),
+(460, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714028807/xezhndsp0zavni1wnge5.jpg', 92, 24, '2024-04-25 07:14:30', '2024-04-25 07:14:30'),
+(461, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029479/b2utepv5beckkkxrbxwv.jpg', 94, 23, '2024-04-25 07:18:25', '2024-04-25 07:18:25'),
+(462, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029484/odwfbzkccotqtzisyoz5.jpg', 94, 8, '2024-04-25 07:18:25', '2024-04-25 07:18:25'),
+(463, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029492/acdlsicshln8bhfzfnqd.jpg', 94, 24, '2024-04-25 07:18:25', '2024-04-25 07:18:25'),
+(464, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029496/hfm1rqdbfjfb15jhfbxl.jpg', 94, 34, '2024-04-25 07:18:25', '2024-04-25 07:18:25'),
+(465, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029781/fgfuj3sdsusqlsc5tjnx.jpg', 95, 8, '2024-04-25 07:24:56', '2024-04-25 07:24:56'),
+(466, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029834/qbfkfbh4qzsxnmorsmoi.jpg', 95, 28, '2024-04-25 07:24:56', '2024-04-25 07:24:56'),
+(467, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029844/j68fdjjh2h6a6trdtabr.jpg', 95, 25, '2024-04-25 07:24:56', '2024-04-25 07:24:56'),
+(468, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029854/eob63dqlny1ff1xmbesd.jpg', 95, 27, '2024-04-25 07:24:56', '2024-04-25 07:24:56'),
+(469, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029865/jjymzru2uuuxqs1vfeye.jpg', 95, 22, '2024-04-25 07:24:56', '2024-04-25 07:24:56'),
+(470, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030195/kvnb8euodwixaoyelklu.jpg', 96, 8, '2024-04-25 07:30:52', '2024-04-25 07:30:52'),
+(471, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030199/jh6ps1vwcmi581v20axj.jpg', 96, 13, '2024-04-25 07:30:52', '2024-04-25 07:30:52'),
+(472, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030205/a6dlpsyzjnzvgom93dgp.jpg', 96, 22, '2024-04-25 07:30:52', '2024-04-25 07:30:52'),
+(473, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030232/qjw3jhm9lynuwoytesg5.jpg', 96, 25, '2024-04-25 07:30:52', '2024-04-25 07:30:52'),
+(474, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030214/b2ieqyyhzekrldjz5kky.jpg', 96, 27, '2024-04-25 07:30:52', '2024-04-25 07:30:52'),
+(475, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029205/xzrgvqixmk7pprvgqkyb.jpg', 93, 8, '2024-04-25 07:37:10', '2024-04-25 07:37:10'),
+(476, 60000, 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714029211/ugjx2bwdsoilwovhhjc5.jpg', 93, 9, '2024-04-25 07:37:10', '2024-04-25 07:37:10');
 
 -- --------------------------------------------------------
 
@@ -767,7 +825,9 @@ INSERT INTO `service_categories` (`id`, `name`, `description`, `image`, `slug`, 
 (35, 'Concept tùy chỉnh', 'Hàng handmade, thực phẩm chức năng,...', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1702540265/tczphrfuxm828u6boqew.jpg', 'concept-tuy-chinh', 18, '2023-12-14 00:51:07', '2023-12-14 00:51:07'),
 (36, 'Chụp Ảnh Concept Sofa', 'Chụp trên ghế Sofa', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1702883970/rehyiqd0uob4d4nz8dwv.jpg', 'chup-anh-concept-sofa', 14, '2023-12-18 00:19:32', '2023-12-18 00:19:32'),
 (37, 'Chụp ảnh sản phẩm', 'Chia sẽ kinh nghiệm chụp ảnh', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1703661772/spslftaj58fsphwrcrov.jpg', 'chup-anh-san-pham', 19, '2023-12-27 00:22:52', '2023-12-27 00:22:52'),
-(38, 'Nước Hoa', 'Nước hoa mini, Các loại sản phẩm có nước bên trong', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925327/iiixwvidasmchx0xdikm.jpg', 'nuoc-hoa', 15, '2024-02-02 18:55:29', '2024-02-02 18:55:29');
+(38, 'Nước Hoa', 'Nước hoa mini, Các loại sản phẩm có nước bên trong', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1706925327/iiixwvidasmchx0xdikm.jpg', 'nuoc-hoa', 15, '2024-02-02 18:55:29', '2024-02-02 18:55:29'),
+(40, 'Áo thể thao 3D', 'Áo thể thao 3D', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1713517775/kmzht1fxr3dje0bioet8.jpg', 'ao-the-thao-3d', 16, '2024-04-19 02:09:36', '2024-04-19 02:09:36'),
+(43, 'Chụp ảnh phụ kiện', 'Chụp phông trắng mũ lưỡi trai', 'https://res.cloudinary.com/drgvvh4sv/image/upload/v1714030034/gmmigahy1j5qjxs2jmb7.jpg', 'mu-luoi-trai', 15, '2024-04-25 00:27:15', '2024-04-25 00:28:34');
 
 -- --------------------------------------------------------
 
@@ -818,7 +878,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `last_password_change`, `created_at`, `updated_at`) VALUES
 (11, 'Juva Media', '0703555544', 'mediajuva@gmail.com', NULL, '$2y$10$BHkwgOCZWDogbf741z5NQe7sp3zYrL4nFWPiVppKtq32z45Fh4xNO', NULL, 0, '2024-02-02 07:46:49', '2024-01-29 01:39:24', '2024-01-29 01:39:24'),
-(13, 'Quang Sơn', '0394062185', 'sonvq1901@gmail.com', NULL, '$2y$10$TThjzO5NMfYSwzfsVHWkauMnfH4XxL2LdQNT5JHD4fUrXHEt08TnG', NULL, 0, NULL, '2024-02-02 06:41:39', '2024-02-02 06:41:39');
+(13, 'Quang Sơn', '0394062185', 'sonvq1901@gmail.com', NULL, '$2y$10$TThjzO5NMfYSwzfsVHWkauMnfH4XxL2LdQNT5JHD4fUrXHEt08TnG', NULL, 0, NULL, '2024-02-02 06:41:39', '2024-02-02 06:41:39'),
+(14, 'quang', '0912345678', 'quang@gmail.com', NULL, '$2y$10$cB6/aiD4erPNzHTu0qA7WeTZBodpUpupWCKU1JrEJGJGyErfCrJHy', NULL, 1, NULL, '2024-02-19 23:30:23', '2024-02-19 23:30:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -985,7 +1046,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `cart_products`
@@ -1045,19 +1106,19 @@ ALTER TABLE `photography`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT cho bảng `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `product_photography`
 --
 ALTER TABLE `product_photography`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=477;
 
 --
 -- AUTO_INCREMENT cho bảng `services`
@@ -1069,7 +1130,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT cho bảng `service_categories`
 --
 ALTER TABLE `service_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `topics`
@@ -1081,7 +1142,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
